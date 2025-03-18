@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Djezzy Recrutement - Connexion/Inscription</title>
+    <style>
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        button {
+            cursor: pointer;
+            border: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* En-tête */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: #fff;
+            box-shadow: 0 10px 10px rgba(8, 8, 8, 0.473);
+        }
+        
+        .logo img{
+            height: 70px;
+            width: 70px;
+            color: #333;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+            
+        }
+        
+        nav ul li a.active {
+            color: white;
+            font-weight: bold;
+            position: relative;
+        }
+
+        nav ul li a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #da0808;
+        }
+        
+        .signup-btn {
+            background-color: #da0808;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 5px;
+        }
+
+        /* Section d'authentification */
+        .auth-section {
+            padding: 60px 5%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            min-height: calc(100vh - 100px - 200px); /* Hauteur minimale pour le contenu principal */
+        }
+
+        .auth-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 10px rgba(8, 8, 8, 0.473);
+            width: 100%;
+            max-width: 450px;
+            transition: transform 0.3s ease;
+        }
+
+        .auth-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .auth-header h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .auth-header h2::after {
+            content: '';
+            position: absolute;
+            height: 3px;
+            width: 80px;
+            background-color: #da0808;
+            bottom: -10px;
+            left: calc(50% - 40px);
+        }
+
+        .auth-header p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .input-field {
+            position: relative;
+        }
+
+        .input-field i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        .input-field input, .input-field select {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-field input:focus, .input-field select:focus {
+            outline: none;
+            border-color: #da0808;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-item input {
+            margin-right: 5px;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .forgot-password a {
+            color: #da0808;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: #b50606;
+            text-decoration: underline;
+        }
+
+        .auth-btn {
+            width: 100%;
+            background-color: #da0808;
+            color: white;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .auth-btn:hover {
+            background-color: #b50606;
+        }
+
+        .separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .separator::before,
+        .separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .separator span {
+            padding: 0 10px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: #f5f5f5;
+            color: #333;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .facebook {
+            background-color: #3b5998;
+            color: white;
+        }
+
+        .google {
+            background-color: #db4437;
+            color: white;
+        }
+
+        .linkedin {
+            background-color: #0077b5;
+            color: white;
+        }
+
+        .social-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .switch-form {
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .switch-form a {
+            color: #da0808;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .switch-form a:hover {
+            color: #b50606;
+            text-decoration: underline;
+        }
+
+        /* Style spécifique pour le formulaire d'inscription */
+        .register-card .input-group {
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .checkbox-group input {
+            margin-right: 10px;
+        }
+
+        /* Formulaire en deux colonnes */
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-row .input-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-card {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .login-card {
+            animation-delay: 0.1s;
+        }
+
+        .register-card {
+            animation-delay: 0.3s;
+            max-width: 600px;
+        }
+
+        /* Pied de page */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 5%;
+            text-align: center;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: #da0808;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: #fff;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #da0808;
+        }
+
+        .footer-bottom {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .auth-section {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .auth-section {
+                padding: 40px 5%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .auth-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête -->
+    <header>
+        <div class="logo">           
+             <img src="Logo_Djezzy_2015-1.png">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="page d'accueil.html">Accueil</a></li>
+                <li><a href="offres d'emploi.html">Offres d'emploi</a></li>
+                <li><a href="A propos.html">A propos</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#" class="signup-btn active">Espace candidat</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Section d'authentification -->
+    <section class="auth-section">
+        <!-- Carte de connexion -->
+        <div class="auth-card login-card" id="login-card">
+            <div class="auth-header">
+                <h2>Connexion</h2>
+                <p>Accédez à votre compte.</p>
+            </div>
+            <form>
+                <div class="input-group">
+                    <label>Email</label>
+                    <div class="input-field">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" placeholder="Entrez votre email">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Mot de passe</label>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Entrez votre mot de passe">
+                    </div>
+                </div>
+                <div class="forgot-password">
+                    <a href="#">Mot de passe oublié ?</a>
+                </div>
+                <button type="submit" class="auth-btn">Se connecter</button>
+            </form>
+            <p class="switch-form">Pas encore inscrit ? <a href="#" id="show-register" onclick="toggleAuth('register')">Créer un compte</a></p>
+        </div>
+        
+        <!-- Carte d'inscription avec les nouveaux champs -->
+        <div class="auth-card register-card" id="register-card" style="display: none;">
+            <div class="auth-header">
+                <h2>Inscription</h2>
+                <p>Créez un compte pour postuler.</p>
+            </div>
+            <form>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Nom</label>
+                        <div class="input-field">
+                            <i class="fas fa-user"></i>
+                            <input type="text" placeholder="Entrez votre nom">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Prénom</label>
+                        <div class="input-field">
+                            <i class="fas fa-user"></i>
+                            <input type="text" placeholder="Entrez votre prénom">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Email</label>
+                        <div class="input-field">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" placeholder="Entrez votre email">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Téléphone</label>
+                        <div class="input-field">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" placeholder="Entrez votre numéro de téléphone">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Date de naissance</label>
+                        <div class="input-field">
+                            <i class="fas fa-calendar"></i>
+                            <input type="date">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Sexe</label>
+                        <div class="radio-group">
+                            <div class="radio-item">
+                                <input type="radio" id="homme" name="sexe" value="homme">
+                                <label for="homme">Homme</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="femme" name="sexe" value="femme">
+                                <label for="femme">Femme</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Wilaya</label>
+                        <div class="input-field">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <select>
+                                <option value="">Sélectionnez votre wilaya</option>
+                                <option value="Adrar">Adrar</option>
+                                <option value="Chlef">Chlef</option>
+                                <option value="Laghouat">Laghouat</option>
+                                <option value="Oum El Bouaghi">Oum El Bouaghi</option>
+                                <option value="Batna">Batna</option>
+                                <option value="Béjaïa">Béjaïa</option>
+                                <option value="Biskra">Biskra</option>
+                                <!-- Ajouter les autres wilayas au besoin -->
+                                <option value="Alger">Alger</option>
+                                <option value="Oran">Oran</option>
+                                <option value="Constantine">Constantine</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Profession</label>
+                        <div class="input-field">
+                            <i class="fas fa-briefcase"></i>
+                            <input type="text" placeholder="Entrez votre profession">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="input-group">
+                        <label>Mot de passe</label>
+                        <div class="input-field">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" placeholder="Créez un mot de passe">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Confirmer le mot de passe</label>
+                        <div class="input-field">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" placeholder="Confirmez votre mot de passe">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms">
+                    <label for="terms">J'accepte les termes et conditions</label>
+                </div>
+                
+                <button type="submit" class="auth-btn">Suivant</button>
+            </form>
+            <p class="switch-form">Déjà un compte ? <a href="#" id="show-login" onclick="toggleAuth('login')">Se connecter</a></p>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>À propos</h3>
+                <p>Djezzy Recrutement vous aide à trouver l'emploi de vos rêves grâce à nos offres adaptées à votre profil.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Liens utiles</h3>
+                <ul>
+                    <li><a href="page d'accueil.html">Accueil</a></li>
+                    <li><a href="offres d'emploi.html">Offres d'emploi</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 Djezzy Recrutement. Tous droits réservés.
+        </div>
+    </footer>
+
+    <script>
+        function toggleAuth(formType) {
+            const loginCard = document.getElementById("login-card");
+            const registerCard = document.getElementById("register-card");
+            
+            if (formType === "register") {
+                loginCard.style.display = "none";
+                registerCard.style.display = "block";
+            } else {
+                loginCard.style.display = "block";
+                registerCard.style.display = "none";
+            }
+            
+            // Faire défiler vers le haut pour voir le formulaire
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // S'assurer que sur les appareils mobiles, un seul formulaire est visible au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.innerWidth <= 992) {
+                const loginCard = document.getElementById("login-card");
+                const registerCard = document.getElementById("register-card");
+                
+                loginCard.style.display = "block";
+                registerCard.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>

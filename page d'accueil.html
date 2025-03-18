@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Recrutement Pro - Trouvez votre prochain emploi</title>
+    <style>
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        button {
+            cursor: pointer;
+            border: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* En-tête */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: #fff;
+            box-shadow: 0 10px 10px rgba(8, 8, 8, 0.473);
+        }
+        
+        .logo img{
+            height: 70px;
+            width:70px;
+            color: #333;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        nav ul li a.active {
+    color: #da0808;
+    font-weight: bold;
+    position: relative;
+}
+
+nav ul li a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #da0808;
+}
+        
+        .signup-btn {
+            background-color: #da0808;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 5px;
+        }
+        
+        /* Section héros */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 5%;
+            background-color: #f5f5f5;
+        }
+        
+        .hero-content {
+            width: 50%;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #333;
+            line-height: 1.2;
+        }
+        
+        .hero-image {
+            width: 45%;
+            position: relative;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            box-shadow: 0 10px 10px rgba(8, 8, 8, 0.473);
+        }
+        
+        .hero-circle {
+            position: absolute;
+            width: 110%;
+            height: 110%;
+            background-color: #e8f5e9;
+            border-radius: 50%;
+            top: -5%;
+            left: -5%;
+            z-index: -1;
+        }
+        
+        .stats {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        
+        /* Section des solutions de recrutement */
+        .recruitment-solutions {
+            padding: 60px 5%;
+            text-align: center;
+        }
+        
+        .recruitment-solutions h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .recruitment-solutions p {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+        }
+        
+        .solutions-cards {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .solution-card {
+            flex: 1;
+            padding: 30px;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 10px 10px rgba(8, 8, 8, 0.473);
+        }
+        
+        .solution-card:nth-child(2) {
+            background-color: #da0808;
+            color: #fff;
+        }
+        
+        .solution-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #4CAF50;
+        }
+        
+        .solution-card:nth-child(2) .solution-icon {
+            color: #fff;
+        }
+        
+        .solution-card h3 {
+            margin-bottom: 10px;
+        }
+        
+        /* Section compétences recherchées */
+        .skills {
+            padding: 60px 5%;
+            background-color: #f5f5f5;
+        }
+        
+        .skills h2 {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        
+        .skill-item {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 10px rgba(8, 8, 8, 0.473);
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #da0808;
+        }
+        
+        .skill-item h3 {
+            margin-bottom: 10px;
+        }
+        
+        /* Section Job Listings */
+        .job-listings {
+            padding: 60px 5%;
+        }
+        
+        .job-listings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .job-listings h2 {
+            font-size: 2.2rem;
+        }
+        
+        .view-all-btn {
+            background-color: #da0808;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        
+        .job-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+        
+        .job-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 10px rgba(14, 14, 14, 0.473);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+        .job-card img {
+            width: 100%;
+            height: 65%;
+            border-radius: 10px;
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .job-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+        
+        .job-details {
+            margin-bottom: 15px;
+        }
+        
+        .job-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .job-detail i {
+            margin-right: 5px;
+            color: #da0808;
+        }
+        
+        .apply-btn {
+            background-color: #da0808;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        .details-btn, .apply-btn {
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.details-btn {
+    background: #8b8786;
+    color: #535252;
+}
+
+.apply-btn {
+    background: #da0808;
+    color: white;
+}
+
+.details-btn:hover {
+    background: #8b8786;
+}
+
+.apply-btn:hover {
+    background: #da0808;
+}
+
+        /* Section recrutement personnalisé */
+        .custom-recruitment {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 5%;
+            background-color: #db9c9c;
+            border-radius: 10px;
+            margin: 0 5% 60px;
+        }
+        
+        .custom-recruitment-content {
+            width: 50%;
+        }
+        
+        .custom-recruitment h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .custom-recruitment-image {
+            width: 45%;
+        }
+        
+        .custom-recruitment-image img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        
+        .contact-btn {
+            background-color: #da0808;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 5%;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-section h3 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: #da0808;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-links a {
+    color: #fff;
+    font-size: 1.5rem;
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: #da0808;
+}
+
+.footer-bottom {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #444;
+    font-size: 0.9rem;
+}
+
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .skills-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero, .solutions-cards, .custom-recruitment {
+                flex-direction: column;
+            }
+            
+            .hero-content, .hero-image, .custom-recruitment-content, .custom-recruitment-image {
+                width: 100%;
+                margin-bottom: 30px;
+            }
+            
+            .job-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .solutions-cards {
+                flex-direction: column;
+            }
+            
+            .solution-card {
+                margin-bottom: 20px;
+            }
+        }
+        /* Animation du titre principal */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes highlightUnderline {
+    0% {
+        width: 0;
+        left: 50%;
+    }
+    100% {
+        width: 100px;
+        left: calc(50% - 50px);
+    }
+}
+
+.hero h1 {
+    position: relative;
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+.hero h1::after {
+    content: '';
+    position: absolute;
+    height: 3px;
+    background-color: #da0808;
+    bottom: -10px;
+    animation: highlightUnderline 1.2s ease-out 0.5s forwards;
+}
+
+.hero p {
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+    </style>
+</head>
+<body>
+    
+    <!-- En-tête -->
+    <header>
+        <div class="logo">           
+             <img src="Logo_Djezzy_2015-1.png" >
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Accueil</a></li>
+                <li><a href="offres d'emploi.html">Offres d'emploi</a></li>
+                <li><a href="A propos.html">A propos</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="connexion.html" class="signup-btn">Espace candidat</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Section héros -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Trouvez l'emploi idéal pour vos compétences</h1>
+            <p>Notre plateforme spécialisée aide les candidats à trouver des emplois qui correspondent exactement à leurs préférences et compétences. En analysant votre profil professionnel, nous vous connectons aux opportunités qui valorisent vos talents spécifiques et respectent vos critères personnels. Que vous recherchiez un environnement de travail particulier, un secteur d'activité précis ou des missions alignées avec votre expertise, nous vous guidons vers les postes qui vous permettront de vous épanouir et d'exceller dans votre domaine.</p>
+            
+            <div class="stats">Plus de 5000 offres d'emploi disponibles</div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-circle"></div>
+            <img src="images (1).jpeg" alt="Professionnel en costume d'affaires">
+        </div>
+    </section>
+
+    <!-- Section des solutions de recrutement -->
+    <section class="recruitment-solutions">
+        <h2>Solutions de recrutement innovantes</h2>
+        <p>Nous proposons des approches personnalisées pour vous aider à trouver les meilleurs talents ou votre prochain emploi.</p>
+        
+        <div class="solutions-cards">
+            <div class="solution-card">
+                <div class="solution-icon">&#128188;</div>
+                <h3>Valorisation des compétences</h3>
+                <p>Notre algorithme intelligent analyse votre profil et met en avant vos compétences clés pour vous connecter aux emplois qui correspondent le mieux à votre expertise.</p>
+            </div>
+            <div class="solution-card">
+                <div class="solution-icon">&#128196;</div>
+                <h3>Offres personnalisées</h3>
+                <p>Recevez des recommandations d'emploi adaptées à vos préférences professionnelles, votre parcours et vos aspirations de carrière.</p>
+            </div>
+            <div class="solution-card">
+                <div class="solution-icon">&#129309;</div>
+                <h3>Expérience candidat optimisée</h3>
+                <p>Profitez d'un accompagnement sur mesure tout au long de votre recherche d'emploi, du dépôt de CV jusqu'à la préparation aux entretiens.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section compétences recherchées -->
+    <section class="skills">
+        <h2>Compétences les plus recherchées</h2>
+        <div class="skills-container">
+            <div class="skill-item">
+                <div class="skill-icon">&#128187;</div>
+                <h3>Développement web</h3>
+                <p>JavaScript, React, Node.js</p>
+            </div>
+            <div class="skill-item">
+                <div class="skill-icon">&#128202;</div>
+                <h3>Data Science</h3>
+                <p>Python, R, Machine Learning</p>
+            </div>
+            <div class="skill-item">
+                <div class="skill-icon">&#128161;</div>
+                <h3>Marketing Digital</h3>
+                <p>SEO, Content Marketing, Analytics</p>
+            </div>
+            <div class="skill-item">
+                <div class="skill-icon">&#128736;</div>
+                <h3>DevOps</h3>
+                <p>CI/CD, Docker, Kubernetes</p>
+            </div>
+            <div class="skill-item">
+                <div class="skill-icon">&#128241;</div>
+                <h3>Développement Mobile</h3>
+                <p>Swift, Kotlin, Flutter</p>
+            </div>
+            <div class="skill-item">
+                <div class="skill-icon">&#129504;</div>
+                <h3>Intelligence Artificielle</h3>
+                <p>Deep Learning, NLP, Computer Vision</p>
+            </div>
+            <div class="skill-item">
+                <div class="skill-icon">&#128295;</div>
+                <h3>Gestion de projet</h3>
+                <p>Agile, Scrum, Kanban</p>
+            </div>
+            <div class="skill-item">
+                <div class="skill-icon">&#128210;</div>
+                <h3>Design UX/UI</h3>
+                <p>Figma, Adobe XD, Prototypage</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section recrutement personnalisé -->
+    <section class="custom-recruitment">
+        <div class="custom-recruitment-content">
+            <h2>Votre parcours professionnel personnalisé</h2>
+            <p>Notre plateforme vous offre une expérience sur mesure qui s'adapte à votre profil unique et à vos ambitions professionnelles.</p>
+            <p>Grâce à nos outils avancés de correspondance et notre réseau d'entreprises partenaires, nous identifions rapidement les opportunités qui valorisent véritablement vos compétences et respectent vos préférences.</p>
+            <a href="#" class="contact-btn">Créer mon profil</a>
+        </div>
+        <div class="custom-recruitment-image">
+            <img src="images (2).jpeg" alt="Candidat consultant son profil professionnel">
+        </div>
+    </section>
+
+    <!-- Section Job Listings -->
+<section class="job-listings">
+    <div class="job-listings-header">
+        <h2>Offres d'emploi récentes</h2>
+        <a href="#" class="view-all-btn">Voir toutes les offres</a>
+    </div>
+    <div class="job-cards">
+        <div class="job-card">
+            <img src="La gestion des ressources humaines dans un contexte en mutation.jpg" >
+            <div class="job-title">Responsable des Ressources Humaines</div>
+            <div class="job-actions">
+                <a href="#" class="details-btn">Voir détails</a>
+                <a href="#" class="apply-btn">Postuler</a>
+            </div>
+        </div>
+
+        <div class="job-card">
+            <img src="The Full Stack Web Development.jpg" >
+            <div class="job-title">Développeur Full Stack</div>
+            <div class="job-actions">
+                <a href="#" class="details-btn">Voir détails</a>
+                <a href="#" class="apply-btn">Postuler</a>
+            </div>
+        </div>
+
+        <div class="job-card">
+            <img src="What is Data science _.jpg" >
+            <div class="job-title">Data Scientist</div>
+            <div class="job-actions">
+                <a href="#" class="details-btn">Voir détails</a>
+                <a href="#" class="apply-btn">Postuler</a>
+            </div>
+        </div>
+
+        <div class="job-card">
+            <img src="Premium Vector _ Devops_ Agile development and optimisation background.jpg" >
+            <div class="job-title">DevOps Engineer</div>
+            <div class="job-actions">
+                <a href="#" class="details-btn">Voir détails</a>
+                <a href="#" class="apply-btn">Postuler</a>
+            </div>
+        </div>
+
+        <div class="job-card">
+            <img src="Senior Accountant Job Description.jpg" >
+            <div class="job-title">Comptable Senior</div>
+            <div class="job-actions">
+                <a href="#" class="details-btn">Voir détails</a>
+                <a href="#" class="apply-btn">Postuler</a>
+            </div>
+        </div>
+
+        <div class="job-card">
+            <img src="application design to buy different types of honey.jpg" >
+            <div class="job-title">UX/UI Designer</div>
+            <div class="job-actions">
+                <a href="#" class="details-btn">Voir détails</a>
+                <a href="#" class="apply-btn">Postuler</a>
+            </div>
+        </div>
+
+        <div class="job-card">
+            <img src="télécharger (2).jpg">
+            <div class="job-title">Ingénieur IA</div>
+            <div class="job-actions">
+                <a href="#" class="details-btn">Voir détails</a>
+                <a href="#" class="apply-btn">Postuler</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>À propos</h3>
+                <p>Djezzy Recrutement vous aide à trouver l'emploi de vos rêves grâce à nos offres adaptées à votre profil.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Liens utiles</h3>
+                <ul>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#">Offres d'emploi</a></li>
+                    <li><a href="#">Recruteurs</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 Djezzy Recrutement. Tous droits réservés.
+        </div>
+    </footer>
+    
+</body>
+</html>
