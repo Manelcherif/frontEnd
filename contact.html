@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Djezzy - Contact</title>
+    <!-- Ajout de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --djezzy-red: #e4032e; /* Couleur rouge standardisée de Djezzy */
+            --dark-text: #333;
+            --light-bg: #f7f5f5;
+            --footer-bg: #333;
+            --border-light: #ddd;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--light-bg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(228, 3, 46, 0.1);
+        }
+
+        .logo img {
+            height: 70px;
+            width: 70px;
+            color: var(--dark-text);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: var(--dark-text);
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--djezzy-red);
+        }
+        
+        nav ul li a.active {
+            color: var(--djezzy-red);
+            font-weight: bold;
+            position: relative;
+        }
+
+        nav ul li a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--djezzy-red);
+        }
+
+        .signup-btn {
+            background-color: var(--djezzy-red);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .signup-btn:hover {
+            background-color: #c5022a;
+            color: black;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 50px 0;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .contact-header h1 {
+            font-size: 32px;
+            color: var(--djezzy-red);
+            margin-bottom: 15px;
+        }
+
+        .contact-header p {
+            font-size: 16px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: space-between;
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            font-size: 15px;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--djezzy-red);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #c5022a;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .info-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .info-card h3 {
+            color: var(--djezzy-red);
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .info-item {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .info-item .icon {
+            min-width: 25px;
+            margin-right: 10px;
+            color: var(--djezzy-red);
+        }
+
+        .info-item p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Contact social links */
+        .contact-social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .contact-social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #f4f4f4;
+            border-radius: 50%;
+            color: var(--djezzy-red);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .contact-social-links a:hover {
+            background-color: var(--djezzy-red);
+            color: white;
+        }
+
+        /* Map */
+        .map-container {
+            margin-top: 30px;
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--footer-bg);
+            color: #fff;
+            padding: 40px 5%;
+            text-align: center;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: var(--djezzy-red);
+        }
+
+        /* Footer social links */
+        .footer-social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .footer-social-links a {
+            color: #fff;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-social-links a:hover {
+            color: var(--djezzy-red);
+        }
+        
+        .footer-bottom {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+        }
+
+        /* Response Message */
+        .response-message {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 10px;
+            }
+            
+            nav {
+                width: 100%;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+                display: none;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .hamburger {
+                display: block;
+                position: absolute;
+                top: 30px;
+                right: 30px;
+            }
+            
+            .contact-content {
+                flex-direction: column;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-social-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">           
+             <img src="Logo_Djezzy_2015-1.png" alt="Logo Djezzy">
+        </div>
+        
+        <nav>
+            <ul id="menu">
+                <li><a href="page-accueil.html">Accueil</a></li>
+                <li><a href="offres d'emploi.html">Offres d'emploi</a></li>
+                <li><a href="A propos.html">A propos</a></li>
+                <li><a href="#" class="active">Contact</a></li>
+                <li><a href="connexion.html" class="signup-btn">Espace candidat</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-header">
+                <h1>Contactez-nous</h1>
+                <p>Vous avez des questions ou besoin d'assistance ? Notre équipe est là pour vous aider et répondre à toutes vos préoccupations.</p>
+            </div>
+
+            <div class="contact-content">
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nom complet</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Numéro de téléphone</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Sélectionnez un sujet</option>
+                                <option value="assistance">Assistance technique</option>
+                                <option value="facturation">Facturation</option>
+                                <option value="offres">Informations sur les offres</option>
+                                <option value="suggestion">Suggestions</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Envoyer le message</button>
+                    </form>
+                    <div class="response-message" id="responseMessage"></div>
+                </div>
+
+                <div class="contact-info">
+                    <div class="info-card">
+                        <h3>Nos coordonnées</h3>
+                        <div class="info-item">
+                            <div class="icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <p>Siège social Djezzy, Route de Wilaya, Bir Mourad Raïs, Alger, Algérie</p>
+                        </div>
+                        <div class="info-item">
+                            <div class="icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <p>Service client: 888 (depuis un mobile Djezzy)<br>+213 770 888 888 (depuis un autre réseau)</p>
+                        </div>
+                        <div class="info-item">
+                            <div class="icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <p>info@djezzy.dz</p>
+                        </div>
+                        <div class="info-item">
+                            <div class="icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <p>Du dimanche au jeudi: 8h00 - 17h00<br>Vendredi et samedi: 9h00 - 16h00</p>
+                        </div>
+                        <div class="contact-social-links">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Assistance rapide</h3>
+                        <div class="info-item">
+                            <div class="icon">
+                                <i class="fas fa-comment-dots"></i>
+                            </div>
+                            <p>Chat en direct disponible sur notre application mobile Djezzy</p>
+                        </div>
+                        <div class="info-item">
+                            <div class="icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <p>Téléchargez notre application pour une assistance instantanée</p>
+                        </div>
+                    </div>
+
+                    <div class="map-container">
+                        <!-- Remplacez par l'adresse exacte du siège de Djezzy -->
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12794.880103079482!2d3.0511233697753906!3d36.738223899999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128fb26d3c0a172d%3A0x5d387c9d1f1b83e3!2sDjezzy!5e0!3m2!1sfr!2sdz!4v1654513352161!5m2!1sfr!2sdz" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>À propos</h3>
+                <p>Djezzy Recrutement vous aide à trouver l'emploi de vos rêves grâce à nos offres adaptées à votre profil.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Liens utiles</h3>
+                <ul>
+                    <li><a href="page d'accueil.html">Accueil</a></li>
+                    <li><a href="offres-emploi.html">Offres d'emploi</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <div class="footer-social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 Djezzy Recrutement. Tous droits réservés.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Menu hamburger pour mobile
+            const hamburger = document.querySelector('.hamburger');
+            const menu = document.getElementById('menu');
+            
+            hamburger.addEventListener('click', function() {
+                menu.classList.toggle('active');
+            });
+
+            // Gestion du formulaire de contact
+            const contactForm = document.getElementById('contactForm');
+            const responseMessage = document.getElementById('responseMessage');
+
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validation du formulaire
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                
+                // Validation simple
+                if (!name || !email || !phone || !subject || !message) {
+                    showResponse('Veuillez remplir tous les champs du formulaire.', 'error');
+                    return;
+                }
+                
+                // Validation de l'email
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email)) {
+                    showResponse('Veuillez entrer une adresse email valide.', 'error');
+                    return;
+                }
+                
+                // Validation du téléphone (format algérien simplifié)
+                const phonePattern = /^(0|\+213|00213)?[567]\d{8}$/;
+                if (!phonePattern.test(phone)) {
+                    showResponse('Veuillez entrer un numéro de téléphone valide.', 'error');
+                    return;
+                }
+                
+                // Simulation d'envoi de formulaire
+                // En production, remplacez cette partie par votre code AJAX pour envoyer les données au serveur
+                setTimeout(function() {
+                    showResponse('Votre message a été envoyé avec succès. Notre équipe vous contactera bientôt.', 'success');
+                    contactForm.reset();
+                }, 1000);
+            });
+            
+            function showResponse(message, type) {
+                responseMessage.textContent = message;
+                responseMessage.className = 'response-message ' + type;
+                responseMessage.style.display = 'block';
+                
+                // Faire défiler jusqu'au message de réponse
+                responseMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
+                // Masquer le message après 5 secondes
+                setTimeout(function() {
+                    responseMessage.style.display = 'none';
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>

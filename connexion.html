@@ -65,6 +65,17 @@
             
         }
         
+        nav ul li a {
+            color:#333;
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: #da0808;
+        }
+        
         nav ul li a.active {
             color: white;
             font-weight: bold;
@@ -86,6 +97,19 @@
             color: #fff;
             padding: 8px 20px;
             border-radius: 5px;
+        }
+
+        .signup-btn:hover {
+            background-color: #c5022a;
+            color: black;
+        }
+
+        /* Hamburger menu pour mobile */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #333;
         }
 
         /* Section d'authentification */
@@ -461,7 +485,7 @@
                 <li><a href="page d'accueil.html">Accueil</a></li>
                 <li><a href="offres d'emploi.html">Offres d'emploi</a></li>
                 <li><a href="A propos.html">A propos</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="contact.html">Contact</a></li>
                 <li><a href="#" class="signup-btn active">Espace candidat</a></li>
             </ul>
         </nav>

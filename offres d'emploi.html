@@ -37,20 +37,24 @@
         }
 
         nav ul li a.active {
-    color: #da0808;
-    font-weight: bold;
-    position: relative;
-}
+            color: #da0808;
+            font-weight: bold;
+            position: relative;
+        }
 
-nav ul li a.active::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: #da0808;
-}
+        nav ul li a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #da0808;
+        }
+
+        nav ul li a:hover {
+            color: #da0808;
+        }
 
         /* En-tête */
         header {
@@ -154,7 +158,7 @@ nav ul li a.active::after {
             margin-bottom: 15px;
         }
 
-        .offre-card #details-btn, .offre-card .apply-btn {
+        .offre-card .details-btn, .offre-card .apply-btn {
             display: inline-block;
             padding: 10px 15px;
             margin: 5px;
@@ -163,7 +167,7 @@ nav ul li a.active::after {
             transition: background-color 0.3s ease;
         }
 
-        .offre-card #details-btn {
+        .offre-card .details-btn {
             background-color: #8b8786;
             color: #fff;
         }
@@ -173,12 +177,89 @@ nav ul li a.active::after {
             color: #fff;
         }
 
-        .offre-card #details-btn:hover {
+        .offre-card .details-btn:hover {
             background-color: #777;
         }
 
         .offre-card .apply-btn:hover {
             background-color: #c20707;
+        }
+
+        /* Style pour conteneur de détails */
+        .detail-container {
+            width: 80%;
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            position: fixed;
+            top: 50%; 
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.3s ease-out;
+            z-index: 10;
+            cursor: default;
+        }
+
+        .detail-container.active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Contenu principal */
+        .offer-details h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .offer-details p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .offer-details h3 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .offer-details ul {
+            list-style-type: none;
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+
+        .offer-details ul li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .offer-details ul li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #da0808;
+        }
+
+        /* Bouton Postuler */
+        .apply-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #d91e18;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .apply-button:hover {
+            background-color: #b71b14;
         }
 
         /* Pied de page */
@@ -249,79 +330,6 @@ nav ul li a.active::after {
             border-top: 1px solid #444;
             font-size: 0.9rem;
         }
-
-        #container1 {
-    width: 80%;
-    max-width: 800px;
-    background: white;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-    position:fixed;
-    top: 50%; 
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    transition: transform 0.3s ease-out;
-    z-index: 10;
-    cursor:default;
-}
-
-#container1.active {
-    transform: translate(-50%, -50%) scale(1);
-}
-
-
-.back-button {
-    text-decoration: none;
-    color: #d91e18;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.back-button:hover {
-    text-decoration: underline;
-}
-
-/* Contenu principal */
-.offer-details h2 {
-    color: #333;
-}
-
-.offer-details p {
-    font-size: 16px;
-    color: #555;
-}
-
-.offer-details ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.offer-details ul li {
-    background: url('bullet-icon.png') no-repeat left center;
-    padding-left: 25px;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-/* Bouton Postuler */
-.apply-button {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    margin-top: 20px;
-    background-color: #d91e18;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.apply-button:hover {
-    background-color: #b71b14;
-}
     </style>
 </head>
 <body id="backgroundArea">
@@ -332,10 +340,10 @@ nav ul li a.active::after {
         </div>
         <nav>
             <ul>
-                <li><a href="index.html">Accueil</a></li>
+                <li><a href="page d'accueil.html">Accueil</a></li>
                 <li><a href="" class="active">Offres d'emploi</a></li>
                 <li><a href="A propos.html">A propos</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="contact.html">Contact</a></li>
                 <li><a href="connexion.html" class="signup-btn">Espace candidat</a></li>
             </ul>
         </nav>
@@ -353,45 +361,12 @@ nav ul li a.active::after {
             <h1>Toutes les offres d'emploi</h1>
             <div class="offres-grid" id="offresGrid">
                 <!-- Offre 1 -->
-                <div class="offre-card" data-title="Responsable des Ressources Humaines">
+                <div class="offre-card" data-title="Responsable des Ressources Humaines" job-details="ujsicojzifzef ihfoijsifjrf dnioznvflkesnfjnzrefiojezf fiuozifjie,fjkjfijr rijizjrfoz,fioniojrf iurhoijrfjzurnfjenrzifjeizf zifoizjhfizenfjzfiz">
                     <img src="La gestion des ressources humaines dans un contexte en mutation.jpg" alt="Responsable des Ressources Humaines">
                     <h2>Responsable des Ressources Humaines</h2>
                     <p>Poste basé à Alger. Gestion des talents et développement des compétences.</p>
-                    <a href="#" id="details-btn">Voir détails</a>
+                    <a href="#" class="details-btn">Voir détails</a>
                     <a href="#" class="apply-btn">Postuler</a>
-                </div>
-                <div id="container1">
-        
-
-                    <main>
-                        <div class="offer-details">
-                            <h2>Responsable des Ressources Humaines</h2>
-                            <p class="location"><strong>Lieu :</strong> Alger, Algérie</p>
-                            <p class="date"><strong>Date de publication :</strong> 07 Mars 2025</p>
-            
-                            <h3>Description du poste</h3>
-                            <p>En tant que Responsable des Ressources Humaines, vous serez chargé de gérer et développer les politiques RH de l'entreprise, en veillant à l'amélioration du bien-être des employés et à l'optimisation des performances organisationnelles.</p>
-            
-                            <h3>Missions principales</h3>
-                            <ul>
-                                <li>Développer et mettre en œuvre les stratégies RH.</li>
-                                <li>Superviser le recrutement et la gestion des talents.</li>
-                                <li>Assurer la gestion administrative et sociale des employés.</li>
-                                <li>Élaborer des programmes de formation et de développement.</li>
-                                <li>Gérer les relations sociales et assurer la conformité légale.</li>
-                            </ul>
-            
-                            <h3>Profil recherché</h3>
-                            <ul>
-                                <li>Bac+5 en Gestion des Ressources Humaines, Droit ou équivalent.</li>
-                                <li>Expérience de 5 ans minimum en RH.</li>
-                                <li>Bonne connaissance du droit du travail en Algérie.</li>
-                                <li>Excellentes compétences en communication et leadership.</li>
-                            </ul>
-            
-                            <button class="apply-button">Postuler</button>
-                        </div>
-                    </main>
                 </div>
 
                 <!-- Offre 2 -->
@@ -454,7 +429,7 @@ nav ul li a.active::after {
                 <ul>
                     <li><a href="page d'accueil.html">Accueil</a></li>
                     <li><a href="offres d'emploi.html">Offres d'emploi</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -492,28 +467,91 @@ nav ul li a.active::after {
             }
         }
 
-        // Éléments DOM
-        const backgroundArea = document.getElementById('backgroundArea');
-        const container1 = document.getElementById('container1');
-        const detailsbtn = document.getElementById('details-btn');
+        // Fonction pour initialiser les conteneurs de détails pour chaque offre
+        function initJobDetails() {
+            // Récupération de toutes les offres
+            const jobCards = document.querySelectorAll('.offre-card');
+            
+            // Pour chaque offre, créer un conteneur de détails
+            jobCards.forEach((card, index) => {
+                const jobTitle = card.querySelector('h2').textContent;
+                const jobLocation = card.querySelector('p').textContent.split('.')[0];
+                const detailsBtn = card.querySelector('.details-btn');
+                
+                // Créer un conteneur pour chaque offre
+                let containerId = `container-${index + 1}`;
+                let container = document.createElement('div');
+                container.id = containerId;
+                container.className = 'detail-container';
+                
+                // Définir le contenu spécifique pour chaque offre
+                container.innerHTML = `
+                    <main>
+                        <div class="offer-details">
+                            <h2>${jobTitle}</h2>
+                            <p class="location"><strong>Lieu :</strong> ${jobLocation}</p>
+                            <p class="date"><strong>Date de publication :</strong> 07 Mars 2025</p>
+                
+                            <h3>Description du poste</h3>
+                            <p>Description détaillée pour le poste ${jobTitle}.</p>
+                
+                            <h3>Missions principales</h3>
+                            <ul>
+                                <li>Mission 1 pour ${jobTitle}</li>
+                                <li>Mission 2 pour ${jobTitle}</li>
+                                <li>Mission 3 pour ${jobTitle}</li>
+                                <li>Mission 4 pour ${jobTitle}</li>
+                            </ul>
+                
+                            <h3>Profil recherché</h3>
+                            <ul>
+                                <li>Qualification 1 requise</li>
+                                <li>Qualification 2 requise</li>
+                                <li>Qualification 3 requise</li>
+                                <li>Qualification 4 souhaitée</li>
+                            </ul>
+                
+                            <button class="apply-button">Postuler</button>
+                        </div>
+                    </main>
+                `;
+                
+                // Ajouter le conteneur au body
+                document.body.appendChild(container);
+                
+                // Ajouter l'écouteur d'événement au bouton de détails
+                detailsBtn.addEventListener('click', function(e) {
+                    // Fermer tous les autres conteneurs
+                    document.querySelectorAll('.detail-container').forEach(cont => {
+                        cont.classList.remove('active');
+                    });
+                    
+                    // Ouvrir ce conteneur
+                    container.classList.add('active');
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+            });
+            
+            // Fermer le conteneur actif au clic sur le fond
+            document.getElementById('backgroundArea').addEventListener('click', function() {
+                document.querySelectorAll('.detail-container').forEach(container => {
+                    container.classList.remove('active');
+                });
+            });
+            
+            // Empêcher la propagation des clics depuis les conteneurs
+            document.querySelectorAll('.detail-container').forEach(container => {
+                container.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
+        }
 
-        // Ouvrir le conteneur au clic sur le bouton
-        detailsbtn.addEventListener('click', function(e) {
-            container1.classList.add('active');
-            e.stopPropagation(); // Empêcher le clic de se propager au fond
-        });
+        // Initialiser les détails d'offres au chargement de la page
+        window.addEventListener('DOMContentLoaded', initJobDetails);
 
-        // Fermer au clic sur le fond
-        backgroundArea.addEventListener('click', function(e) {
-            if (container1.classList.contains('active')) {
-                container1.classList.remove('active');
-            }
-        });
-
-        // Empêcher la propagation des clics depuis le conteneur
-        container1.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
+        
     </script>
 </body>
 </html>
