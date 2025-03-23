@@ -103,7 +103,17 @@
             background-color: #c5022a;
             color: black;
         }
-
+        .btn {
+            width: 100%;
+            background-color: green;
+            color: white;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
         /* Hamburger menu pour mobile */
         .hamburger {
             display: none;
@@ -715,7 +725,7 @@
                     <label for="terms">J'accepte les termes et conditions</label>
                 </div>
                 
-                <button type="submit" class="auth-btn">Suivant</button>
+                <button type="submit" class="auth-btn" onclick="toggleAuth('formation')">Suivant</button>
             </form>
             <p class="switch-form">Déjà un compte ? <a href="#" id="show-login" onclick="toggleAuth('login')">Se connecter</a></p>
         </div>
@@ -780,7 +790,7 @@
              <label><input type="checkbox" id="enCours"> En cours</label>
                   
            <button type="button" class="btn" onclick="toggleAuth('register')">Précédent</button>
-<button type="button" class="auth-btn" onclick="toggleAuth('experience')">Suivant</button>
+           <button type="button" class="auth-btn" onclick="toggleAuth('experience')">Suivant</button>
   </form>
         </div>
        
@@ -884,9 +894,6 @@
                       
                 </div>
             </div>
-           
-    
-          
         </div>
 
         </div>
@@ -958,15 +965,10 @@
             if (window.innerWidth <= 992) {
                 const loginCard = document.getElementById("login-card");
                 const registerCard = document.getElementById("register-card");
-                const formationCard = document.getElementById("formation-card");
-                const experCard=document.getElementById("exper-card");
-                const competCard=document.getElementById("competence-card");
-       
+                       
                 loginCard.style.display = "block";
                 registerCard.style.display = "none";
-                formationCard.style.display = "none";
-                experCard.style.display='none';
-                competCard.style.display='none';
+               
             }
         });
     </script>
