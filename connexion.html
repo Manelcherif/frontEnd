@@ -374,7 +374,84 @@
             animation-delay: 0.3s;
             max-width: 600px;
         }
+        .formation-card{
+             animation-delay: 0.3s;
+            max-width: 600px;
+        }
+        
+       .exper-card { 
+           animation-delay: 0.3s;
+            max-width: 600px;
+        }
+        
+        .compet-card{
+             animation-delay: 0.3s;
+            max-width: 600px;
+        }
+       .compet-card .input-group {
+              margin-bottom: 15px;
+       }
 
+       .compet-card h3 {
+           margin-top: 25px;
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.2rem;
+        }
+
+      .compet-card p {
+           margin-top: 15px;
+            margin-bottom: 8px;
+            font-weight: bold;
+           display: block;
+       }
+     .compet-card .button-container {
+          display: flex;
+         flex-direction: row;
+         gap: 10px;
+         margin-bottom: 15px;
+      }
+     .compet-card .c1 {
+         width: 40px;         
+         height: 40px;        
+         border-radius: 50%;   
+         display: inline-flex;       
+         align-items: center;   
+         justify-content: center;
+         background-color: #f5f5f5;
+         border: 1px solid #ddd;
+         padding: 0;
+         color: #333;
+         font-size: 0.9rem;
+         transition: all 0.3s ease;
+      }
+
+     .compet-card .c1:hover {
+         background-color: #da0808;
+         color: white;
+         border-color: #da0808;
+      }
+
+     .compet-card .c1.active {
+         background-color: #da0808;
+         color: white;
+         border-color: #da0808;
+     }
+
+     .compet-card input[type="text"] {
+         width: 100%;
+         padding: 12px 15px;
+         border: 1px solid #ddd;
+         border-radius: 5px;
+         font-size: 1rem;
+         margin-bottom: 10px;
+         transition: border-color 0.3s ease;
+     }
+
+     .compet-card input[type="text"]:focus {
+         outline: none;
+         border-color: #da0808;
+     }
         /* Pied de page */
         footer {
             background-color: #333;
@@ -642,6 +719,178 @@
             </form>
             <p class="switch-form">Déjà un compte ? <a href="#" id="show-login" onclick="toggleAuth('login')">Se connecter</a></p>
         </div>
+   
+   
+        <div class="auth-card formation-card" id="formation-card" style="display: none;">
+
+            <div class="auth-header">
+                <h2>Formation</h2> 
+            </div>
+            <form> 
+              <div class="form-row">
+                     <div class="input-group">
+                        <label>Établissement</label>  
+                        <div class="input-field">
+                           <i class="fas fa-building"></i> 
+                           <input type="text" placeholder="Établissement" >
+                       </div>
+                     </div>  
+                
+                     <div class="input-group">
+                        <label>Niveau d'étude</label> 
+                        <div class="input-field"> 
+                           <i class="fas fa-university"></i> 
+                          <input type="text" placeholder="Niveau d'étude" >
+                        </div>
+                     </div> 
+            </div>      
+            <div class="form-row">
+                     <div class="input-group">
+                       <label>Domaine</label>  
+                       <div class="input-field">
+                            <i class="fas fa-briefcase"></i> 
+                          <input type="text" placeholder="Domaine" >
+                       </div>
+                     </div>
+                     <div class="input-group">
+                        <label>Spécialité</label>  
+                        <div class="input-field">
+                           <i class="fas fa-briefcase"></i>       
+                          <input type="text" placeholder="Spécialité" required>
+                        </div>
+                     </div>   
+            </div> 
+            <div class="form-row">    
+                     <div class="input-group">                          
+                       <label>Début</label>
+                       <div class="input-field">
+                         <i class="fas fa-calendar"></i>  
+                         <input type="date" id="startDate" >
+                       </div>
+                     </div>   
+        
+                  <div class="input-group">                        
+                      <label>Fin</label>    
+                       <div class="input-field">             
+                          <i class="fas fa-calendar"></i>  
+                           <input type="date" id="endDate">
+                       </div>
+                    </div>  
+            </div>   
+             <label><input type="checkbox" id="enCours"> En cours</label>
+                  
+           <button type="button" class="btn" onclick="toggleAuth('register')">Précédent</button>
+<button type="button" class="auth-btn" onclick="toggleAuth('experience')">Suivant</button>
+  </form>
+        </div>
+       
+        <div class="auth-card exper-card" id="exper-card" style="display: none;">
+        
+            <div class="auth-header">
+                <h2>Expérience</h2> 
+            </div>
+            <form> 
+                   <div class="form-row">   
+                      <div class="input-group"> 
+                        <label > Poste</label>
+                          <div class="input-field">
+                            <i class="fas fa-building"></i>  
+                            <input type="text">
+                          </div>
+                        </div>  
+                        <div class="input-group">                          
+                              <label>Nom de l'entreprise</label>
+                              <div class="input-field">
+                                <i class="fas fa-building"></i>  
+                               <input type="text" >            
+                              </div>
+                        </div>  
+                    </div>
+                    <div class="form-row">
+                      
+                            <div class="input-group">                          
+                              <label>Domaine</label>
+                              <div class="input-field">
+                                <i class="fas fa-briefcase"></i>  
+                                <input type="text">
+                              </div>
+                            </div> 
+                    </div>    
+                       <div class="form-row">
+                              <div class="input-group">                          
+                                  <label>Début</label>
+                                  <div class="input-field">
+                                    <i class="fas fa-calendar"></i>  
+                                      <input type="date"> 
+                                  </div>
+                                </div>  
+
+                                <div class="input-group">                          
+                                  <label>Fin</label> 
+                                  <div class="input-field">
+                                    <i class="fas fa-calendar"></i>  
+                                    <input type="date"> 
+                                 </div>
+                             </div> 
+                       </div>   
+                  
+                
+                     <button class="btn" onclick="toggleAuth('formation')">Précédent</button>
+                     <button class="auth-btn" onclick="toggleAuth('competences')">Suivant</button> 
+                  </div>
+            </form>                   
+        
+                <!-- -->
+                <div class="auth-card compet-card" id="competence-card" style="display: none;">
+                    <div class="auth-header">
+                        <h2>Compétences </h2> 
+                    </div>
+                    <form> 
+                    <h3>Langue</h3>
+
+                    <p>Français</p>
+                    <div class="button-container">
+                <button class="c1">A1</button>
+                <button class="c1">A2</button>
+                <button class="c1">B1</button>
+                <button class="c1">B2</button>
+                <button class="c1">C1</button>
+                <button class="c1">C2</button>
+              </div>
+                <p>Anglais</p>
+                <div class="button-container">
+                <button class="c1">A1</button>
+                <button class="c1">A2</button>
+                <button class="c1">B1</button>
+                <button class="c1">B2</button>
+                <button class="c1">C1</button>
+                <button class="c1">C2</button>
+               </div> 
+                <p>Arabe</p>
+                 <div class="button-container">
+                <button class="c1">A1</button>
+                <button class="c1">A2</button>
+                <button class="c1">B1</button>
+                <button class="c1">B2</button>
+                <button class="c1">C1</button>
+                <button class="c1">C2</button>
+             </div>  
+              <h3>Compétences</h3>
+                    <input type="text" placeholder="Compétences">
+                    <button class="c1">Ajouter</button>
+                     <button type="button" class="btn" onclick="toggleAuth('experience')">Précédent</button>
+                    <button type="submit" class="auth-btn">Envoi</button>
+            </form>
+                      
+                </div>
+            </div>
+           
+    
+          
+        </div>
+
+        </div>
+   
     </section>
 
     <!-- Pied de page -->
@@ -675,30 +924,49 @@
     </footer>
 
     <script>
-        function toggleAuth(formType) {
-            const loginCard = document.getElementById("login-card");
-            const registerCard = document.getElementById("register-card");
-            
-            if (formType === "register") {
-                loginCard.style.display = "none";
-                registerCard.style.display = "block";
-            } else {
-                loginCard.style.display = "block";
-                registerCard.style.display = "none";
-            }
-            
-            // Faire défiler vers le haut pour voir le formulaire
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+         function toggleAuth(formType) {
+        const loginCard = document.getElementById("login-card");
+        const registerCard = document.getElementById("register-card");
+        const formationCard = document.getElementById("formation-card");
+        const experCard=document.getElementById("exper-card");
+       const competCard=document.getElementById("competence-card");
+        // Cacher tous les formulaires
+        loginCard.style.display = "none";
+        registerCard.style.display = "none";
+        formationCard.style.display = "none";
+        experCard.style.display='none';
+        competCard.style.display='none';
+        // Afficher le bon formulaire
+        if (formType === "register") {
+            registerCard.style.display = "block";
+        } else if (formType === "formation") {
+            formationCard.style.display = "block";
+        } else if(formType==='experience'){
+            experCard.style.display="block";
+        }else if(formType==="competences"){
+          competCard.style.display="block";
+        
+        } else {
+            loginCard.style.display = "block";
         }
 
+        // Faire défiler vers le haut pour voir le formulaire sélectionné
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
         // S'assurer que sur les appareils mobiles, un seul formulaire est visible au chargement
         document.addEventListener('DOMContentLoaded', function() {
             if (window.innerWidth <= 992) {
                 const loginCard = document.getElementById("login-card");
                 const registerCard = document.getElementById("register-card");
-                
+                const formationCard = document.getElementById("formation-card");
+                const experCard=document.getElementById("exper-card");
+                const competCard=document.getElementById("competence-card");
+       
                 loginCard.style.display = "block";
                 registerCard.style.display = "none";
+                formationCard.style.display = "none";
+                experCard.style.display='none';
+                competCard.style.display='none';
             }
         });
     </script>
