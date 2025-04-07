@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Djezzy Recrutement - Profil Administrateur</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #e63312;
+            --secondary-color: #333;
+            --light-gray: #f4f4f4;
+            --white: #ffffff;
+            --text-dark: #333;
+            --border-color: #ddd;
+        }
+    
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            width: 250px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 20px 0;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+        }
+        
+        .brand {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .brand img {
+            width: 40px;
+            margin-right: 10px;
+        }
+        
+        .brand-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--light-gray);
+        }
+        
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+        
+        .menu-title {
+            padding: 10px 20px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .menu-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .menu-item:hover, .menu-item.active {
+            background-color: rgba(230, 18, 18, 0.8);
+            color: var(--white);
+        }
+        
+        .menu-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main content styles */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-name {
+            margin-right: 10px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgb(231, 7, 7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+        }
+
+        /* Profile Page Styles */
+        .profile-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+        }
+
+        .profile-sidebar {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .profile-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .edit-cover {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .edit-cover:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            background-color: white;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: var(--primary-color);
+            position: relative;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .edit-avatar {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: var(--primary-color);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+            font-size: 12px;
+            border: 2px solid white;
+        }
+
+        .profile-name {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .profile-title {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .profile-stats {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .profile-stat {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .profile-details {
+            padding: 20px;
+        }
+
+        .profile-detail-item {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        .detail-icon {
+            width: 36px;
+            height: 36px;
+            background-color: rgba(230, 51, 18, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            margin-right: 15px;
+        }
+
+        .detail-content {
+            flex: 1;
+        }
+
+        .detail-label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 3px;
+        }
+
+        .detail-value {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .profile-actions {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .profile-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            border-radius: 4px;
+            background-color: white;
+            border: 1px solid var(--border-color);
+            color: var(--secondary-color);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .profile-btn:hover {
+            background-color: var(--light-gray);
+        }
+
+        .profile-btn i {
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+
+        .profile-btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+
+        .profile-btn-primary:hover {
+            background-color: #d12e0f;
+        }
+
+        .profile-btn-primary i {
+            color: white;
+        }
+
+        .profile-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .content-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .card-title i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .card-action {
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light-gray);
+            color: var(--secondary-color);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .card-action:hover {
+            background-color: #e0e0e0;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .profile-form-group {
+            margin-bottom: 20px;
+        }
+
+        .profile-form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .profile-form-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .profile-form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(230, 51, 18, 0.1);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-col {
+            flex: 1;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-input {
+            margin-right: 10px;
+        }
+
+        .checkbox-label {
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .activity-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 25px;
+        }
+
+        .timeline-point {
+            position: absolute;
+            left: -30px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            border: 2px solid white;
+        }
+
+        .timeline-date {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content {
+            background-color: var(--light-gray);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .timeline-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .timeline-desc {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .card-footer {
+            padding: 15px 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+        }
+
+        .view-all {
+            color: var(--primary-color);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .security-setting {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .security-setting:last-child {
+            padding-bottom: 0;
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+
+        .security-info h4 {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .security-info p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .security-action {
+            background-color: var(--light-gray);
+            border: none;
+            color: var(--secondary-color);
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .security-action:hover {
+            background-color: #e0e0e0;
+        }
+
+        .notification-item {
+            display: flex;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .notification-item:last-child {
+            padding-bottom: 0;
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+
+        .notification-icon {
+            width: 36px;
+            height: 36px;
+            background-color: rgba(230, 51, 18, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            margin-right: 15px;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .notification-time {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .notification-actions {
+            margin-left: 10px;
+        }
+
+        .notification-action {
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 5px;
+        }
+
+        .notification-action:hover {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <img src="Logo_Djezzy_2015-1.png" alt="Logo">
+                <div class="brand-text">Djezzy Recrutement</div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <div class="menu-title">Général</div>
+                <a href="tableau de bord.html" class="menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Tableau de bord</span>
+                </a>
+                <a href="creer annonce.html" class="menu-item">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Annonces</span>
+                </a>
+                <a href="candidats.html" class="menu-item">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Candidats</span>
+                </a>
+                
+                <div class="menu-title">Compte</div>
+                <a href="#" class="menu-item active">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Mon profil</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Déconnexion</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1 class="page-title">Mon Profil</h1>
+                <div class="user-info">
+                    <span>Brahim Mansouri</span>
+                    <div class="user-avatar">BM</div>
+                </div>
+            </div>
+
+            <!-- Profile Container -->
+            <div class="profile-container">
+                <!-- Profile Sidebar -->
+                <div class="profile-sidebar">
+                    <div class="profile-header">
+                        <div class="edit-cover">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <div class="profile-avatar">
+                            <i class="fas fa-user"></i>
+                            <div class="edit-avatar">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                        </div>
+                        <div class="profile-name">Brahim Mansouri</div>
+                        <div class="profile-title">Administrateur Système Senior</div>
+                    </div>
+                    
+                    <div class="profile-stats">
+                        <div class="profile-stat">
+                            <div class="stat-value">158</div>
+                            <div class="stat-label">Annonces créées</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="stat-value">243</div>
+                            <div class="stat-label">Candidats gérés</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="stat-value">37</div>
+                            <div class="stat-label">Utilisateurs</div>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-details">
+                        <div class="profile-detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="detail-content">
+                                <div class="detail-label">Email</div>
+                                <div class="detail-value">brahim.mansouri@djezzy.dz</div>
+                            </div>
+                        </div>
+                        <div class="profile-detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="detail-content">
+                                <div class="detail-label">Téléphone</div>
+                                <div class="detail-value">+213 555 123 456</div>
+                            </div>
+                        </div>
+                        <div class="profile-detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="detail-content">
+                                <div class="detail-label">Département</div>
+                                <div class="detail-value">Technologie de l'Information</div>
+                            </div>
+                        </div>
+                        <div class="profile-detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="detail-content">
+                                <div class="detail-label">Localisation</div>
+                                <div class="detail-value">Alger, Algérie</div>
+                            </div>
+                        </div>
+                        <div class="profile-detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="detail-content">
+                                <div class="detail-label">Date d'embauche</div>
+                                <div class="detail-value">15 Juin 2020</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-actions">
+                        <button class="profile-btn profile-btn-primary">
+                            <i class="fas fa-edit"></i> Modifier le profil
+                        </button>
+                        <button class="profile-btn">
+                            <i class="fas fa-lock"></i> Changer le mot de passe
+                        </button>
+                        <button class="profile-btn">
+                            <i class="fas fa-download"></i> Télécharger les données
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Profile Content -->
+                <div class="profile-content">
+                    <!-- Information personnelle -->
+                    <div class="content-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fas fa-user"></i> Informations personnelles
+                            </div>
+                            <div class="card-actions">
+                                <div class="card-action">
+                                    <i class="fas fa-edit"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="profile-form-group">
+                                        <label class="profile-form-label">Nom</label>
+                                        <input type="text" class="profile-form-input" value="Mansouri" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="profile-form-group">
+                                        <label class="profile-form-label">Prénom</label>
+                                        <input type="text" class="profile-form-input" value="Brahim" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="profile-form-group">
+                                        <label class="profile-form-label">Email</label>
+                                        <input type="email" class="profile-form-input" value="brahim.mansouri@djezzy.dz" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="profile-form-group">
+                                        <label class="profile-form-label">Téléphone</label>
+                                        <input type="tel" class="profile-form-input" value="+213 555 123 456" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-col">
+                                    <div class="profile-form-group">
+                                        <label class="profile-form-label">Date de naissance</label>
+                                        <input type="date" class="profile-form-input" value="1985-08-12" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-col">
+                                    <div class="profile-form-group">
+                                        <label class="profile-form-label">Adresse</label>
+                                        <input type="text" class="profile-form-input" value="Sidi Yahia, Hydra, Alger" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile-form-group">
+                                <label class="profile-form-label">Biographie</label>
+                                <textarea class="profile-form-input" rows="4" disabled>Administrateur système senior avec 8 ans d'expérience dans la gestion de systèmes IT complexes et le développement de solutions de recrutement digitales. Expert en optimisation de processus RH et en sécurité des données.</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activité récente -->
+                    <div class="content-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fas fa-history"></i> Activité récente
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="activity-timeline">
+                                <div class="timeline-line"></div>
+                                <div class="timeline-item">
+                                    <div class="timeline-point"></div>
+                                    <div class="timeline-date">Aujourd'hui à 11:30</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Création d'une nouvelle annonce</div>
+                                        <div class="timeline-desc">Vous avez créé une annonce pour le poste "Développeur Front-end Senior"</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-point"></div>
+                                    <div class="timeline-date">Hier à 15:45</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Ajout d'un nouvel utilisateur</div>
+                                        <div class="timeline-desc">Vous avez ajouté "Farida Mekkaoui" comme recruteur dans le système</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-point"></div>
+                                    <div class="timeline-date">28/03/2025 à 09:15</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Mise à jour des paramètres système</div>
+                                        <div class="timeline-desc">Vous avez modifié les paramètres de notification pour tous les utilisateurs</div>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-point"></div>
+                                    <div class="timeline-date">25/03/2025 à 14:20</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-title">Validation de candidature</div>
+                                        <div class="timeline-desc">Vous avez approuvé la candidature de "Karim Lahlou" pour le poste d'Administrateur IT</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="view-all">Voir toutes les activités</div>
+                        </div>
+                    </div>
+
+                    <!-- Sécurité du compte -->
+                    <div class="content-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fas fa-shield-alt"></i> Sécurité du compte
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="security-setting">
+                                <div class="security-info">
+                                    <h4>Authentification à deux facteurs</h4>
+                                    <p>Ajoute une couche de sécurité supplémentaire à votre compte</p>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="security-setting">
+                                <div class="security-info">
+                                    <div class="security-label">Dernière connexion</div>
+                                    <div class="security-value">03 Avril 2025 à 08:23</div>
+                                </div>
+                            </div>
+                            <div class="security-setting">
+                                <div class="security-info">
+                                    <div class="security-label">Authentification à deux facteurs</div>
+                                    <div class="security-value">Activée</div>
+                                </div>
+                                <button class="security-btn">Gérer</button>
+                            </div>
+                            <div class="security-setting">
+                                <div class="security-info">
+                                    <div class="security-label">Historique des connexions</div>
+                                    <div class="security-value">5 connexions la semaine dernière</div>
+                                </div>
+                                <button class="security-btn">Voir l'historique</button>
+                            </div>
+                            <div class="security-setting">
+                                <div class="security-info">
+                                    <div class="security-label">Changer le mot de passe</div>
+                                </div>
+                                <button class="security-btn">Modifier</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div> 
+        </div> 
+    </div> 
+</body>
+</html>

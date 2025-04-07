@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Djezzy Recrutement - Profil Candidat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #e63312;
+            --secondary-color: #333;
+            --light-gray: #f4f4f4;
+            --white: #ffffff;
+            --text-dark: #333;
+            --border-color: #ddd;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar styles */
+        .sidebar {
+            width: 250px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 20px 0;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+        }
+        
+        .brand {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .brand img {
+            width: 40px;
+            margin-right: 10px;
+        }
+        
+        .brand-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--light-gray);
+        }
+        
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+        
+        .menu-title {
+            padding: 10px 20px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .menu-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .menu-item:hover, .menu-item.active {
+            background-color: rgba(230, 18, 18, 0.8);
+            color: var(--white);
+        }
+        
+        .menu-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Main content styles */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-name {
+            margin-right: 10px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgb(231, 7, 7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+        }
+        
+        /* Candidate Profile Styles */
+        .profile-container {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+        
+        .profile-header {
+            display: flex;
+            padding: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 30px;
+            font-size: 40px;
+            color: #666;
+        }
+        
+        .profile-info {
+            flex: 1;
+        }
+        
+        .candidate-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .candidate-title {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .profile-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            color: #666;
+        }
+        
+        .meta-item i {
+            margin-right: 8px;
+            color: var(--primary-color);
+        }
+        
+        .profile-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .profile-tab {
+            padding: 15px 20px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .profile-tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+        
+        .profile-content {
+            padding: 30px;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .content-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .bio {
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .skill-tag {
+            background-color: rgba(230, 51, 18, 0.1);
+            color: var(--primary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .experience-item, .education-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .experience-item:last-child, .education-item:last-child {
+            border-bottom: none;
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .item-title {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .item-subtitle {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .item-date {
+            color: #999;
+            font-size: 14px;
+        }
+        
+        .item-description {
+            line-height: 1.6;
+            color: #666;
+        }
+        
+        .documents-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .document-item {
+            display: flex;
+            align-items: center;
+            background-color: var(--light-gray);
+            padding: 10px 15px;
+            border-radius: 5px;
+            width: calc(50% - 10px);
+        }
+        
+        .document-icon {
+            margin-right: 10px;
+            font-size: 20px;
+            color: var(--primary-color);
+        }
+        
+        .document-info {
+            flex: 1;
+        }
+        
+        .document-name {
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+        
+        .document-size {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .document-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-action {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+        
+        .btn-action:hover {
+            color: var(--primary-color);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: #d62d0b;
+            border-color: #d62d0b;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(230, 51, 18, 0.1);
+        }
+        
+        .rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .rating-stars {
+            display: flex;
+            margin-right: 10px;
+        }
+        
+        .rating-stars i {
+            color: #ffc107;
+            margin-right: 3px;
+        }
+        
+        .rating-value {
+            font-weight: 600;
+            margin-right: 5px;
+        }
+        
+        .rating-count {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Styles pour la section Candidatures */
+        .application-item {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .application-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .application-info {
+            flex: 1;
+        }
+        
+        .application-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .application-meta {
+            display: flex;
+            gap: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .application-status {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .status-pending {
+            background-color: #fff8e1;
+            color: #ffa000;
+        }
+        
+        .status-interview {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .status-hired {
+            background-color: #e8f5e9;
+            color: #388e3c;
+        }
+        
+        .status-rejected {
+            background-color: #ffebee;
+            color: #d32f2f;
+        }
+        
+        .job-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .job-detail {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .job-detail i {
+            margin-right: 5px;
+            color: var(--primary-color);
+        }
+        
+        .timeline {
+            margin-top: 20px;
+            padding-left: 20px;
+            border-left: 2px dashed #ddd;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 15px;
+            padding-left: 20px;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+        }
+        
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        
+        .timeline-date {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 3px;
+        }
+        
+        .timeline-title {
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+        
+        .timeline-text {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* Styles pour la section Notes */
+        .notes-container {
+            margin-bottom: 30px;
+        }
+        
+        .note-item {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .note-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        
+        .note-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 16px;
+            color: #666;
+        }
+        
+        .author-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .author-name {
+            font-weight: 500;
+        }
+        
+        .author-role {
+            font-size: 13px;
+            color: #888;
+        }
+        
+        .note-date {
+            font-size: 14px;
+            color: #888;
+        }
+        
+        .note-content {
+            line-height: 1.6;
+            color: #444;
+        }
+        
+        .note-form {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 15px;
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .note-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        @media (max-width: 992px) {
+            .document-item {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+                overflow: visible;
+            }
+            
+            .brand-text, .menu-item span, .menu-title {
+                display: none;
+            }
+            
+            .brand {
+                justify-content: center;
+            }
+            
+            .brand img {
+                margin-right: 0;
+            }
+            
+            .menu-item {
+                justify-content: center;
+                padding: 15px;
+            }
+            
+            .menu-item i {
+                margin-right: 0;
+                font-size: 18px;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+            
+            .profile-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .profile-avatar {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .profile-meta {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <img src="Logo_Djezzy_2015-1.png" alt="Logo">
+                <div class="brand-text">Djezzy Recrutement</div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <div class="menu-title">Général</div>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Tableau de bord</span>
+                </a>
+                <a href="creer annonce.html" class="menu-item">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Annonces</span>
+                </a>
+                <a href="candidats.html" class="menu-item active">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Candidats</span>
+                </a>
+                
+                
+                <div class="menu-title">Compte</div>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Mon profil</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Déconnexion</span>
+                </a>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <h1 class="page-title">Profil du Candidat</h1>
+                <div class="user-info">
+                    <span class="user-name">Brahim Mansouri</span>
+                    <div class="user-avatar">BM</div>
+                </div>
+            </div>
+            
+            <!-- Candidate Profile -->
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-avatar">KL</div>
+                    <div class="profile-info">
+                        <h2 class="candidate-name">Karim Lahlou</h2>
+                        <h3 class="candidate-title">Développeur Full Stack</h3>
+                        <div class="profile-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>karim.lahlou@example.com</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-phone"></i>
+                                <span>+213 770 123 456</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Alger, Algérie</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-briefcase"></i>
+                                <span>5 ans d'expérience</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="profile-tabs">
+                    <div class="profile-tab" data-tab="informations">Informations</div>
+                    <div class="profile-tab" data-tab="candidatures">Candidatures</div>
+                    <div class="profile-tab" data-tab="entretiens">Entretiens</div>
+                    <div class="profile-tab" data-tab="notes">Notes</div>
+                </div>
+                
+                <!-- Tab Content: Informations -->
+                <div class="profile-content tab-content" id="tab-informations">
+                    <div class="content-section">
+                        <h3 class="section-title">Évaluation</h3>
+                        <div class="rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="rating-value">4.5</div>
+                            <div class="rating-count">(2 évaluations)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h3 class="section-title">À propos</h3>
+                        <p class="bio">
+                            Développeur Full Stack passionné avec plus de 5 ans d'expérience dans le développement d'applications web et mobiles. 
+                            Spécialisé dans les technologies JavaScript modernes et les frameworks associés. 
+                            Adepte des méthodologies agiles et du travail en équipe, j'ai contribué au développement de plusieurs applications à forte charge pour des entreprises dans le secteur des télécommunications et de la fintech.
+                        </p>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h3 class="section-title">Compétences</h3>
+                        <div class="skills-list">
+                            <div class="skill-tag">JavaScript</div>
+                            <div class="skill-tag">React.js</div>
+                            <div class="skill-tag">Node.js</div>
+                            <div class="skill-tag">Vue.js</div>
+                            <div class="skill-tag">Express</div>
+                            <div class="skill-tag">MongoDB</div>
+                            <div class="skill-tag">PostgreSQL</div>
+                            <div class="skill-tag">Docker</div>
+                            <div class="skill-tag">AWS</div>
+                            <div class="skill-tag">CI/CD</div>
+                            <div class="skill-tag">RESTful API</div>
+                            <div class="skill-tag">GraphQL</div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h3 class="section-title">Expérience professionnelle</h3>
+                        <div class="experience-item">
+                            <div class="item-header">
+                                <h4 class="item-title">Développeur Full Stack Senior</h4>
+                                <div class="item-date">Jan 2023 - Présent</div>
+                            </div>
+                            <div class="item-subtitle">TechSolutions Algérie, Alger</div>
+                            <p class="item-description">
+                                Lead développeur sur plusieurs projets clés pour des clients du secteur des télécommunications.
+                                Conception et développement d'applications web avec React.js et Node.js.
+                                Mise en place d'une architecture microservices et optimisation des performances.
+                                Encadrement d'une équipe de 4 développeurs juniors.
+                            </p>
+                        </div>
+                        
+                        <div class="experience-item">
+                            <div class="item-header">
+                                <h4 class="item-title">Développeur JavaScript</h4>
+                                <div class="item-date">Mars 2020 - Déc 2022</div>
+                            </div>
+                            <div class="item-subtitle">DigitalWorks, Oran</div>
+                            <p class="item-description">
+                                Développement front-end avec React.js et Vue.js.
+                                Implémentation d'API RESTful avec Express.js.
+                                Intégration de systèmes de paiement et d'authentification.
+                                Participation à des revues de code et au mentorat des nouveaux développeurs.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h3 class="section-title">Formation</h3>
+                        <div class="education-item">
+                            <div class="item-header">
+                                <h4 class="item-title">Master en Informatique</h4>
+                                <div class="item-date">2017 - 2020</div>
+                            </div>
+                            <div class="item-subtitle">Université des Sciences et de la Technologie Houari Boumediene, Alger</div>
+                            <p class="item-description">
+                                Spécialisation en développement de logiciels et systèmes d'information.
+                                Projet de fin d'études: Plateforme collaborative pour la gestion de projets agiles.
+                            </p>
+                        </div>
+                        
+                        <div class="education-item">
+                            <div class="item-header">
+                                <h4 class="item-title">Licence en Informatique</h4>
+                                <div class="item-date">2014 - 2017</div>
+                            </div>
+                            <div class="item-subtitle">Université des Sciences et de la Technologie Houari Boumediene, Alger</div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <h3 class="section-title">Documents</h3>
+                        <div class="documents-list">
+                            <div class="document-item">
+                                <div class="document-icon">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <div class="document-info">
+                                    <div class="document-name">CV_Karim_Lahlou.pdf</div>
+                                    <div class="document-size">512 KB</div>
+                                </div>
+                                <div class="document-actions">
+                                    <button class="btn-action"><i class="fas fa-download"></i></button>
+                                    <button class="btn-action"><i class="fas fa-eye"></i></button>
+                                </div>
+                            </div>
+                            
+                            <div class="document-item">
+                                <div class="document-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <div class="document-info">
+                                    <div class="document-name">Lettre_Motivation.pdf</div>
+                                    <div class="document-size">304 KB</div>
+                                </div>
+                                <div class="document-actions">
+                                    <button class="btn-action"><i class="fas fa-download"></i></button>
+                                    <button class="btn-action"><i class="fas fa-eye"></i></button>
+                                </div>
+                            </div>
+                            
+                            <div class="document-item">
+                                <div class="document-icon">
+                                    <i class="fas fa-file-certificate"></i>
+                                </div>
+                                <div class="document-info">
+                                    <div class="document-name">Diplome_Master.pdf</div>
+                                    <div class="document-size">1.2 MB</div>
+                                </div>
+                                <div class="document-actions">
+                                    <button class="btn-action"><i class="fas fa-download"></i></button>
+                                    <button class="btn-action"><i class="fas fa-eye"></i></button>
+                                </div>
+                            </div>
+                            
+                            <div class="document-item">
+                                <div class="document-icon">
+                                    <i class="fas fa-file-certificate"></i>
+                                </div>
+                                <div class="document-info">
+                                    <div class="document-name">Certification_React.pdf</div>
+                                    <div class="document-size">856 KB</div>
+                                </div>
+                                <div class="document-actions">
+                                    <button class="btn-action"><i class="fas fa-download"></i></button>
+                                    <button class="btn-action"><i class="fas fa-eye"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary">Programmer un entretien</button>
+                        <button class="btn btn-outline">Envoyer un message</button>
+                        <button class="btn btn-outline">Exporter le profil</button>
+                    </div>
+                </div>
+                
+                <!-- Tab Content: Candidatures -->
+<div class="profile-content tab-content" id="tab-candidatures">
+    <div class="content-section">
+        <h3 class="section-title">Candidatures en cours (2)</h3>
+        
+        <div class="application-item">
+            <div class="application-header">
+                <div class="application-info">
+                    <h4 class="application-title">Développeur Full Stack Senior - Direction Technique</h4>
+                    <div class="application-meta">
+                        <span><i class="fas fa-calendar-alt"></i> Postulé le: 15 mars 2025</span>
+                        <span><i class="fas fa-clock"></i> Dernière mise à jour: 28 mars 2025</span>
+                    </div>
+                </div>
+                <div class="application-status status-interview">Entretien programmé</div>
+            </div>
+            
+            <div class="job-details">
+                <div class="job-detail">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Alger, Siège</span>
+                </div>
+                <div class="job-detail">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Compétitif</span>
+                </div>
+                <div class="job-detail">
+                    <i class="fas fa-briefcase"></i>
+                    <span>CDI</span>
+                </div>
+                <div class="job-detail">
+                    <i class="fas fa-users"></i>
+                    <span>Direction des Systèmes d'Information</span>
+                </div>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">15 mars 2025</div>
+                    <div class="timeline-title">Candidature soumise</div>
+                    <div class="timeline-text">Le candidat a postulé en ligne via le site carrières.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">20 mars 2025</div>
+                    <div class="timeline-title">Candidature retenue</div>
+                    <div class="timeline-text">Le CV a été présélectionné par le recruteur.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">25 mars 2025</div>
+                    <div class="timeline-title">Entretien programmé</div>
+                    <div class="timeline-text">Entretien technique prévu pour le 2 avril 2025 à 14h00.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="application-item">
+            <div class="application-header">
+                <div class="application-info">
+                    <h4 class="application-title">Architecte Solutions Digitales - Projet Next Gen</h4>
+                    <div class="application-meta">
+                        <span><i class="fas fa-calendar-alt"></i> Postulé le: 10 février 2025</span>
+                        <span><i class="fas fa-clock"></i> Dernière mise à jour: 15 mars 2025</span>
+                    </div>
+                </div>
+                <div class="application-status status-pending">En cours d'évaluation</div>
+            </div>
+            
+            <div class="job-details">
+                <div class="job-detail">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Alger, Bab Ezzouar</span>
+                </div>
+                <div class="job-detail">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Selon expérience</span>
+                </div>
+                <div class="job-detail">
+                    <i class="fas fa-briefcase"></i>
+                    <span>CDI</span>
+                </div>
+                <div class="job-detail">
+                    <i class="fas fa-users"></i>
+                    <span>Direction Innovation</span>
+                </div>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">10 février 2025</div>
+                    <div class="timeline-title">Candidature soumise</div>
+                    <div class="timeline-text">Le candidat a postulé en ligne via le site carrières.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">28 février 2025</div>
+                    <div class="timeline-title">Candidature en cours d'examen</div>
+                    <div class="timeline-text">Le dossier est en cours d'évaluation par l'équipe technique.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">15 mars 2025</div>
+                    <div class="timeline-title">Test technique demandé</div>
+                    <div class="timeline-text">Un test technique a été envoyé au candidat, en attente de retour.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content-section">
+        <h3 class="section-title">Candidatures passées (1)</h3>
+        
+        <div class="application-item">
+            <div class="application-header">
+                <div class="application-info">
+                    <h4 class="application-title">Développeur Backend - Équipe Billing</h4>
+                    <div class="application-meta">
+                        <span><i class="fas fa-calendar-alt"></i> Postulé le: 5 octobre 2024</span>
+                        <span><i class="fas fa-clock"></i> Clôturée le: 15 novembre 2024</span>
+                    </div>
+                </div>
+                <div class="application-status status-rejected">Non retenu</div>
+            </div>
+            
+            <div class="job-details">
+                <div class="job-detail">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Oran</span>
+                </div>
+                <div class="job-detail">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Non communiqué</span>
+                </div>
+                <div class="job-detail">
+                    <i class="fas fa-briefcase"></i>
+                    <span>CDD - 12 mois</span>
+                </div>
+                <div class="job-detail">
+                    <i class="fas fa-users"></i>
+                    <span>Département Commercial</span>
+                </div>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">5 octobre 2024</div>
+                    <div class="timeline-title">Candidature soumise</div>
+                    <div class="timeline-text">Le candidat a postulé en ligne via le site carrières.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">20 octobre 2024</div>
+                    <div class="timeline-title">Entretien téléphonique</div>
+                    <div class="timeline-text">Premier entretien avec le service RH.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">15 novembre 2024</div>
+                    <div class="timeline-title">Candidature non retenue</div>
+                    <div class="timeline-text">Profil intéressant mais ne correspondant pas exactement aux besoins du poste.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tab Content: Entretiens -->
+<div class="profile-content tab-content" id="tab-entretiens">
+    <div class="content-section">
+        <h3 class="section-title">Entretiens à venir</h3>
+        
+        <div class="application-item">
+            <div class="application-header">
+                <div class="application-info">
+                    <h4 class="application-title">Entretien technique - Développeur Full Stack Senior</h4>
+                    <div class="application-meta">
+                        <span><i class="fas fa-calendar-alt"></i> Date: 2 avril 2025</span>
+                        <span><i class="fas fa-clock"></i> Heure: 14:00 - 15:30</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Lieu: Salle de conférence B3, Siège Djezzy</span>
+                    </div>
+                </div>
+                <div class="application-status status-interview">Programmé</div>
+            </div>
+            
+            <div class="job-details">
+                <div class="job-detail">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Interviewers: Mohammed Benali (DSI), Sarah Mazari (RH)</span>
+                </div>
+                <div class="job-detail">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Type: Entretien technique + Test pratique</span>
+                </div>
+                <div class="job-detail">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Durée estimée: 90 minutes</span>
+                </div>
+            </div>
+            
+            <div class="action-buttons" style="margin-top: 15px;">
+                <button class="btn btn-primary">Modifier l'entretien</button>
+                <button class="btn btn-outline">Envoyer un rappel</button>
+                <button class="btn btn-outline">Annuler</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content-section">
+        <h3 class="section-title">Entretiens passés</h3>
+        
+        <div class="application-item">
+            <div class="application-header">
+                <div class="application-info">
+                    <h4 class="application-title">Entretien téléphonique - Développeur Backend</h4>
+                    <div class="application-meta">
+                        <span><i class="fas fa-calendar-alt"></i> Date: 20 octobre 2024</span>
+                        <span><i class="fas fa-clock"></i> Heure: 11:00 - 11:45</span>
+                        <span><i class="fas fa-phone"></i> Type: Téléphonique</span>
+                    </div>
+                </div>
+                <div class="application-status status-rejected">Terminé</div>
+            </div>
+            
+            <div class="content-section" style="margin: 15px 0;">
+                <h4 class="section-title" style="font-size: 16px;">Résumé de l'entretien</h4>
+                <p class="item-description">
+                    Le candidat a démontré de bonnes connaissances techniques en Node.js et Express. 
+                    Bonne compréhension des architectures RESTful et des bases de données NoSQL.
+                    Cependant, l'expérience en développement backend pour les systèmes de facturation 
+                    était limitée par rapport aux exigences du poste.
+                </p>
+            </div>
+            
+            <div class="rating" style="margin-bottom: 15px;">
+                <div class="rating-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <div class="rating-value">3.0</div>
+                <div class="rating-count">Évaluation technique</div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-outline">Voir le compte-rendu détaillé</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content-section">
+        <h3 class="section-title">Programmer un nouvel entretien</h3>
+        
+        <div class="note-form">
+            <div class="form-group">
+                <label class="form-label">Poste concerné</label>
+                <select class="form-control">
+                    <option>Développeur Full Stack Senior - Direction Technique</option>
+                    <option>Architecte Solutions Digitales - Projet Next Gen</option>
+                    <option>Autre poste...</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Type d'entretien</label>
+                <select class="form-control">
+                    <option>Entretien technique</option>
+                    <option>Entretien avec RH</option>
+                    <option>Entretien avec manager</option>
+                    <option>Test pratique</option>
+                    <option>Entretien final</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Date et heure</label>
+                <input type="datetime-local" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Lieu / Mode</label>
+                <select class="form-control">
+                    <option>Siège Djezzy - Salle de conférence B3</option>
+                    <option>Entretien téléphonique</option>
+                    <option>Visioconférence</option>
+                    <option>Autre lieu...</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Interviewers</label>
+                <input type="text" class="form-control" placeholder="Noms et fonctions des interviewers">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Notes ou instructions particulières</label>
+                <textarea class="form-control" placeholder="Ajoutez des détails supplémentaires si nécessaire"></textarea>
+            </div>
+            
+            <div class="note-actions">
+                <button class="btn btn-primary">Programmer l'entretien</button>
+                <button class="btn btn-outline">Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tab Content: Notes -->
+<div class="profile-content tab-content" id="tab-notes">
+    <div class="content-section">
+        <h3 class="section-title">Notes et commentaires</h3>
+        
+        <div class="notes-container">
+            <div class="note-item">
+                <div class="note-header">
+                    <div class="note-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <div class="author-name">Sarah Mazari</div>
+                            <div class="author-role">Responsable Recrutement</div>
+                        </div>
+                    </div>
+                    <div class="note-date">28 mars 2025 à 14:20</div>
+                </div>
+                <div class="note-content">
+                    <p>J'ai contacté le candidat pour confirmer sa disponibilité pour l'entretien du 2 avril. Il est très intéressé par le poste et a confirmé sa présence. Il a demandé plus d'informations sur l'équipe technique et le projet concerné. Je lui ai envoyé une brève description par email.</p>
+                    <p>Je suggère que l'équipe technique prépare quelques questions spécifiques sur les projets à forte charge qu'il a mentionnés dans son CV pour évaluer sa capacité à gérer nos besoins actuels.</p>
+                </div>
+            </div>
+            
+            <div class="note-item">
+                <div class="note-header">
+                    <div class="note-author">
+                        <div class="author-avatar">MB</div>
+                        <div class="author-info">
+                            <div class="author-name">Mohammed Benali</div>
+                            <div class="author-role">Directeur Technique</div>
+                        </div>
+                    </div>
+                    <div class="note-date">25 mars 2025 à 10:45</div>
+                </div>
+                <div class="note-content">
+                    <p>Le profil de Karim semble très intéressant pour notre équipe de développement. Ses compétences en React et Node.js correspondent parfaitement à notre stack technique actuelle. J'ai examiné les projets mentionnés sur son GitHub et la qualité du code est impressionnante.</p>
+                    <p>Pour l'entretien technique, je propose de mettre l'accent sur l'architecture des applications à grande échelle et sur les performances. Il serait également utile d'évaluer sa capacité à travailler en équipe et à encadrer des développeurs juniors, car c'est un aspect important du poste.</p>
+                </div>
+            </div>
+            
+            <div class="note-item">
+                <div class="note-header">
+                    <div class="note-author">
+                        <div class="author-avatar">FA</div>
+                        <div class="author-info">
+                            <div class="author-name">Fatiha Amrani</div>
+                            <div class="author-role">Recruteuse IT</div>
+                        </div>
+                    </div>
+                    <div class="note-date">20 mars 2025 à 09:30</div>
+                </div>
+                <div class="note-content">
+                    <p>J'ai fait une présélection du CV de Karim pour le poste de Développeur Full Stack Senior. Ses 5 années d'expérience, dont 2 ans en position senior, correspondent bien au profil recherché. Sa lettre de motivation démontre une bonne compréhension des enjeux de notre secteur.</p>
+                    <p>Points forts: expertise technique solide, expérience dans le secteur des télécommunications, capacité à encadrer une équipe.</p>
+                    <p>À approfondir: expérience spécifique avec des systèmes à forte charge, connaissance des problématiques propres aux opérateurs mobiles.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="note-form">
+            <h4 class="section-title" style="font-size: 16px;">Ajouter une note</h4>
+            <div class="form-group">
+                <label class="form-label">Titre</label>
+                <input type="text" class="form-control" placeholder="Objet de votre note">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Contenu</label>
+                <textarea class="form-control" placeholder="Rédigez votre note ici..."></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Visibilité</label>
+                <select class="form-control">
+                    <option>Tous les recruteurs</option>
+                    <option>Équipe technique uniquement</option>
+                    <option>RH uniquement</option>
+                    <option>Privé (visible uniquement par moi)</option>
+                </select>
+            </div>
+            <div class="note-actions">
+                <button class="btn btn-primary">Enregistrer la note</button>
+                <button class="btn btn-outline">Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for tab switching -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set Informations tab as default active tab
+        document.querySelector('.profile-tab[data-tab="informations"]').classList.add('active');
+        document.getElementById('tab-informations').classList.add('active');
+        
+        // Tab switching functionality
+        const tabs = document.querySelectorAll('.profile-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                tabs.forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Hide all tab contents
+                const tabContents = document.querySelectorAll('.tab-content');
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Show selected tab content
+                const tabName = this.getAttribute('data-tab');
+                document.getElementById('tab-' + tabName).classList.add('active');
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
