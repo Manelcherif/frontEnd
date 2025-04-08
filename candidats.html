@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Djezzy Recrutement - Candidats</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #e63312;
+            --secondary-color: #333;
+            --light-gray: #f4f4f4;
+            --white: #ffffff;
+            --text-dark: #333;
+            --border-color: #ddd;
+        }
+    
+    /* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar styles */
+/* Sidebar styles */
+.sidebar {
+            width: 250px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 20px 0;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+        }
+        
+        .brand {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .brand img {
+            width: 40px;
+            margin-right: 10px;
+        }
+        
+        .brand-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--light-gray);
+        }
+        
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+        
+        .menu-title {
+            padding: 10px 20px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .menu-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .menu-item:hover, .menu-item.active {
+            background-color: rgba(230, 18, 18, 0.8);
+            color: var(--white);
+        }
+        
+        .menu-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Main content styles */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-name {
+            margin-right: 10px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgb(231, 7, 7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+        }
+
+/* Main content styles */
+.main-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info span {
+    margin-right: 10px;
+}
+
+.user-avatar {
+    width: 35px;
+    height: 35px;
+    background-color: #d32f2f;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Filters and search */
+.filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.search-bar {
+    position: relative;
+    flex: 1;
+    max-width: 300px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px 15px 10px 35px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.search-bar i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+}
+
+.filter-options {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-options select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.add-button {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.add-button:hover {
+    background-color: #b71c1c;
+}
+
+/* Table styles */
+.candidates-table {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #f9f9f9;
+    color: #666;
+    font-weight: 600;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.candidate-info {
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #f0f0f0;
+    color: #666;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.info .name {
+    font-weight: 500;
+}
+
+.info .email {
+    font-size: 12px;
+    color: #888;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status.new {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.status.in-progress {
+    background-color: #fff8e1;
+    color: #ffa000;
+}
+
+.status.interview {
+    background-color: #e8f5e9;
+    color: #388e3c;
+}
+
+.status.accepted {
+    background-color: #e8f5e9;
+    color: #388e3c;
+}
+
+.status.rejected {
+    background-color: #ffebee;
+    color: #d32f2f;
+}
+
+.actions {
+    display: flex;
+    gap: 5px;
+}
+
+.action-btn {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.action-btn.view {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.action-btn.edit {
+    background-color: #fff8e1;
+    color: #ffa000;
+}
+
+.action-btn.delete {
+    background-color: #ffebee;
+    color: #d32f2f;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.page-btn {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.page-btn.active {
+    background-color: #d32f2f;
+    color: white;
+    border-color: #d32f2f;
+}
+
+.page-btn.prev,
+.page-btn.next {
+    width: auto;
+    padding: 0 10px;
+}
+
+.ellipsis {
+    margin: 0 5px;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <img src="Logo_Djezzy_2015-1.png" alt="Logo">
+                <div class="brand-text">Djezzy Recrutement</div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <div class="menu-title">Général</div>
+                <a href="tableau de bord.html" class="menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Tableau de bord</span>
+                </a>
+                <a href="creer annonce.html" class="menu-item">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Annonces</span>
+                </a>
+                <a href="candidats.html" class="menu-item active">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Candidats</span>
+                </a>
+                
+                
+                <div class="menu-title">Compte</div>
+                <a href="admin profile.html" class="menu-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Mon profil</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Déconnexion</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1 class="page-title">Candidats</h1>
+                <div class="user-info">
+                    <span>Brahim Mansouri</span>
+                    <div class="user-avatar">BM</div>
+                </div>
+            </div>
+
+            <!-- Filters and Search -->
+            <div class="filters">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Rechercher un candidat...">
+                </div>
+                <div class="filter-options">
+                    <select>
+                        <option>Tous les départements</option>
+                        <option>IT</option>
+                        <option>Marketing</option>
+                        <option>Infrastructure</option>
+                        <option>Ventes</option>
+                    </select>
+                    <select>
+                        <option>Tous les postes</option>
+                        <option>Développeur Full Stack</option>
+                        <option>Chef de Projet Digital</option>
+                        <option>Ingénieur Réseau</option>
+                        <option>Responsable Commercial</option>
+                    </select>
+                    <select>
+                        <option>Tous les statuts</option>
+                        <option>Nouveau</option>
+                        <option>En cours</option>
+                        <option>Entretien planifié</option>
+                        <option>Accepté</option>
+                        <option>Refusé</option>
+                    </select>
+                </div>
+                <button class="add-button">
+                    <i class="fas fa-plus"></i> Ajouter un candidat
+                </button>
+            </div>
+
+            <!-- Candidates Table -->
+            <div class="candidates-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Candidat</th>
+                            <th>Poste</th>
+                            <th>Département</th>
+                            <th>Date de candidature</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="candidate-info">
+                                <div class="avatar">KL</div>
+                                <div class="info">
+                                    <div class="name">Karim Lahlou</div>
+                                    <div class="email">karim.lahlou@gmail.com</div>
+                                </div>
+                            </td>
+                            <td>Développeur Full Stack</td>
+                            <td>IT</td>
+                            <td>23/03/2025</td>
+                            <td><span class="status new">Nouveau</span></td>
+                            <td class="actions">
+                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="candidate-info">
+                                <div class="avatar">SB</div>
+                                <div class="info">
+                                    <div class="name">Sara Benali</div>
+                                    <div class="email">sara.benali@outlook.com</div>
+                                </div>
+                            </td>
+                            <td>Chef de Projet Digital</td>
+                            <td>Marketing</td>
+                            <td>22/03/2025</td>
+                            <td><span class="status interview">Entretien planifié</span></td>
+                            <td class="actions">
+                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="candidate-info">
+                                <div class="avatar">YM</div>
+                                <div class="info">
+                                    <div class="name">Yacine Mehdi</div>
+                                    <div class="email">yacine.mehdi@yahoo.fr</div>
+                                </div>
+                            </td>
+                            <td>Ingénieur Réseau</td>
+                            <td>Infrastructure</td>
+                            <td>21/03/2025</td>
+                            <td><span class="status in-progress">En cours</span></td>
+                            <td class="actions">
+                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="candidate-info">
+                                <div class="avatar">FZ</div>
+                                <div class="info">
+                                    <div class="name">Fatima Zahra</div>
+                                    <div class="email">fatima.zahra25@gmail.com</div>
+                                </div>
+                            </td>
+                            <td>Responsable Commercial</td>
+                            <td>Ventes</td>
+                            <td>20/03/2025</td>
+                            <td><span class="status accepted">Accepté</span></td>
+                            <td class="actions">
+                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="candidate-info">
+                                <div class="avatar">AH</div>
+                                <div class="info">
+                                    <div class="name">Ahmed Hassan</div>
+                                    <div class="email">ahmed.hassan@gmail.com</div>
+                                </div>
+                            </td>
+                            <td>Analyste Marketing</td>
+                            <td>Marketing</td>
+                            <td>19/03/2025</td>
+                            <td><span class="status rejected">Refusé</span></td>
+                            <td class="actions">
+                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="candidate-info">
+                                <div class="avatar">NA</div>
+                                <div class="info">
+                                    <div class="name">Naima Amrani</div>
+                                    <div class="email">naima.amrani@gmail.com</div>
+                                </div>
+                            </td>
+                            <td>Chef de Projet Digital</td>
+                            <td>Marketing</td>
+                            <td>18/03/2025</td>
+                            <td><span class="status in-progress">En cours</span></td>
+                            <td class="actions">
+                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="candidate-info">
+                                <div class="avatar">OB</div>
+                                <div class="info">
+                                    <div class="name">Omar Bensaid</div>
+                                    <div class="email">omar.bensaid@outlook.com</div>
+                                </div>
+                            </td>
+                            <td>Développeur Backend</td>
+                            <td>IT</td>
+                            <td>17/03/2025</td>
+                            <td><span class="status interview">Entretien planifié</span></td>
+                            <td class="actions">
+                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="candidate-info">
+                                <div class="avatar">LT</div>
+                                <div class="info">
+                                    <div class="name">Leila Tazi</div>
+                                    <div class="email">leila.tazi@yahoo.fr</div>
+                                </div>
+                            </td>
+                            <td>Responsable Commercial</td>
+                            <td>Ventes</td>
+                            <td>16/03/2025</td>
+                            <td><span class="status new">Nouveau</span></td>
+                            <td class="actions">
+                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="candidate-info">
+                                <div class="avatar">RM</div>
+                                <div class="info">
+                                    <div class="name">Rachid Mansouri</div>
+                                    <div class="email">rachid.mansouri@gmail.com</div>
+                                </div>
+                            </td>
+                            <td>Ingénieur Réseau</td>
+                            <td>Infrastructure</td>
+                            <td>15/03/2025</td>
+                            <td><span class="status accepted">Accepté</span></td>
+                            <td class="actions">
+                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="candidate-info">
+                                <div class="avatar">SE</div>
+                                <div class="info">
+                                    <div class="name">Samira El Fassi</div>
+                                    <div class="email">samira.elfassi@outlook.com</div>
+                                </div>
+                            </td>
+                            <td>Analyste Marketing</td>
+                            <td>Marketing</td>
+                            <td>14/03/2025</td>
+                            <td><span class="status rejected">Refusé</span></td>
+                            <td class="actions">
+                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="candidate-info">
+                                <div class="avatar">HB</div>
+                                <div class="info">
+                                    <div class="name">Hamid Benjelloun</div>
+                                    <div class="email">hamid.benjelloun@gmail.com</div>
+                                </div>
+                            </td>
+                            <td>Développeur Full Stack</td>
+                            <td>IT</td>
+                            <td>13/03/2025</td>
+                            <td><span class="status in-progress">En cours</span></td>
+                            <td class="actions">
+                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="page-btn prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <span class="ellipsis">...</span>
+                <button class="page-btn">10</button>
+                <button class="page-btn next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Sélectionner les éléments nécessaires
+const searchInput = document.querySelector('.search-bar input');
+const departmentSelect = document.querySelector('.filter-options select:nth-child(1)');
+const positionSelect = document.querySelector('.filter-options select:nth-child(2)');
+const statusSelect = document.querySelector('.filter-options select:nth-child(3)');
+const candidateRows = document.querySelectorAll('tbody tr');
+const addButton = document.querySelector('.add-button');
+const actionButtons = document.querySelectorAll('.action-btn');
+const paginationButtons = document.querySelectorAll('.page-btn');
+const prevButton = document.querySelector('.page-btn.prev');
+const nextButton = document.querySelector('.page-btn.next');
+const pageNumbers = Array.from(document.querySelectorAll('.page-btn:not(.prev):not(.next)'));
+
+// Variables pour la pagination
+const rowsPerPage = 5;
+let currentPage = 1;
+let filteredRows = Array.from(candidateRows);
+
+// Fonction principale de filtrage
+function filterTable() {
+    const searchText = searchInput.value.toLowerCase();
+    const department = departmentSelect.value;
+    const position = positionSelect.value;
+    const status = statusSelect.value;
+    
+    // Réinitialiser les lignes filtrées
+    filteredRows = Array.from(candidateRows).filter(row => {
+        const name = row.querySelector('.name').textContent.toLowerCase();
+        const email = row.querySelector('.email').textContent.toLowerCase();
+        const rowPosition = row.querySelector('td:nth-child(2)').textContent;
+        const rowDepartment = row.querySelector('td:nth-child(3)').textContent;
+        const rowStatus = row.querySelector('.status').textContent;
+        
+        const matchesSearch = name.includes(searchText) || email.includes(searchText);
+        const matchesDepartment = department === 'Tous les départements' || rowDepartment === department;
+        const matchesPosition = position === 'Tous les postes' || rowPosition === position;
+        const matchesStatus = status === 'Tous les statuts' || rowStatus === status;
+        
+        return matchesSearch && matchesDepartment && matchesPosition && matchesStatus;
+    });
+    
+    // Réinitialiser à la première page après filtrage
+    currentPage = 1;
+    
+    // Appliquer la pagination sur les résultats filtrés
+    updateTableDisplay();
+}
+
+// Fonction pour mettre à jour l'affichage de la table
+function updateTableDisplay() {
+    // Masquer toutes les lignes d'abord
+    candidateRows.forEach(row => row.style.display = 'none');
+    
+    // Calculer les indices pour la pagination
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const endIndex = Math.min(startIndex + rowsPerPage, filteredRows.length);
+    
+    // Afficher uniquement les lignes de la page actuelle
+    for (let i = startIndex; i < endIndex; i++) {
+        if (filteredRows[i]) {
+            filteredRows[i].style.display = '';
+        }
+    }
+    
+    // Mettre à jour les contrôles de pagination
+    updatePaginationControls();
+}
+
+// Fonction pour mettre à jour les contrôles de pagination
+function updatePaginationControls() {
+    const totalPages = Math.max(1, Math.ceil(filteredRows.length / rowsPerPage));
+    
+    // Mettre à jour l'état des boutons de pagination
+    pageNumbers.forEach(button => {
+        const pageNum = parseInt(button.textContent);
+        button.classList.toggle('active', pageNum === currentPage);
+        
+        // N'afficher que les boutons pertinents
+        if (totalPages <= 5) {
+            // Si peu de pages, montrer tous les boutons jusqu'au total
+            button.style.display = pageNum <= totalPages ? '' : 'none';
+        } else {
+            // Pour beaucoup de pages, montrer 1, la page courante et ses voisines, et la dernière page
+            if (pageNum === 1 || pageNum === totalPages || 
+                Math.abs(pageNum - currentPage) <= 1) {
+                button.style.display = '';
+            } else {
+                button.style.display = 'none';
+            }
+        }
+    });
+    
+    // Mettre à jour l'état des boutons précédent/suivant
+    prevButton.disabled = currentPage === 1;
+    nextButton.disabled = currentPage >= totalPages;
+    
+    // Gérer l'affichage de l'ellipse
+    const ellipsis = document.querySelector('.ellipsis');
+    if (ellipsis) {
+        ellipsis.style.display = (totalPages > 5 && currentPage < totalPages - 2) ? '' : 'none';
+    }
+}
+
+// Fonction pour changer de page
+function changePage(newPage) {
+    const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
+    
+    // Vérifier que la nouvelle page est valide
+    if (newPage >= 1 && newPage <= totalPages) {
+        currentPage = newPage;
+        updateTableDisplay();
+    }
+}
+
+// Ajouter les gestionnaires d'événements pour les filtres
+searchInput.addEventListener('input', filterTable);
+departmentSelect.addEventListener('change', filterTable);
+positionSelect.addEventListener('change', filterTable);
+statusSelect.addEventListener('change', filterTable);
+
+// Ajouter les gestionnaires d'événements pour la pagination
+prevButton.addEventListener('click', () => changePage(currentPage - 1));
+nextButton.addEventListener('click', () => changePage(currentPage + 1));
+
+pageNumbers.forEach(button => {
+    button.addEventListener('click', function() {
+        const pageNum = parseInt(this.textContent);
+        if (!isNaN(pageNum)) {
+            changePage(pageNum);
+        }
+    });
+});
+
+// Gestionnaire pour le bouton d'ajout
+addButton.addEventListener('click', function() {
+    alert('Fonctionnalité d\'ajout de candidat à implémenter');
+});
+
+// Gestionnaires pour les boutons d'action
+actionButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const action = this.classList.contains('view') ? 'voir' : 
+                       this.classList.contains('edit') ? 'modifier' : 'supprimer';
+        const candidateName = this.closest('tr').querySelector('.name').textContent;
+        alert(`Action: ${action} le candidat ${candidateName}`);
+    });
+});
+
+// Initialiser l'affichage au chargement de la page
+document.addEventListener('DOMContentLoaded', function() {
+    filterTable();
+});
+    </script>
+</body>
+</html>

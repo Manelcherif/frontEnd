@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Djezzy Recrutement - Créer une Annonce</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #e63312;
+            --secondary-color: #333;
+            --light-gray: #f4f4f4;
+            --white: #ffffff;
+            --text-dark: #333;
+            --border-color: #ddd;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar styles */
+        .sidebar {
+            width: 250px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 20px 0;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+        
+        .brand {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .brand img {
+            width: 40px;
+            margin-right: 10px;
+        }
+        
+        .brand-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--white);
+        }
+        
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+        
+        .menu-title {
+            padding: 10px 20px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .menu-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .menu-item:hover, .menu-item.active {
+            background-color: rgba(230, 18, 18, 0.8);
+            color: var(--white);
+        }
+        
+        .menu-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Main content styles */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-name {
+            margin-right: 10px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgb(212, 10, 10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+        }
+        
+        /* Form styles */
+        .form-container {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+        }
+        
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-col {
+            flex: 1;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: rgb(212, 10, 10);
+        }
+        
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .checkbox-item input {
+            width: auto;
+            margin-right: 8px;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+            min-height: 40px;
+            padding: 5px;
+            border: 1px dashed var(--border-color);
+            border-radius: 4px;
+        }
+        
+        .skill-tag {
+            background-color: var(--light-gray);
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            color: var(--text-dark);
+        }
+        
+        .skill-tag i {
+            font-size: 12px;
+            margin-left: 8px;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .skill-tag i:hover {
+            color: rgb(212, 10, 10);
+        }
+        
+        .skill-input {
+            display: flex;
+            margin-top: 10px;
+        }
+        
+        .skill-input input {
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .btn-add {
+            background-color: rgb(212, 10, 10);
+            color: var(--white);
+            border: none;
+            border-radius: 0 4px 4px 0;
+            padding: 0 15px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .btn-add:hover {
+            background-color: #d52e11;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .btn-cancel {
+            background-color: #f8f9fa;
+            border: 1px solid var(--border-color);
+            color: var(--text-dark);
+        }
+        
+        .btn-cancel:hover {
+            background-color: #e9ecef;
+        }
+        
+        .btn-preview {
+            background-color: #f8f9fa;
+            border: 1px solid var(--border-color);
+            color: var(--text-dark);
+        }
+        
+        .btn-preview:hover {
+            background-color: #e9ecef;
+        }
+        
+        .btn-save {
+            background-color: #6c757d;
+            border: 1px solid #6c757d;
+            color: var(--white);
+        }
+        
+        .btn-save:hover {
+            background-color: #5a6268;
+        }
+        
+        .btn-publish {
+            background-color: rgb(212, 10, 10);
+            border: 1px solid rgb(212, 10, 10);
+            color: var(--white);
+        }
+        
+        .btn-publish:hover {
+            background-color: #d52e11;
+        }
+        
+        /* Editor Toolbar */
+        .editor-container {
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .toolbar {
+            display: flex;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        
+        .toolbar button {
+            background: none;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .toolbar button:hover {
+            background-color: #e9ecef;
+        }
+        
+        .toolbar-group {
+            display: flex;
+            border-right: 1px solid var(--border-color);
+            padding-right: 5px;
+            margin-right: 5px;
+        }
+        
+        .toolbar-group:last-child {
+            border-right: none;
+        }
+        
+        .editor-content {
+            padding: 15px;
+            min-height: 200px;
+            overflow: auto;
+        }
+        
+        /* Toggle button */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .toggle-label {
+            margin-right: 10px;
+            font-weight: 500;
+        }
+        
+        .toggle {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: rgb(212, 10, 10);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        /* Date picker custom style */
+        input[type="date"] {
+            padding-right: 10px;
+        }
+        
+        /* Help tooltip */
+        .help-tooltip {
+            display: inline-block;
+            margin-left: 5px;
+            position: relative;
+            color: #6c757d;
+            cursor: help;
+        }
+        
+        .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+            font-weight: normal;
+        }
+        
+        .help-tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* Form validation */
+        .error-message {
+            color: rgb(212, 10, 10);
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        input.error, select.error, textarea.error {
+            border-color: rgb(212, 10, 10);
+        }
+        
+        /* Preview modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: var(--white);
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .preview-content {
+            max-height: 70vh;
+            overflow-y: auto;
+            padding: 0 10px;
+        }
+        
+        .preview-header {
+            margin-bottom: 20px;
+        }
+        
+        .preview-job-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .preview-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .preview-meta-item {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .preview-meta-item i {
+            margin-right: 5px;
+            color: rgb(212, 10, 10);
+        }
+        
+        .preview-section {
+            margin-bottom: 25px;
+        }
+        
+        .preview-section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .preview-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .preview-skill {
+            background-color: var(--light-gray);
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+        
+        .modal-actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        @media (max-width: 992px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+                overflow: visible;
+            }
+            
+            .brand-text, .menu-item span, .menu-title {
+                display: none;
+            }
+            
+            .brand {
+                justify-content: center;
+            }
+            
+            .brand img {
+                margin-right: 0;
+            }
+            
+            .menu-item {
+                justify-content: center;
+                padding: 15px;
+            }
+            
+            .menu-item i {
+                margin-right: 0;
+                font-size: 18px;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .toolbar {
+                flex-wrap: wrap;
+            }
+            
+            .toolbar-group {
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <img src="Logo_Djezzy_2015-1.png" alt="Logo">
+                <div class="brand-text">Djezzy <span>Recrutement</span></div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <div class="menu-title">Général</div>
+                <a href="tableau de bord.html" class="menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Tableau de bord</span>
+                </a>
+                <a href="#" class="menu-item active">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Annonces</span>
+                </a>
+                <a href="candidats.html" class="menu-item">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Candidats</span>
+                </a>
+                
+                
+                <div class="menu-title">Compte</div>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Mon profil</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Déconnexion</span>
+                </a>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <h1 class="page-title">Créer une annonce</h1>
+                <div class="user-info">
+                    <span class="user-name">Brahim Mansouri</span>
+                    <div class="user-avatar">BM</div>
+                </div>
+            </div>
+            
+            <!-- Form Container -->
+            <div class="form-container">
+                <form id="jobPostingForm">
+                    <!-- Job Details Section -->
+                    <div class="form-section">
+                        <h2 class="section-title">Informations générales</h2>
+                        
+                        <div class="form-group">
+                            <label for="jobTitle">Titre du poste *</label>
+                            <input type="text" id="jobTitle" placeholder="Ex: Développeur Full Stack" required>
+                            <div class="error-message">Veuillez saisir le titre du poste</div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <label for="department">Département *</label>
+                                <select id="department" required>
+                                    <option value="">Sélectionner un département</option>
+                                    <option value="it">IT</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="finance">Finance</option>
+                                    <option value="hr">Ressources Humaines</option>
+                                    <option value="sales">Ventes</option>
+                                    <option value="operations">Opérations</option>
+                                    <option value="customer_service">Service Client</option>
+                                </select>
+                                <div class="error-message">Veuillez sélectionner un département</div>
+                            </div>
+                            <div class="form-col">
+                                <label for="location">Lieu *</label>
+                                <select id="location" required>
+                                    <option value="">Sélectionner un lieu</option>
+                                    <option value="alger">Alger</option>
+                                    <option value="oran">Oran</option>
+                                    <option value="constantine">Constantine</option>
+                                    <option value="annaba">Annaba</option>
+                                    <option value="remote">Télétravail</option>
+                                </select>
+                                <div class="error-message">Veuillez sélectionner un lieu</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <label for="employmentType">Type de contrat *</label>
+                                <select id="employmentType" required>
+                                    <option value="">Sélectionner un type</option>
+                                    <option value="full_time">CDI</option>
+                                    <option value="part_time">CDD</option>
+                                    <option value="contract">Contrat de prestation</option>
+                                    <option value="internship">Stage</option>
+                                </select>
+                                <div class="error-message">Veuillez sélectionner un type de contrat</div>
+                            </div>
+                            <div class="form-col">
+                                <label for="experienceLevel">Niveau d'expérience *</label>
+                                <select id="experienceLevel" required>
+                                    <option value="">Sélectionner un niveau</option>
+                                    <option value="entry">Débutant (0-2 ans)</option>
+                                    <option value="mid">Intermédiaire (2-5 ans)</option>
+                                    <option value="senior">Senior (5-8 ans)</option>
+                                    <option value="expert">Expert (8+ ans)</option>
+                                </select>
+                                <div class="error-message">Veuillez sélectionner un niveau d'expérience</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <label for="publishDate">Date de publication *</label>
+                                <input type="date" id="publishDate" required>
+                                <div class="error-message">Veuillez sélectionner une date de publication</div>
+                            </div>
+                            <div class="form-col">
+                                <label for="applicationDeadline">Date limite de candidature *</label>
+                                <input type="date" id="applicationDeadline" required>
+                                <div class="error-message">Veuillez sélectionner une date limite</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <label for="salaryMin">Salaire minimum (DZD)</label>
+                                <input type="number" id="salaryMin" placeholder="Ex: 60000">
+                            </div>
+                            <div class="form-col">
+                                <label for="salaryMax">Salaire maximum (DZD)</label>
+                                <input type="number" id="salaryMax" placeholder="Ex: 120000">
+                            </div>
+                        </div>
+                        
+                        <div class="toggle-container">
+                            <span class="toggle-label">Afficher le salaire dans l'annonce:</span>
+                            <label class="toggle">
+                                <input type="checkbox" id="showSalary">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Job Description Section -->
+                    <div class="form-section">
+                        <h2 class="section-title">Description du poste</h2>
+                        
+                        <div class="form-group">
+                            <label for="shortDescription">Brève description (résumé) *</label>
+                            <textarea id="shortDescription" placeholder="Écrivez un bref résumé du poste (max 300 caractères)" maxlength="300" required></textarea>
+                            <div class="error-message">Veuillez saisir une brève description</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="jobDescription">Description détaillée *</label>
+                            <div class="editor-container">
+                                <div class="toolbar">
+                                    <div class="toolbar-group">
+                                        <button type="button" title="Gras"><i class="fas fa-bold"></i></button>
+                                        <button type="button" title="Italique"><i class="fas fa-italic"></i></button>
+                                        <button type="button" title="Souligné"><i class="fas fa-underline"></i></button>
+                                    </div>
+                                    <div class="toolbar-group">
+                                        <button type="button" title="Liste à puces"><i class="fas fa-list-ul"></i></button>
+                                        <button type="button" title="Liste numérotée"><i class="fas fa-list-ol"></i></button>
+                                    </div>
+                                    <div class="toolbar-group">
+                                        <button type="button" title="Titre"><i class="fas fa-heading"></i></button>
+                                        <button type="button" title="Citation"><i class="fas fa-quote-right"></i></button>
+                                    </div>
+                                </div>
+                                <div id="jobDescription" class="editor-content" contenteditable="true"></div>
+                            </div>
+                            <div class="error-message">Veuillez saisir une description détaillée</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="responsibilities">Responsabilités principales *</label>
+                            <div class="editor-container">
+                                <div class="toolbar">
+                                    <div class="toolbar-group">
+                                        <button type="button" title="Gras"><i class="fas fa-bold"></i></button>
+                                        <button type="button" title="Italique"><i class="fas fa-italic"></i></button>
+                                    </div>
+                                    <div class="toolbar-group">
+                                        <button type="button" title="Liste à puces"><i class="fas fa-list-ul"></i></button>
+                                        <button type="button" title="Liste numérotée"><i class="fas fa-list-ol"></i></button>
+                                    </div>
+                                </div>
+                                <div id="responsibilities" class="editor-content" contenteditable="true"></div>
+                            </div>
+                            <div class="error-message">Veuillez saisir les responsabilités principales</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="requirements">Exigences et qualifications *</label>
+                            <div class="editor-container">
+                                <div class="toolbar">
+                                    <div class="toolbar-group">
+                                        <button type="button" title="Gras"><i class="fas fa-bold"></i></button>
+                                        <button type="button" title="Italique"><i class="fas fa-italic"></i></button>
+                                    </div>
+                                    <div class="toolbar-group">
+                                        <button type="button" title="Liste à puces"><i class="fas fa-list-ul"></i></button>
+                                        <button type="button" title="Liste numérotée"><i class="fas fa-list-ol"></i></button>
+                                    </div>
+                                </div>
+                                <div id="requirements" class="editor-content" contenteditable="true"></div>
+                            </div>
+                            <div class="error-message">Veuillez saisir les exigences et qualifications</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="benefits">Avantages et bénéfices</label>
+                            <div class="editor-container">
+                                <div class="toolbar">
+                                    <div class="toolbar-group">
+                                        <button type="button" title="Gras"><i class="fas fa-bold"></i></button>
+                                        <button type="button" title="Italique"><i class="fas fa-italic"></i></button>
+                                    </div>
+                                    <div class="toolbar-group">
+                                        <button type="button" title="Liste à puces"><i class="fas fa-list-ul"></i></button>
+                                        <button type="button" title="Liste numérotée"><i class="fas fa-list-ol"></i></button>
+                                    </div>
+                                </div>
+                                <div id="benefits" class="editor-content" contenteditable="true"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Skills and Tags Section -->
+                    <div class="form-section">
+                        <h2 class="section-title">
+                            Compétences et tags
+                            <span class="help-tooltip">
+                                <i class="fas fa-question-circle"></i>
+                                <span class="tooltip-text">Ajoutez des compétences pour aider les candidats à trouver votre poste</span>
+                            </span>
+                        </h2>
+                        
+                        <div class="form-group">
+                            <label for="skills">Compétences requises</label>
+                            <div class="skills-container" id="skillsContainer">
+                                <!-- Skills will be added here -->
+                            </div>
+                            <div class="skill-input">
+                                <input type="text" id="skillInput" placeholder="Ajouter une compétence...">
+                                <button type="button" class="btn-add" id="addSkill">Ajouter</button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Inclure dans les catégories</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="categories" value="technology"> Technologie
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="categories" value="marketing"> Marketing
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="categories" value="finance"> Finance
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="categories" value="customer_service"> Service Client
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="categories" value="management"> Management
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="categories" value="sales"> Ventes
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="categories" value="healthcare"> Santé
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="categories" value="education"> Éducation
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional Info Section -->
+                    <div class="form-section">
+                        <h2 class="section-title">Informations additionnelles</h2>
+                        
+                        <div class="form-group">
+                            <label for="applicationInstructions">Instructions pour la candidature</label>
+                            <textarea id="applicationInstructions" placeholder="Instructions spécifiques pour les candidats..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="hiringManager">Responsable du recrutement</label>
+                            <select id="hiringManager">
+                                <option value="">Sélectionner un responsable</option>
+                                <option value="1">Amina Benali - RH</option>
+                                <option value="2">Karim Laroussi - Directeur IT</option>
+                                <option value="3">Sarah Meziane - Marketing</option>
+                                <option value="4">Mourad Kaci - Finance</option>
+                            </select>
+                        </div>
+                        
+                        <div class="toggle-container">
+                            <span class="toggle-label">Activer le formulaire de candidature en ligne:</span>
+                            <label class="toggle">
+                                <input type="checkbox" id="enableOnlineApplication" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-container">
+                            <span class="toggle-label">Recevoir des notifications par email:</span>
+                            <label class="toggle">
+                                <input type="checkbox" id="emailNotifications" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-cancel">Annuler</button>
+                        <button type="button" class="btn btn-preview" id="previewBtn">Aperçu</button>
+                        <button type="button" class="btn btn-save">Enregistrer brouillon</button>
+                        <button type="submit" class="btn btn-publish">Publier l'annonce</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Preview Modal -->
+    <div id="previewModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Aperçu de l'annonce</h2>
+            
+            <div class="preview-content">
+                <div class="preview-header">
+                    <div class="preview-job-title" id="previewTitle">Titre du poste</div>
+                    <div class="preview-meta">
+                        <div class="preview-meta-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span id="previewLocation">Lieu</span>
+                        </div>
+                        <div class="preview-meta-item">
+                            <i class="fas fa-briefcase"></i>
+                            <span id="previewType">Type de contrat</span>
+                        </div>
+                        <div class="preview-meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span id="previewExperience">Niveau d'expérience</span>
+                        </div>
+                        <div class="preview-meta-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span id="previewDeadline">Date limite</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="preview-section">
+                    <div class="preview-section-title">Description</div>
+                    <div id="previewDescription"></div>
+                </div>
+                
+                <div class="preview-section">
+                    <div class="preview-section-title">Responsabilités</div>
+                    <div id="previewResponsibilities"></div>
+                </div>
+                
+                <div class="preview-section">
+                    <div class="preview-section-title">Exigences et qualifications</div>
+                    <div id="previewRequirements"></div>
+                </div>
+                
+                <div class="preview-section">
+                    <div class="preview-section-title">Avantages et bénéfices</div>
+                    <div id="previewBenefits"></div>
+                </div>
+                
+                <div class="preview-section">
+                    <div class="preview-section-title">Compétences requises</div>
+                    <div class="preview-skills" id="previewSkills"></div>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn btn-cancel close-modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // JavaScript pour fonctionnalités interactives serait ajouté ici
+        document.addEventListener('DOMContentLoaded', function() {
+            // Prévisualisation
+            const previewBtn = document.getElementById('previewBtn');
+            const modal = document.getElementById('previewModal');
+            const closeModal = document.getElementsByClassName('close-modal');
+            
+            // Fonction d'ouverture de la prévisualisation
+            previewBtn.onclick = function() {
+                modal.style.display = "block";
+                
+                // Remplir les données de prévisualisation
+                document.getElementById('previewTitle').textContent = document.getElementById('jobTitle').value || 'Titre du poste';
+                document.getElementById('previewLocation').textContent = document.getElementById('location').options[document.getElementById('location').selectedIndex].text;
+                document.getElementById('previewType').textContent = document.getElementById('employmentType').options[document.getElementById('employmentType').selectedIndex].text;
+                document.getElementById('previewExperience').textContent = document.getElementById('experienceLevel').options[document.getElementById('experienceLevel').selectedIndex].text;
+                
+                // Date limite formatée
+                const deadline = document.getElementById('applicationDeadline').value;
+                document.getElementById('previewDeadline').textContent = deadline ? new Date(deadline).toLocaleDateString('fr-FR') : 'Non spécifiée';
+                
+                // Contenu riche
+                document.getElementById('previewDescription').innerHTML = document.getElementById('shortDescription').value;
+                document.getElementById('previewResponsibilities').innerHTML = document.getElementById('responsibilities').innerHTML;
+                document.getElementById('previewRequirements').innerHTML = document.getElementById('requirements').innerHTML;
+                document.getElementById('previewBenefits').innerHTML = document.getElementById('benefits').innerHTML;
+            }
+            
+            // Fermer la modal
+            for (let i = 0; i < closeModal.length; i++) {
+                closeModal[i].onclick = function() {
+                    modal.style.display = "none";
+                }
+            }
+            
+            // Fermer en cliquant en dehors
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+            
+            // Gestion des compétences
+            const addSkillBtn = document.getElementById('addSkill');
+            const skillInput = document.getElementById('skillInput');
+            const skillsContainer = document.getElementById('skillsContainer');
+            
+            addSkillBtn.onclick = function() {
+                const skillValue = skillInput.value.trim();
+                if (skillValue) {
+                    const skillTag = document.createElement('div');
+                    skillTag.className = 'skill-tag';
+                    skillTag.innerHTML = skillValue + '<i class="fas fa-times"></i>';
+                    
+                    skillTag.querySelector('i').onclick = function() {
+                        skillsContainer.removeChild(skillTag);
+                    }
+                    
+                    skillsContainer.appendChild(skillTag);
+                    skillInput.value = '';
+                }
+            }
+            
+            // Validation de formulaire avant soumission
+            document.getElementById('jobPostingForm').onsubmit = function(e) {
+                e.preventDefault();
+                
+                // Logique de validation et soumission
+                alert('Formulaire soumis avec succès!');
+            }
+        });
+    </script>
+</body>
+</html>
