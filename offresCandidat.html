@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - Djezzy Recrutement</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+    :root {
+      --djezzy-red: #da0808;
+      --djezzy-dark: #1a1a1a;
+      --djezzy-light: #f4f4f4;
+      --approved: #2e7d32;
+      --rejected: #c62828;
+      --pending: #1565c0;
+    }
+        * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--djezzy-dark);
+      color: white;
+      padding: 15px 5%;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      height: 40px;
+    }
+
+    .header-menu {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .header-menu a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 15px;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .header-menu a:hover {
+      color: #ccc;
+    }
+
+    .header-menu a.active {
+      color: var(--djezzy-red);
+    }
+
+    .header-menu a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--djezzy-red);
+    }
+
+    .user-icon {
+      background-color: white;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.3s;
+    }
+
+    .user-icon:hover {
+      transform: scale(1.1);
+    }
+
+    .user-icon i {
+      color: var(--djezzy-dark);
+      font-size: 16px;
+    }
+        .job-buttons {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .job-buttons button {
+        background-color: transparent;
+        color: #333;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 0;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+
+    .job-buttons button.active {
+        color: #da0808;
+    }
+
+    .job-buttons button.active:after {
+        content: '';
+        position: absolute;
+        bottom: -11px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #da0808;
+    }
+
+    .job-buttons button:hover {
+        color: #da0808;
+    }
+
+        .search-jobs{
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .search-jobs input {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            font-size: 1rem;
+        }
+
+        .search-jobs button {
+            background-color: #da0808;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 0 5px 5px 0;
+            font-size: 1rem;
+        }
+
+        /* Section des offres */
+        .offres {
+            padding: 60px 5%;
+        }
+
+        .offres h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #333;
+        }
+
+        .offres-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .offre-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .offre-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .offre-card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .offre-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .offre-card p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .offre-card .details-btn, .offre-card .apply-btn {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .offre-card .details-btn {
+            background-color: #8b8786;
+            color: #fff;
+        }
+
+        .offre-card .apply-btn {
+            background-color: #da0808;
+            color: #fff;
+        }
+
+        .offre-card .details-btn:hover {
+            background-color: #777;
+        }
+
+        .offre-card .apply-btn:hover {
+            background-color: #c20707;
+        }
+
+        /* Style pour conteneur de détails */
+        .detail-container {
+            width: 80%;
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            position: fixed;
+            top: 50%; 
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.3s ease-out;
+            z-index: 10;
+            cursor: default;
+        }
+
+        .detail-container.active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Contenu principal */
+        .offer-details h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .offer-details p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .offer-details h3 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .offer-details ul {
+            list-style-type: none;
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+
+        .offer-details ul li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .offer-details ul li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #da0808;
+        }
+
+        /* Bouton Postuler */
+        .apply-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #d91e18;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .apply-button:hover {
+            background-color: #b71b14;
+        }
+    </style>
+</head>
+<body id="backgroundArea">
+    <header class="header">
+        <img src="Logo_Djezzy_2015-1.png" alt="Djezzy Logo" class="logo">
+        <div class="header-menu">
+          <a href="offresCandidat.html"class="active">OFFRE D'EMPLOI</a>
+          <a href="mesCandidat.html" >MES CANDIDATURES</a>
+          <div class="user-icon">
+            <a href="candidatProfil.html"><i class="fas fa-user"></i></a>
+          </div>
+        </div>
+      </header>
+    <div class="job-buttons">
+        <button onclick="viewAllJobs()" class="active">Offres d'emplois</button>
+        <button onclick="viewBestOffers()">Les meilleurs offres pour vous</button>
+    </div>
+
+  <!-- Barre de recherche -->
+  <div class="search-jobs">
+    <input type="text" id="searchInput" placeholder="Rechercher une offre...">
+    <button onclick="searchOffers()">Rechercher</button>
+</div>
+
+<!-- Section des offres -->
+<section class="offres">
+    <div class="container">
+        <h1>Toutes les offres d'emploi</h1>
+        <div class="offres-grid" id="offresGrid">
+            <!-- Offre 1 -->
+            <div class="offre-card" data-title="Responsable des Ressources Humaines" job-details="ujsicojzifzef ihfoijsifjrf dnioznvflkesnfjnzrefiojezf fiuozifjie,fjkjfijr rijizjrfoz,fioniojrf iurhoijrfjzurnfjenrzifjeizf zifoizjhfizenfjzfiz">
+                <img src="La gestion des ressources humaines dans un contexte en mutation.jpg" alt="Responsable des Ressources Humaines">
+                <h2>Responsable des Ressources Humaines</h2>
+                <p>Poste basé à Alger. Gestion des talents et développement des compétences.</p>
+                <a href="#" class="details-btn">Voir détails</a>
+                <a href="#" class="apply-btn">Postuler</a>
+            </div>
+
+            <!-- Offre 2 -->
+            <div class="offre-card" data-title="Développeur Full Stack">
+                <img src="The Full Stack Web Development.jpg" alt="Développeur Full Stack">
+                <h2>Développeur Full Stack</h2>
+                <p>Poste en télétravail. Maîtrise de JavaScript, React et Node.js requise.</p>
+                <a href="#" class="details-btn">Voir détails</a>
+                <a href="#" class="apply-btn">Postuler</a>
+            </div>
+
+            <!-- Offre 3 -->
+            <div class="offre-card" data-title="Data Scientist">
+                <img src="What is Data science _.jpg" alt="Data Scientist">
+                <h2>Data Scientist</h2>
+                <p>Poste basé à Oran. Expérience en Machine Learning et Python nécessaire.</p>
+                <a href="#" class="details-btn">Voir détails</a>
+                <a href="#" class="apply-btn">Postuler</a>
+            </div>
+
+            <!-- Offre 4 -->
+            <div class="offre-card" data-title="DevOps Engineer">
+                <img src="Premium Vector _ Devops_ Agile development and optimisation background.jpg" alt="DevOps Engineer">
+                <h2>DevOps Engineer</h2>
+                <p>Poste basé à Constantine. Connaissance de Docker et Kubernetes requise.</p>
+                <a href="#" class="details-btn">Voir détails</a>
+                <a href="#" class="apply-btn">Postuler</a>
+            </div>
+
+            <!-- Offre 5 -->
+            <div class="offre-card" data-title="Comptable Senior">
+                <img src="Senior Accountant Job Description.jpg" alt="Comptable Senior">
+                <h2>Comptable Senior</h2>
+                <p>Poste basé à Alger. Expérience en gestion financière et comptabilité.</p>
+                <a href="#" class="details-btn">Voir détails</a>
+                <a href="#" class="apply-btn">Postuler</a>
+            </div>
+
+            <!-- Offre 6 -->
+            <div class="offre-card" data-title="UX/UI Designer">
+                <img src="application design to buy different types of honey.jpg" alt="UX/UI Designer">
+                <h2>UX/UI Designer</h2>
+                <p>Poste en télétravail. Maîtrise de Figma et Adobe XD requise.</p>
+                <a href="#" class="details-btn">Voir détails</a>
+                <a href="#" class="apply-btn">Postuler</a>
+            </div>
+        </div>
+    </div>
+</section>
+    <script>
+      function searchOffers() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.offre-card');
+            let foundMatch = false; 
+            cards.forEach(card => {
+                const title = card.getAttribute('data-title').toLowerCase();
+                if (title.includes(input)) {
+                    card.style.display = 'block';
+                    foundMatch = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            if (!foundMatch) {
+                alert("Aucune offre ne correspond à votre recherche.");
+            }
+        }
+
+        // Fonction pour initialiser les conteneurs de détails pour chaque offre
+        function initJobDetails() {
+            // Récupération de toutes les offres
+            const jobCards = document.querySelectorAll('.offre-card');
+            
+            // Pour chaque offre, créer un conteneur de détails on
+            jobCards.forEach((card, index) => {
+                const jobTitle = card.querySelector('h2').textContent;
+                const jobLocation = card.querySelector('p').textContent.split('.')[0];
+                const detailsBtn = card.querySelector('.details-btn');
+                
+                // Créer un conteneur pour chaque offre
+                let containerId = `container-${index + 1}`;
+                let container = document.createElement('div');
+                container.id = containerId;
+                container.className = 'detail-container';
+                
+                // Définir le contenu spécifique pour chaque offre
+                container.innerHTML = `
+                    <main>
+                        <div class="offer-details">
+                            <h2>${jobTitle}</h2>
+                            <p class="location"><strong>Lieu :</strong> ${jobLocation}</p>
+                            <p class="date"><strong>Date de publication :</strong> 07 Mars 2025</p>
+                
+                            <h3>Description du poste</h3>
+                            <p>Description détaillée pour le poste ${jobTitle}.</p>
+                
+                            <h3>Missions principales</h3>
+                            <ul>
+                                <li>Mission 1 pour ${jobTitle}</li>
+                                <li>Mission 2 pour ${jobTitle}</li>
+                                <li>Mission 3 pour ${jobTitle}</li>
+                                <li>Mission 4 pour ${jobTitle}</li>
+                            </ul>
+                
+                            <h3>Profil recherché</h3>
+                            <ul>
+                                <li>Qualification 1 requise</li>
+                                <li>Qualification 2 requise</li>
+                                <li>Qualification 3 requise</li>
+                                <li>Qualification 4 souhaitée</li>
+                            </ul>
+                
+                            <button class="apply-button">Postuler</button>
+                        </div>
+                    </main>
+                `;
+                
+                // Ajouter le conteneur au body
+                document.body.appendChild(container);
+                
+                // Ajouter l'écouteur d'événement au bouton de détails
+                detailsBtn.addEventListener('click', function(e) {
+                    // Fermer tous les autres conteneurs
+                    document.querySelectorAll('.detail-container').forEach(cont => {
+                        cont.classList.remove('active');
+                    });
+                    
+                    // Ouvrir ce conteneur
+                    container.classList.add('active');
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+            });
+            
+            // Fermer le conteneur actif au clic sur le fond
+            document.getElementById('backgroundArea').addEventListener('click', function() {
+                document.querySelectorAll('.detail-container').forEach(container => {
+                    container.classList.remove('active');
+                });
+            });
+            
+            // Empêcher la propagation des clics depuis les conteneurs
+            document.querySelectorAll('.detail-container').forEach(container => {
+                container.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
+        }
+
+        // Initialiser les détails d'offres au chargement de la page
+        window.addEventListener('DOMContentLoaded', initJobDetails);
+
+        
+    </script>
+</body>
+</html>
