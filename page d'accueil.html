@@ -44,7 +44,7 @@
             align-items: center;
             padding: 15px 5%;
             background-color: #fff;
-            box-shadow: 0 10px 10px rgba(8, 8, 8, 0.473);
+            box-shadow: 0 2px 5px rgba(8, 8, 8, 0.473);
         }
         
         .logo img{
@@ -90,218 +90,605 @@ nav ul li a:hover {
             padding: 8px 20px;
             border-radius: 5px;
         }
+
+body {
+  background-color: #fafafa;
+  color: #333;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  color: #222;
+}
+
+section {
+  max-width: 90%;
+  margin: 5rem auto;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+  position: relative;
+}
+
+/* Section héros */
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  padding: 4rem 2rem;
+  overflow: hidden;
+  background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(to bottom, #ff3333, #ff0000);
+}
+
+.hero-content {
+  flex: 1.2;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  line-height: 1.2;
+}
+
+.hero h1::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, #ff3333, #ff0000);
+  border-radius: 4px;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+.stats {
+  display: inline-block;
+  padding: 0.6rem 1.5rem;
+  background-color: rgba(255, 0, 0, 0.1);
+  color: #ff0000;
+  font-weight: 600;
+  border-radius: 30px;
+  margin-top: 1rem;
+}
+
+.hero-image {
+  flex: 1;
+  position: relative;
+}
+
+.hero-circle {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background: linear-gradient(135deg, rgba(255, 51, 51, 0.1) 0%, rgba(255, 51, 51, 0.05) 100%);
+  border-radius: 50%;
+  z-index: 1;
+  top: -20px;
+  right: -20px;
+}
+
+.hero-image img {
+  width: 100%;
+  border-radius: 12px;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s ease;
+}
+
+.hero-image img:hover {
+  transform: scale(1.02);
+}
+
+/* Section des solutions de recrutement */
+.recruitment-solutions {
+  text-align: center;
+}
+
+.recruitment-solutions h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+.recruitment-solutions h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(to right, #ff3333, #ff0000);
+  border-radius: 4px;
+}
+
+.recruitment-solutions > p {
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  color: #555;
+}
+
+.solutions-cards {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.solution-card {
+  flex: 1;
+  min-width: 250px;
+  max-width: 350px;
+  padding: 2.5rem 1.5rem;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.solution-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 0;
+  background: linear-gradient(to bottom, #ff3333, #ff0000);
+  transition: height 0.3s ease;
+}
+
+.solution-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.solution-card:hover::before {
+  height: 100%;
+}
+
+.solution-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1.2rem;
+  color: #ff0000;
+}
+
+.solution-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  transition: color 0.3s ease;
+}
+
+.solution-card:hover h3 {
+  color: #ff0000;
+}
+
+.solution-card p {
+  color: #666;
+}
+
+/* Section compétences recherchées */
+.skills h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.skills h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(to right, #ff3333, #ff0000);
+  border-radius: 4px;
+}
+
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.skill-item {
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  text-align: center;
+}
+
+.skill-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  background-color: #fff5f5;
+}
+
+.skill-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #ff0000;
+}
+
+.skill-item h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.skill-item p {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* Section recrutement personnalisé */
+.custom-recruitment {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3rem;
+  background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
+}
+
+.custom-recruitment::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(to bottom, #ff3333, #ff0000);
+}
+
+.custom-recruitment-content {
+  flex: 1;
+}
+
+.custom-recruitment h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.custom-recruitment h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, #ff3333, #ff0000);
+  border-radius: 4px;
+}
+
+.custom-recruitment p {
+  font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+  color: #555;
+}
+
+.contact-btn {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  margin-top: 1rem;
+  background: linear-gradient(to right, #ff3333, #ff0000);
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 50px;
+  box-shadow: 0 8px 15px rgba(255, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 20px rgba(255, 0, 0, 0.3);
+  background: linear-gradient(to right, #ff0000, #ff3333);
+}
+
+.custom-recruitment-image {
+  flex: 1;
+}
+
+.custom-recruitment-image img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s ease;
+}
+
+.custom-recruitment-image img:hover {
+  transform: scale(1.02);
+}
+
+/* Responsive design */
+@media (max-width: 992px) {
+  section {
+    max-width: 90%;
+    padding: 2rem 1.5rem;
+  }
+  
+  .hero, .custom-recruitment {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .hero h1::after, .custom-recruitment h2::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .hero-content, .custom-recruitment-content,
+  .hero-image, .custom-recruitment-image {
+    width: 100%;
+  }
+  
+  .solutions-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .solution-card {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .skills-container {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 800px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  section {
+    max-width: 95%;
+    margin: 3rem auto;
+  }
+  
+  .skills-container {
+    grid-template-columns: 1fr;
+  }
+}
         
-        /* Section héros */
-        .hero {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 60px 5%;
-            background-color: #f5f5f5;
-        }
-        
-        .hero-content {
-            width: 50%;
-        }
-        
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: #333;
-            line-height: 1.2;
-        }
-        
-        .hero-image {
-            width: 45%;
+        .careers-container {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 50px auto;
+            background: linear-gradient(135deg, #fff 0%, #fff0f1 100%);
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(226, 6, 19, 0.1);
+            overflow: hidden;
             position: relative;
         }
         
-        .hero-image img {
-            width: 100%;
-            border-radius: 50%;
-            border: 5px solid #fff;
-            box-shadow: 0 10px 10px rgba(8, 8, 8, 0.473);
-        }
-        
-        .hero-circle {
+        .careers-container::before {
+            content: '';
             position: absolute;
-            width: 110%;
-            height: 110%;
-            background-color: #e8f5e9;
-            border-radius: 50%;
-            top: -5%;
-            left: -5%;
-            z-index: -1;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background-color: #e20613;
+            border-radius: 16px 0 0 16px;
         }
         
-        .stats {
-            margin-top: 15px;
-            font-weight: bold;
+        .careers-content {
+            display: flex;
+            flex-direction: row;
         }
         
-        /* Section des solutions de recrutement */
-        .recruitment-solutions {
-            padding: 60px 5%;
-            text-align: center;
+        .careers-image {
+            flex: 0 0 40%;
+            position: relative;
+            overflow: hidden;
         }
         
-        .recruitment-solutions h2 {
-            font-size: 2.2rem;
+        .careers-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .careers-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(226, 6, 19, 0.7), rgba(226, 6, 19, 0.2));
+        }
+        
+        .careers-text {
+            flex: 0 0 60%;
+            padding: 50px;
+            position: relative;
+        }
+        
+        .careers-badge {
+            display: inline-block;
+            background-color: #fff0f1;
+            color: #e20613;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
             margin-bottom: 20px;
+            border: 1px solid #ffcdd2;
         }
         
-        .recruitment-solutions p {
-            max-width: 700px;
-            margin: 0 auto 40px;
-            font-size: 1.1rem;
+        .careers-heading {
+            font-size: 32px;
+            color: #2a2a2a;
+            margin-bottom: 20px;
+            position: relative;
         }
         
-        .solutions-cards {
+        .careers-heading span {
+            color: #e20613;
+        }
+        
+        .careers-description {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .key-points {
             display: flex;
-            justify-content: space-between;
-            gap: 20px;
-        }
-        
-        .solution-card {
-            flex: 1;
-            padding: 30px;
-            text-align: center;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 10px 10px rgba(8, 8, 8, 0.473);
-        }
-        
-        .solution-card:nth-child(2) {
-            background-color: #da0808;
-            color: #fff;
-        }
-        
-        .solution-icon {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            color: #4CAF50;
-        }
-        
-        .solution-card:nth-child(2) .solution-icon {
-            color: #fff;
-        }
-        
-        .solution-card h3 {
-            margin-bottom: 10px;
-        }
-        
-        /* Section compétences recherchées */
-        .skills {
-            padding: 60px 5%;
-            background-color: #f5f5f5;
-        }
-        
-        .skills h2 {
-            font-size: 2.2rem;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-        
-        .skill-item {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 25px;
-            text-align: center;
-            box-shadow: 0 10px 10px rgba(8, 8, 8, 0.473);
-            transition: transform 0.3s ease;
-        }
-        
-        .skill-item:hover {
-            transform: translateY(-5px);
-        }
-        
-        .skill-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: #da0808;
-        }
-        
-        .skill-item h3 {
-            margin-bottom: 10px;
-        }
-        
-        /* Section Job Listings */
-        .job-listings {
-            padding: 60px 5%;
-        }
-        
-        .job-listings-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
             margin-bottom: 30px;
         }
         
-        .job-listings h2 {
-            font-size: 2.2rem;
-        }
-        
-        .view-all-btn {
-            background-color: #da0808;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-        }
-        
-        .job-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 20px 0;
-        }
-        
-        .job-card {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 5px 10px rgba(14, 14, 14, 0.473);
-            transition: transform 0.3s ease;
-            text-align: center;
-        }
-        .job-card img {
-            width: 100%;
-            height: 65%;
-            border-radius: 10px;
-        }
-        
-        .job-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .job-title {
-            font-weight: bold;
-            margin-bottom: 5px;
-            font-size: 1.2rem;
-        }
-        
-        .job-details {
-            margin-bottom: 15px;
-        }
-        
-        .job-detail {
+        .point-item {
+            flex: 0 0 calc(50% - 15px);
             display: flex;
             align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            color: #444;
+        }
+        
+        .point-icon {
+            width: 32px;
+            height: 32px;
+            background-color: #fff0f1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e20613;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .careers-cta {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #e20613;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(226, 6, 19, 0.3);
+        }
+        
+        .careers-cta:hover {
+            background-color: #c70512;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(226, 6, 19, 0.4);
+        }
+        
+        .careers-stats {
+            position: absolute;
+            bottom: 30px;
+            right: 50px;
+            display: flex;
+            gap: 30px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: #e20613;
             margin-bottom: 5px;
-            color: #666;
-            font-size: 0.9rem;
         }
         
-        .job-detail i {
-            margin-right: 5px;
-            color: #da0808;
+        .stat-label {
+            font-size: 13px;
+            color: #777;
         }
         
+        /* Pulse animation for the button */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(226, 6, 19, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(226, 6, 19, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(226, 6, 19, 0);
+            }
+        }
+        
+        .careers-cta {
+            animation: pulse 2s infinite;
+        }
+        
+        @media (max-width: 992px) {
+            .careers-content {
+                flex-direction: column;
+            }
+            
+            .careers-image, .careers-text {
+                flex: 0 0 100%;
+            }
+            
+            .careers-image {
+                height: 250px;
+            }
+            
+            .careers-stats {
+                position: static;
+                margin-top: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .careers-text {
+                padding: 30px;
+            }
+            
+            .point-item {
+                flex: 0 0 100%;
+            }
+        }
         .apply-btn {
             background-color: #da0808;
             color: #fff;
@@ -338,43 +725,123 @@ nav ul li a:hover {
 }
 
         /* Section recrutement personnalisé */
-        .custom-recruitment {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 60px 5%;
-            background-color: #db9c9c;
-            border-radius: 10px;
-            margin: 0 5% 60px;
-        }
-        
-        .custom-recruitment-content {
-            width: 50%;
-        }
-        
-        .custom-recruitment h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-        
-        .custom-recruitment-image {
-            width: 45%;
-        }
-        
-        .custom-recruitment-image img {
-            width: 100%;
-            border-radius: 10px;
-        }
-        
-        .contact-btn {
-            background-color: #da0808;
-            color: #fff;
-            padding: 12px 25px;
-            border-radius: 5px;
-            display: inline-block;
-            margin-top: 20px;
-            font-weight: bold;
-        }
+.custom-recruitment {
+    max-width: 89%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3rem;
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
+  box-shadow: 0 10px 30px rgba(255, 0, 0, 0.05);
+  border-radius: 16px;
+  margin: 50px auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.custom-recruitment::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background: linear-gradient(to bottom, #ff3333, #ff0000);
+}
+
+.custom-recruitment-content {
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.custom-recruitment h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #333;
+  position: relative;
+  padding-bottom: 0.8rem;
+}
+
+.custom-recruitment h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, #ff3333, #ff0000);
+  border-radius: 4px;
+}
+
+.custom-recruitment p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 1.2rem;
+}
+
+.contact-btn {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  margin-top: 1rem;
+  background: linear-gradient(to right, #ff3333, #ff0000);
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 50px;
+  box-shadow: 0 8px 15px rgba(255, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 20px rgba(255, 0, 0, 0.3);
+  background: linear-gradient(to right, #ff0000, #ff3333);
+}
+
+.contact-btn:active {
+  transform: translateY(1px);
+}
+
+.custom-recruitment-image {
+  flex: 1;
+  position: relative;
+}
+
+.custom-recruitment-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s ease;
+}
+
+.custom-recruitment-image img:hover {
+  transform: scale(1.02);
+}
+
+/* Responsive design */
+@media (max-width: 980px) {
+  .custom-recruitment {
+    flex-direction: column;
+    padding: 3rem 1.5rem;
+  }
+  
+  .custom-recruitment-content, 
+  .custom-recruitment-image {
+    width: 100%;
+  }
+  
+  .custom-recruitment h2 {
+    font-size: 2rem;
+  }
+}
 
         footer {
     background-color: #333;
@@ -460,10 +927,6 @@ nav ul li a:hover {
             .hero-content, .hero-image, .custom-recruitment-content, .custom-recruitment-image {
                 width: 100%;
                 margin-bottom: 30px;
-            }
-            
-            .job-cards {
-                grid-template-columns: 1fr;
             }
             
             nav ul {
@@ -637,77 +1100,58 @@ nav ul li a:hover {
         </div>
     </section>
 
-    <!-- Section Job Listings -->
-<section class="job-listings">
-    <div class="job-listings-header">
-        <h2>Offres d'emploi récentes</h2>
-        <a href="offres d'emploi.html" class="view-all-btn">Voir toutes les offres</a>
-    </div>
-    <div class="job-cards">
-        <div class="job-card">
-            <img src="La gestion des ressources humaines dans un contexte en mutation.jpg" >
-            <div class="job-title">Responsable des Ressources Humaines</div>
-            <div class="job-actions">
-                <a href="#" class="details-btn">Voir détails</a>
-                <a href="#" class="apply-btn">Postuler</a>
+    <div class="careers-container">
+        <div class="careers-content">
+            <div class="careers-image">
+                <img src="L'art de la négociation _ 10 étapes pour réussir votre transition professionnelle.jpg" alt="Carrières Djezzy">
             </div>
-        </div>
-
-        <div class="job-card">
-            <img src="The Full Stack Web Development.jpg" >
-            <div class="job-title">Développeur Full Stack</div>
-            <div class="job-actions">
-                <a href="#" class="details-btn">Voir détails</a>
-                <a href="#" class="apply-btn">Postuler</a>
-            </div>
-        </div>
-
-        <div class="job-card">
-            <img src="What is Data science _.jpg" >
-            <div class="job-title">Data Scientist</div>
-            <div class="job-actions">
-                <a href="#" class="details-btn">Voir détails</a>
-                <a href="#" class="apply-btn">Postuler</a>
-            </div>
-        </div>
-
-        <div class="job-card">
-            <img src="Premium Vector _ Devops_ Agile development and optimisation background.jpg" >
-            <div class="job-title">DevOps Engineer</div>
-            <div class="job-actions">
-                <a href="#" class="details-btn">Voir détails</a>
-                <a href="#" class="apply-btn">Postuler</a>
-            </div>
-        </div>
-
-        <div class="job-card">
-            <img src="Senior Accountant Job Description.jpg" >
-            <div class="job-title">Comptable Senior</div>
-            <div class="job-actions">
-                <a href="#" class="details-btn">Voir détails</a>
-                <a href="#" class="apply-btn">Postuler</a>
-            </div>
-        </div>
-
-        <div class="job-card">
-            <img src="application design to buy different types of honey.jpg" >
-            <div class="job-title">UX/UI Designer</div>
-            <div class="job-actions">
-                <a href="#" class="details-btn">Voir détails</a>
-                <a href="#" class="apply-btn">Postuler</a>
-            </div>
-        </div>
-
-        <div class="job-card">
-            <img src="télécharger (2).jpg">
-            <div class="job-title">Ingénieur IA</div>
-            <div class="job-actions">
-                <a href="#" class="details-btn">Voir détails</a>
-                <a href="#" class="apply-btn">Postuler</a>
+            <div class="careers-text">
+                <div class="careers-badge">Rejoignez notre équipe</div>
+                <h2 class="careers-heading">Découvrez nos <span>opportunités de carrière</span> chez Djezzy</h2>
+                <p class="careers-description">
+                    Chez Djezzy, nous croyons que nos collaborateurs sont notre plus grande richesse. 
+                    Nous proposons des opportunités passionnantes dans différents domaines, 
+                    avec un environnement de travail stimulant, des défis innovants et un parcours de carrière enrichissant.
+                </p>
+                
+                <div class="key-points">
+                    <div class="point-item">
+                        <div class="point-icon">✓</div>
+                        <span>Postes dans toute l'Algérie</span>
+                    </div>
+                    <div class="point-item">
+                        <div class="point-icon">✓</div>
+                        <span>Formations professionnelles</span>
+                    </div>
+                    <div class="point-item">
+                        <div class="point-icon">✓</div>
+                        <span>Avantages sociaux attractifs</span>
+                    </div>
+                    <div class="point-item">
+                        <div class="point-icon">✓</div>
+                        <span>Environnement multiculturel</span>
+                    </div>
+                </div>
+                
+                <a href="offres d'emploi.html" class="careers-cta">Voir toutes les offres</a>
+                
+                <div class="careers-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">Postes ouverts</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4000+</div>
+                        <div class="stat-label">Employés</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Villes</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</section>
 
     <footer>
         <div class="footer-container">

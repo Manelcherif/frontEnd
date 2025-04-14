@@ -120,6 +120,10 @@ body {
         .user-info {
             display: flex;
             align-items: center;
+            background-color: #fff;
+            padding: 8px 15px;
+            border-radius: 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         
         .user-name {
@@ -222,22 +226,6 @@ body {
     background-color: white;
 }
 
-.add-button {
-    background-color: #d32f2f;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.add-button:hover {
-    background-color: #b71c1c;
-}
-
 /* Table styles */
 .candidates-table {
     background-color: white;
@@ -304,16 +292,6 @@ td {
 .status.new {
     background-color: #e3f2fd;
     color: #1976d2;
-}
-
-.status.in-progress {
-    background-color: #fff8e1;
-    color: #ffa000;
-}
-
-.status.interview {
-    background-color: #e8f5e9;
-    color: #388e3c;
 }
 
 .status.accepted {
@@ -466,14 +444,11 @@ td {
                     <select>
                         <option>Tous les statuts</option>
                         <option>Nouveau</option>
-                        <option>En cours</option>
-                        <option>Entretien planifié</option>
                         <option>Accepté</option>
                         <option>Refusé</option>
                     </select>
                 </div>
                 <button class="add-button">
-                    <i class="fas fa-plus"></i> Ajouter un candidat
                 </button>
             </div>
 
@@ -504,9 +479,59 @@ td {
                             <td>23/03/2025</td>
                             <td><span class="status new">Nouveau</span></td>
                             <td class="actions">
-                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                <button class="action-btn view" title="Accepter"><i class="fas fa-check"></i></button>
+                                <button class="action-btn delete" title="Supprimer"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="candidate-info">
+                                <div class="avatar">KL</div>
+                                <div class="info">
+                                    <div class="name">Karim Lahlou</div>
+                                    <div class="email">karim.lahlou@gmail.com</div>
+                                </div>
+                            </td>
+                            <td>Développeur Full Stack</td>
+                            <td>IT</td>
+                            <td>23/03/2025</td>
+                            <td><span class="status new">Nouveau</span></td>
+                            <td class="actions">
+                                <button class="action-btn view" title="Accepter"><i class="fas fa-check"></i></button>
+                                <button class="action-btn delete" title="Supprimer"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="candidate-info">
+                                <div class="avatar">KL</div>
+                                <div class="info">
+                                    <div class="name">Karim Lahlou</div>
+                                    <div class="email">karim.lahlou@gmail.com</div>
+                                </div>
+                            </td>
+                            <td>Développeur Full Stack</td>
+                            <td>IT</td>
+                            <td>23/03/2025</td>
+                            <td><span class="status new">Nouveau</span></td>
+                            <td class="actions">
+                                <button class="action-btn view" title="Accepter"><i class="fas fa-check"></i></button>
+                                <button class="action-btn delete" title="Supprimer"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="candidate-info">
+                                <div class="avatar">KL</div>
+                                <div class="info">
+                                    <div class="name">Karim Lahlou</div>
+                                    <div class="email">karim.lahlou@gmail.com</div>
+                                </div>
+                            </td>
+                            <td>Développeur Full Stack</td>
+                            <td>IT</td>
+                            <td>23/03/2025</td>
+                            <td><span class="status new">nouveau</span></td>
+                            <td class="actions">
+                                <button class="action-btn view" title="Accepter"><i class="fas fa-check"></i></button>
+                                <button class="action-btn delete" title="Supprimer"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
                         <tr>
@@ -520,11 +545,10 @@ td {
                             <td>Chef de Projet Digital</td>
                             <td>Marketing</td>
                             <td>22/03/2025</td>
-                            <td><span class="status interview">Entretien planifié</span></td>
+                            <td><span class="status new">nouveau</span></td>
                             <td class="actions">
-                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                <button class="action-btn view" title="Accepter"><i class="fas fa-check"></i></button>
+                                <button class="action-btn delete" title="Supprimer"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
                         <tr>
@@ -538,47 +562,10 @@ td {
                             <td>Ingénieur Réseau</td>
                             <td>Infrastructure</td>
                             <td>21/03/2025</td>
-                            <td><span class="status in-progress">En cours</span></td>
+                            <td><span class="status new">noveau</span></td>
                             <td class="actions">
-                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="candidate-info">
-                                <div class="avatar">FZ</div>
-                                <div class="info">
-                                    <div class="name">Fatima Zahra</div>
-                                    <div class="email">fatima.zahra25@gmail.com</div>
-                                </div>
-                            </td>
-                            <td>Responsable Commercial</td>
-                            <td>Ventes</td>
-                            <td>20/03/2025</td>
-                            <td><span class="status accepted">Accepté</span></td>
-                            <td class="actions">
-                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="candidate-info">
-                                <div class="avatar">AH</div>
-                                <div class="info">
-                                    <div class="name">Ahmed Hassan</div>
-                                    <div class="email">ahmed.hassan@gmail.com</div>
-                                </div>
-                            </td>
-                            <td>Analyste Marketing</td>
-                            <td>Marketing</td>
-                            <td>19/03/2025</td>
-                            <td><span class="status rejected">Refusé</span></td>
-                            <td class="actions">
-                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                <button class="action-btn view" title="Accepter"><i class="fas fa-check"></i></button>
+                                <button class="action-btn delete" title="Supprimer"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
                         <tr>
@@ -592,101 +579,10 @@ td {
                             <td>Chef de Projet Digital</td>
                             <td>Marketing</td>
                             <td>18/03/2025</td>
-                            <td><span class="status in-progress">En cours</span></td>
+                            <td><span class="status new">nouveau</span></td>
                             <td class="actions">
-                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="candidate-info">
-                                <div class="avatar">OB</div>
-                                <div class="info">
-                                    <div class="name">Omar Bensaid</div>
-                                    <div class="email">omar.bensaid@outlook.com</div>
-                                </div>
-                            </td>
-                            <td>Développeur Backend</td>
-                            <td>IT</td>
-                            <td>17/03/2025</td>
-                            <td><span class="status interview">Entretien planifié</span></td>
-                            <td class="actions">
-                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="candidate-info">
-                                <div class="avatar">LT</div>
-                                <div class="info">
-                                    <div class="name">Leila Tazi</div>
-                                    <div class="email">leila.tazi@yahoo.fr</div>
-                                </div>
-                            </td>
-                            <td>Responsable Commercial</td>
-                            <td>Ventes</td>
-                            <td>16/03/2025</td>
-                            <td><span class="status new">Nouveau</span></td>
-                            <td class="actions">
-                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="candidate-info">
-                                <div class="avatar">RM</div>
-                                <div class="info">
-                                    <div class="name">Rachid Mansouri</div>
-                                    <div class="email">rachid.mansouri@gmail.com</div>
-                                </div>
-                            </td>
-                            <td>Ingénieur Réseau</td>
-                            <td>Infrastructure</td>
-                            <td>15/03/2025</td>
-                            <td><span class="status accepted">Accepté</span></td>
-                            <td class="actions">
-                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="candidate-info">
-                                <div class="avatar">SE</div>
-                                <div class="info">
-                                    <div class="name">Samira El Fassi</div>
-                                    <div class="email">samira.elfassi@outlook.com</div>
-                                </div>
-                            </td>
-                            <td>Analyste Marketing</td>
-                            <td>Marketing</td>
-                            <td>14/03/2025</td>
-                            <td><span class="status rejected">Refusé</span></td>
-                            <td class="actions">
-                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="candidate-info">
-                                <div class="avatar">HB</div>
-                                <div class="info">
-                                    <div class="name">Hamid Benjelloun</div>
-                                    <div class="email">hamid.benjelloun@gmail.com</div>
-                                </div>
-                            </td>
-                            <td>Développeur Full Stack</td>
-                            <td>IT</td>
-                            <td>13/03/2025</td>
-                            <td><span class="status in-progress">En cours</span></td>
-                            <td class="actions">
-                                <button class="action-btn view"><i class="fas fa-eye"></i></button>
-                                <button class="action-btn edit"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                <button class="action-btn view" title="Accepter"><i class="fas fa-check"></i></button>
+                                <button class="action-btn delete" title="Supprimer"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -843,20 +739,119 @@ pageNumbers.forEach(button => {
 addButton.addEventListener('click', function() {
     alert('Fonctionnalité d\'ajout de candidat à implémenter');
 });
-
-// Gestionnaires pour les boutons d'action
-actionButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        const action = this.classList.contains('view') ? 'voir' : 
-                       this.classList.contains('edit') ? 'modifier' : 'supprimer';
-        const candidateName = this.closest('tr').querySelector('.name').textContent;
-        alert(`Action: ${action} le candidat ${candidateName}`);
-    });
-});
-
 // Initialiser l'affichage au chargement de la page
 document.addEventListener('DOMContentLoaded', function() {
     filterTable();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Variables pour stocker l'historique des suppressions
+    let deletedCandidates = [];
+    
+    // Créer et ajouter un bouton d'annulation au-dessus du tableau
+    const actionBar = document.createElement('div');
+    actionBar.style.cssText = 'margin: 10px 0; text-align: right;';
+    actionBar.innerHTML = '<button id="undo-btn" style="padding: 8px 12px; background-color: #f0f0f0; border: 1px solid #ccc; border-radius: 4px; cursor: pointer;" disabled><i class="fas fa-undo"></i> Annuler la dernière suppression</button>';
+    
+    // Insérer le bouton avant le tableau contenant les candidats
+    const table = document.querySelector('tr').closest('table');
+    table.parentNode.insertBefore(actionBar, table);
+    
+    const undoButton = document.getElementById('undo-btn');
+    
+    // Sélectionner tous les boutons d'action
+    const viewButtons = document.querySelectorAll('.action-btn.view');
+    const deleteButtons = document.querySelectorAll('.action-btn.delete');
+    
+    // Ajouter un nouveau bouton "refuser" à chaque ligne
+    const rows = document.querySelectorAll('tr');
+    rows.forEach(row => {
+        const actionsCell = row.querySelector('.actions');
+        if (actionsCell) {
+            // Créer le bouton refuser et l'insérer avant le bouton supprimer
+            const refuseButton = document.createElement('button');
+            refuseButton.className = 'action-btn refuse';
+            refuseButton.innerHTML = '<i class="fas fa-times"></i>';
+            refuseButton.title = 'Refuser';
+            
+            // Insérer le bouton avant le bouton de suppression
+            const deleteButton = actionsCell.querySelector('.action-btn.delete');
+            if (deleteButton) {
+                actionsCell.insertBefore(refuseButton, deleteButton);
+            } else {
+                actionsCell.appendChild(refuseButton);
+            }
+        }
+    });
+    
+    // Récupérer les nouveaux boutons refuser
+    const refuseButtons = document.querySelectorAll('.action-btn.refuse');
+    
+    // Gérer le clic sur le bouton "voir" (œil) - Changer le statut à "Accepté"
+    viewButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const statusCell = row.querySelector('td:nth-child(5) span');
+            
+            statusCell.className = 'status accepted';
+            statusCell.textContent = 'Accepté';
+        });
+    });
+    
+    // Gérer le clic sur le bouton "refuser" (croix) - Changer le statut à "Refusé"
+    refuseButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const row = this.closest('tr');
+            const statusCell = row.querySelector('td:nth-child(5) span');
+            
+            statusCell.className = 'status rejected';
+            statusCell.textContent = 'Refusé';
+        });
+    });
+    
+    // Gérer le clic sur le bouton "supprimer" (corbeille) - Supprimer la ligne avec possibilité d'annulation
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            if(confirm('Êtes-vous sûr de vouloir supprimer ce candidat?')) {
+                const row = this.closest('tr');
+                const tbody = row.parentNode;
+                const position = Array.from(tbody.children).indexOf(row);
+                
+                // Stocker les informations de la ligne supprimée
+                deletedCandidates.push({
+                    element: row,
+                    parent: tbody,
+                    position: position
+                });
+                
+                // Retirer la ligne du tableau
+                row.remove();
+                
+                // Activer le bouton d'annulation
+                undoButton.disabled = false;
+            }
+        });
+    });
+    
+    // Gérer le clic sur le bouton "Annuler"
+    undoButton.addEventListener('click', function() {
+        if (deletedCandidates.length > 0) {
+            // Récupérer la dernière suppression
+            const lastDeleted = deletedCandidates.pop();
+            
+            // Réinsérer la ligne à sa position d'origine si possible
+            if (lastDeleted.position >= lastDeleted.parent.children.length) {
+                lastDeleted.parent.appendChild(lastDeleted.element);
+            } else {
+                lastDeleted.parent.insertBefore(lastDeleted.element, lastDeleted.parent.children[lastDeleted.position]);
+            }
+            
+            // Désactiver le bouton si l'historique est vide
+            if (deletedCandidates.length === 0) {
+                undoButton.disabled = true;
+            }
+        }
+    });
 });
     </script>
 </body>

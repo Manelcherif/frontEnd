@@ -114,10 +114,34 @@
             font-weight: 600;
             color: var(--secondary-color);
         }
+
+        .btn-view-listings {
+    background-color: #e30613; /* Rouge Djezzy */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin: 20px;
+}
+
+.btn-view-listings:hover {
+    background-color: #c00510;
+}
         
         .user-info {
             display: flex;
             align-items: center;
+            margin-left: auto; /* Pour pousser les informations utilisateur à droite */
+    margin-right: 20px;
+    background-color: #fff;
+            padding: 8px 15px;
+            border-radius: 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         
         .user-name {
@@ -441,40 +465,6 @@
         input[type="date"] {
             padding-right: 10px;
         }
-        
-        /* Help tooltip */
-        .help-tooltip {
-            display: inline-block;
-            margin-left: 5px;
-            position: relative;
-            color: #6c757d;
-            cursor: help;
-        }
-        
-        .tooltip-text {
-            visibility: hidden;
-            width: 200px;
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -100px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 12px;
-            font-weight: normal;
-        }
-        
-        .help-tooltip:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
-        }
-        
         /* Form validation */
         .error-message {
             color: rgb(212, 10, 10);
@@ -487,113 +477,7 @@
             border-color: rgb(212, 10, 10);
         }
         
-        /* Preview modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1100;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.5);
-        }
         
-        .modal-content {
-            background-color: var(--white);
-            margin: 5% auto;
-            padding: 20px;
-            border-radius: 8px;
-            width: 80%;
-            max-width: 800px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            position: relative;
-        }
-        
-        .close-modal {
-            position: absolute;
-            right: 20px;
-            top: 15px;
-            font-size: 24px;
-            cursor: pointer;
-        }
-        
-        .modal-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .preview-content {
-            max-height: 70vh;
-            overflow-y: auto;
-            padding: 0 10px;
-        }
-        
-        .preview-header {
-            margin-bottom: 20px;
-        }
-        
-        .preview-job-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-        }
-        
-        .preview-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .preview-meta-item {
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .preview-meta-item i {
-            margin-right: 5px;
-            color: rgb(212, 10, 10);
-        }
-        
-        .preview-section {
-            margin-bottom: 25px;
-        }
-        
-        .preview-section-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--secondary-color);
-        }
-        
-        .preview-skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        
-        .preview-skill {
-            background-color: var(--light-gray);
-            border-radius: 20px;
-            padding: 5px 12px;
-            font-size: 14px;
-            color: var(--text-dark);
-        }
-        
-        .modal-actions {
-            margin-top: 20px;
-            display: flex;
-            justify-content: flex-end;
-        }
         
         @media (max-width: 992px) {
             .form-row {
@@ -683,7 +567,7 @@
                 
                 
                 <div class="menu-title">Compte</div>
-                <a href="#" class="menu-item">
+                <a href="admin profile.html" class="menu-item">
                     <i class="fas fa-user-circle"></i>
                     <span>Mon profil</span>
                 </a>
@@ -698,6 +582,8 @@
         <main class="main-content">
             <div class="header">
                 <h1 class="page-title">Créer une annonce</h1>
+                <a href="liste des offres.html" class="btn btn-view-listings"> Liste des annonces</a>
+                
                 <div class="user-info">
                     <span class="user-name">Brahim Mansouri</span>
                     <div class="user-avatar">BM</div>
@@ -837,294 +723,63 @@
                             <div class="error-message">Veuillez saisir une description détaillée</div>
                         </div>
                         
-                        <div class="form-group">
-                            <label for="responsibilities">Responsabilités principales *</label>
-                            <div class="editor-container">
-                                <div class="toolbar">
-                                    <div class="toolbar-group">
-                                        <button type="button" title="Gras"><i class="fas fa-bold"></i></button>
-                                        <button type="button" title="Italique"><i class="fas fa-italic"></i></button>
-                                    </div>
-                                    <div class="toolbar-group">
-                                        <button type="button" title="Liste à puces"><i class="fas fa-list-ul"></i></button>
-                                        <button type="button" title="Liste numérotée"><i class="fas fa-list-ol"></i></button>
-                                    </div>
-                                </div>
-                                <div id="responsibilities" class="editor-content" contenteditable="true"></div>
-                            </div>
-                            <div class="error-message">Veuillez saisir les responsabilités principales</div>
-                        </div>
+                        <!-- Skills and Tags Section -->
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                Compétences et tags
+                                
+                            </h2>
                         
-                        <div class="form-group">
-                            <label for="requirements">Exigences et qualifications *</label>
-                            <div class="editor-container">
-                                <div class="toolbar">
-                                    <div class="toolbar-group">
-                                        <button type="button" title="Gras"><i class="fas fa-bold"></i></button>
-                                        <button type="button" title="Italique"><i class="fas fa-italic"></i></button>
-                                    </div>
-                                    <div class="toolbar-group">
-                                        <button type="button" title="Liste à puces"><i class="fas fa-list-ul"></i></button>
-                                        <button type="button" title="Liste numérotée"><i class="fas fa-list-ol"></i></button>
-                                    </div>
+                            <div class="form-group">
+                                <label for="skills">Compétences requises</label>
+                                <div class="skills-container" id="skillsContainer">
+                                    <!-- Skills will be added here -->
                                 </div>
-                                <div id="requirements" class="editor-content" contenteditable="true"></div>
+                                <div class="skill-input">
+                                    <input type="text" id="skillInput" placeholder="Ajouter une compétence...">
+                                    <button type="button" class="btn-add" id="addSkill">Ajouter</button>
+                                </div>
                             </div>
-                            <div class="error-message">Veuillez saisir les exigences et qualifications</div>
-                        </div>
                         
-                        <div class="form-group">
-                            <label for="benefits">Avantages et bénéfices</label>
-                            <div class="editor-container">
-                                <div class="toolbar">
-                                    <div class="toolbar-group">
-                                        <button type="button" title="Gras"><i class="fas fa-bold"></i></button>
-                                        <button type="button" title="Italique"><i class="fas fa-italic"></i></button>
-                                    </div>
-                                    <div class="toolbar-group">
-                                        <button type="button" title="Liste à puces"><i class="fas fa-list-ul"></i></button>
-                                        <button type="button" title="Liste numérotée"><i class="fas fa-list-ol"></i></button>
-                                    </div>
+                            <div class="form-group">
+                                <label>Inclure dans les catégories</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="categories" value="technology"> Technologie
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="categories" value="marketing"> Marketing
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="categories" value="finance"> Finance
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="categories" value="customer_service"> Service Client
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="categories" value="management"> Management
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="categories" value="sales"> Ventes
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="categories" value="healthcare"> Santé
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="categories" value="education"> Éducation
+                                    </label>
                                 </div>
-                                <div id="benefits" class="editor-content" contenteditable="true"></div>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Skills and Tags Section -->
-                    <div class="form-section">
-                        <h2 class="section-title">
-                            Compétences et tags
-                            <span class="help-tooltip">
-                                <i class="fas fa-question-circle"></i>
-                                <span class="tooltip-text">Ajoutez des compétences pour aider les candidats à trouver votre poste</span>
-                            </span>
-                        </h2>
-                        
-                        <div class="form-group">
-                            <label for="skills">Compétences requises</label>
-                            <div class="skills-container" id="skillsContainer">
-                                <!-- Skills will be added here -->
-                            </div>
-                            <div class="skill-input">
-                                <input type="text" id="skillInput" placeholder="Ajouter une compétence...">
-                                <button type="button" class="btn-add" id="addSkill">Ajouter</button>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Inclure dans les catégories</label>
-                            <div class="checkbox-group">
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="categories" value="technology"> Technologie
-                                </label>
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="categories" value="marketing"> Marketing
-                                </label>
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="categories" value="finance"> Finance
-                                </label>
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="categories" value="customer_service"> Service Client
-                                </label>
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="categories" value="management"> Management
-                                </label>
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="categories" value="sales"> Ventes
-                                </label>
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="categories" value="healthcare"> Santé
-                                </label>
-                                <label class="checkbox-item">
-                                    <input type="checkbox" name="categories" value="education"> Éducation
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Additional Info Section -->
-                    <div class="form-section">
-                        <h2 class="section-title">Informations additionnelles</h2>
-                        
-                        <div class="form-group">
-                            <label for="applicationInstructions">Instructions pour la candidature</label>
-                            <textarea id="applicationInstructions" placeholder="Instructions spécifiques pour les candidats..."></textarea>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="hiringManager">Responsable du recrutement</label>
-                            <select id="hiringManager">
-                                <option value="">Sélectionner un responsable</option>
-                                <option value="1">Amina Benali - RH</option>
-                                <option value="2">Karim Laroussi - Directeur IT</option>
-                                <option value="3">Sarah Meziane - Marketing</option>
-                                <option value="4">Mourad Kaci - Finance</option>
-                            </select>
-                        </div>
-                        
-                        <div class="toggle-container">
-                            <span class="toggle-label">Activer le formulaire de candidature en ligne:</span>
-                            <label class="toggle">
-                                <input type="checkbox" id="enableOnlineApplication" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        
-                        <div class="toggle-container">
-                            <span class="toggle-label">Recevoir des notifications par email:</span>
-                            <label class="toggle">
-                                <input type="checkbox" id="emailNotifications" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                    </div>
-                    
                     <!-- Form Actions -->
                     <div class="form-actions">
                         <button type="button" class="btn btn-cancel">Annuler</button>
-                        <button type="button" class="btn btn-preview" id="previewBtn">Aperçu</button>
-                        <button type="button" class="btn btn-save">Enregistrer brouillon</button>
                         <button type="submit" class="btn btn-publish">Publier l'annonce</button>
                     </div>
                 </form>
             </div>
         </main>
     </div>
-    
-    <!-- Preview Modal -->
-    <div id="previewModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2 class="modal-title">Aperçu de l'annonce</h2>
-            
-            <div class="preview-content">
-                <div class="preview-header">
-                    <div class="preview-job-title" id="previewTitle">Titre du poste</div>
-                    <div class="preview-meta">
-                        <div class="preview-meta-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span id="previewLocation">Lieu</span>
-                        </div>
-                        <div class="preview-meta-item">
-                            <i class="fas fa-briefcase"></i>
-                            <span id="previewType">Type de contrat</span>
-                        </div>
-                        <div class="preview-meta-item">
-                            <i class="fas fa-clock"></i>
-                            <span id="previewExperience">Niveau d'expérience</span>
-                        </div>
-                        <div class="preview-meta-item">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span id="previewDeadline">Date limite</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="preview-section">
-                    <div class="preview-section-title">Description</div>
-                    <div id="previewDescription"></div>
-                </div>
-                
-                <div class="preview-section">
-                    <div class="preview-section-title">Responsabilités</div>
-                    <div id="previewResponsibilities"></div>
-                </div>
-                
-                <div class="preview-section">
-                    <div class="preview-section-title">Exigences et qualifications</div>
-                    <div id="previewRequirements"></div>
-                </div>
-                
-                <div class="preview-section">
-                    <div class="preview-section-title">Avantages et bénéfices</div>
-                    <div id="previewBenefits"></div>
-                </div>
-                
-                <div class="preview-section">
-                    <div class="preview-section-title">Compétences requises</div>
-                    <div class="preview-skills" id="previewSkills"></div>
-                </div>
-            </div>
-            
-            <div class="modal-actions">
-                <button class="btn btn-cancel close-modal">Fermer</button>
-            </div>
-        </div>
-    </div>
-    
-    <script>
-        // JavaScript pour fonctionnalités interactives serait ajouté ici
-        document.addEventListener('DOMContentLoaded', function() {
-            // Prévisualisation
-            const previewBtn = document.getElementById('previewBtn');
-            const modal = document.getElementById('previewModal');
-            const closeModal = document.getElementsByClassName('close-modal');
-            
-            // Fonction d'ouverture de la prévisualisation
-            previewBtn.onclick = function() {
-                modal.style.display = "block";
-                
-                // Remplir les données de prévisualisation
-                document.getElementById('previewTitle').textContent = document.getElementById('jobTitle').value || 'Titre du poste';
-                document.getElementById('previewLocation').textContent = document.getElementById('location').options[document.getElementById('location').selectedIndex].text;
-                document.getElementById('previewType').textContent = document.getElementById('employmentType').options[document.getElementById('employmentType').selectedIndex].text;
-                document.getElementById('previewExperience').textContent = document.getElementById('experienceLevel').options[document.getElementById('experienceLevel').selectedIndex].text;
-                
-                // Date limite formatée
-                const deadline = document.getElementById('applicationDeadline').value;
-                document.getElementById('previewDeadline').textContent = deadline ? new Date(deadline).toLocaleDateString('fr-FR') : 'Non spécifiée';
-                
-                // Contenu riche
-                document.getElementById('previewDescription').innerHTML = document.getElementById('shortDescription').value;
-                document.getElementById('previewResponsibilities').innerHTML = document.getElementById('responsibilities').innerHTML;
-                document.getElementById('previewRequirements').innerHTML = document.getElementById('requirements').innerHTML;
-                document.getElementById('previewBenefits').innerHTML = document.getElementById('benefits').innerHTML;
-            }
-            
-            // Fermer la modal
-            for (let i = 0; i < closeModal.length; i++) {
-                closeModal[i].onclick = function() {
-                    modal.style.display = "none";
-                }
-            }
-            
-            // Fermer en cliquant en dehors
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            }
-            
-            // Gestion des compétences
-            const addSkillBtn = document.getElementById('addSkill');
-            const skillInput = document.getElementById('skillInput');
-            const skillsContainer = document.getElementById('skillsContainer');
-            
-            addSkillBtn.onclick = function() {
-                const skillValue = skillInput.value.trim();
-                if (skillValue) {
-                    const skillTag = document.createElement('div');
-                    skillTag.className = 'skill-tag';
-                    skillTag.innerHTML = skillValue + '<i class="fas fa-times"></i>';
-                    
-                    skillTag.querySelector('i').onclick = function() {
-                        skillsContainer.removeChild(skillTag);
-                    }
-                    
-                    skillsContainer.appendChild(skillTag);
-                    skillInput.value = '';
-                }
-            }
-            
-            // Validation de formulaire avant soumission
-            document.getElementById('jobPostingForm').onsubmit = function(e) {
-                e.preventDefault();
-                
-                // Logique de validation et soumission
-                alert('Formulaire soumis avec succès!');
-            }
-        });
-    </script>
 </body>
 </html>
