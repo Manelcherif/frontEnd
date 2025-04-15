@@ -7,329 +7,692 @@
     <title>Offres d'emploi - Djezzy Recrutement</title>
     <style>
         /* Styles de base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
 
-        body {
-            line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
-        }
+:root {
+  --primary-color: #ff3a41; /* Rouge Djezzy */
+  --primary-dark: #e30613;
+  --primary-light: #ff6b70;
+  --text-color: #333;
+  --light-text: #fff;
+  --light-bg: #f9f5f5;
+  --border-radius: 6px;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --transition: all 0.3s ease;
+}
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+body {
+  background-color: #fff;
+  color: var(--text-color);
+  line-height: 1.6;
+}
 
-        button {
-            cursor: pointer;
-            border: none;
-        }
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 10%;
+  background-color: #fff;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+.logo img {
+  height: 45px;
+  transition: transform 0.3s ease;
+}
 
-        nav ul li a.active {
-            color: #da0808;
-            font-weight: bold;
-            position: relative;
-        }
+.logo img:hover {
+  transform: scale(1.05);
+}
 
-        nav ul li a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #da0808;
-        }
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
 
-        nav ul li a:hover {
-            color: #da0808;
-        }
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: color 0.3s ease;
+}
 
-        /* En-tête */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, #ff3333, #ff0000);
+  transition: width 0.3s ease;
+}
 
-        .logo img {
-            height: 70px;
-            width: 70px;
-        }
+nav ul li a:hover {
+  color: #ff0000;
+}
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            align-items: center;
-        }
+nav ul li a:hover::after {
+  width: 100%;
+}
 
-        nav ul li {
-            margin-left: 25px;
-        }
+nav ul li a.active {
+  color: #ff0000;
+  font-weight: 600;
+}
 
-        .signup-btn {
-            background-color: #da0808;
-            color: #fff;
-            padding: 8px 20px;
-            border-radius: 5px;
-        }
+nav ul li a.active::after {
+  width: 100%;
+}
 
-        /* Barre de recherche */
-        .search-jobs{
-            display: flex;
-            justify-content: center;
-            margin: 30px 0;
-        }
+.signup-btn {
+  background: linear-gradient(to right, #ff3333, #ff0000);
+  color: white !important;
+  padding: 0.7rem 1.5rem !important;
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
 
-        .search-jobs input {
-            padding: 10px;
-            width: 300px;
-            border: 1px solid #ccc;
-            border-radius: 5px 0 0 5px;
-            font-size: 1rem;
-        }
+.signup-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(255, 0, 0, 0.3) !important;
+}
 
-        .search-jobs button {
-            background-color: #da0808;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 0 5px 5px 0;
-            font-size: 1rem;
-        }
+.signup-btn::after {
+  display: none;
+}
 
-        /* Section des offres */
-        .offres {
-            padding: 60px 5%;
-        }
+/* Barre de recherche */
+.search-jobs {
+  background-color: var(--light-bg);
+  padding: 40px 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
 
-        .offres h1 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            text-align: center;
-            color: #333;
-        }
+#searchInput {
+  width: 60%;
+  padding: 12px 20px;
+  border: 1px solid #eee;
+  border-radius: 30px;
+  font-size: 15px;
+  box-shadow: var(--shadow);
+}
 
-        .offres-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
+.search-jobs button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: var(--transition);
+}
 
-        .offre-card {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
+.search-jobs button:hover {
+  background-color: var(--primary-dark);
+}
 
-        .offre-card:hover {
-            transform: translateY(-5px);
-        }
+/* Section des offres */
+.offres {
+  padding: 60px 5%;
+}
 
-        .offre-card img {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-        .offre-card h2 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
+.offres h1 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--text-color);
+  position: relative;
+  padding-bottom: 15px;
+  font-weight: 600;
+}
 
-        .offre-card p {
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 15px;
-        }
+.offres h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--primary-color);
+}
 
-        .offre-card .details-btn, .offre-card .apply-btn {
-            display: inline-block;
-            padding: 10px 15px;
-            margin: 5px;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            transition: background-color 0.3s ease;
-        }
+.offres-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
 
-        .offre-card .details-btn {
-            background-color: #8b8786;
-            color: #fff;
-        }
+.offre-card {
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: 25px;
+  transition: var(--transition);
+  border: 1px solid #eee;
+}
 
-        .offre-card .apply-btn {
-            background-color: #da0808;
-            color: #fff;
-        }
+.offre-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
 
-        .offre-card .details-btn:hover {
-            background-color: #777;
-        }
+.offre-card h2 {
+  color: var(--text-color);
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: 600;
+}
 
-        .offre-card .apply-btn:hover {
-            background-color: #c20707;
-        }
+.offre-card p {
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 14px;
+}
 
-        /* Style pour conteneur de détails */
-        .detail-container {
-            width: 80%;
-            max-width: 800px;
-            background: white;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
-            position: fixed;
-            top: 50%; 
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.3s ease-out;
-            z-index: 10;
-            cursor: default;
-        }
+.details-btn, .apply-btn {
+  display: inline-block;
+  padding: 8px 18px;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 500;
+  transition: var(--transition);
+  margin-right: 10px;
+  font-size: 14px;
+}
 
-        .detail-container.active {
-            transform: translate(-50%, -50%) scale(1);
-        }
+.details-btn {
+  background-color: #f8f8f8;
+  color: var(--text-color);
+  border: 1px solid #eee;
+}
 
-        /* Contenu principal */
-        .offer-details h2 {
-            color: #333;
-            margin-bottom: 15px;
-        }
+.apply-btn {
+  background-color: var(--primary-color);
+  color: white;
+}
 
-        .offer-details p {
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 15px;
-        }
+.details-btn:hover {
+  background-color: #eee;
+}
 
-        .offer-details h3 {
-            margin-top: 20px;
-            margin-bottom: 10px;
-            color: #333;
-        }
+.apply-btn:hover {
+  background-color: var(--primary-dark);
+}
 
-        .offer-details ul {
-            list-style-type: none;
-            padding-left: 15px;
-            margin-bottom: 20px;
-        }
+/* Détails des offres */
+.detail-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
 
-        .offer-details ul li {
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 20px;
-        }
+.detail-container.active {
+  opacity: 1;
+  pointer-events: auto;
+}
 
-        .offer-details ul li:before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: #da0808;
-        }
+.detail-container main {
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px;
+  width: 80%;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s forwards;
+}
 
-        /* Bouton Postuler */
-        .apply-button {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            margin-top: 20px;
-            background-color: #d91e18;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 
-        .apply-button:hover {
-            background-color: #b71b14;
-        }
+.offer-details h2 {
+  color: var(--text-color);
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 600;
+}
 
-        /* Pied de page */
-        footer {
-            background-color: #333;
-            color: #fff;
-            padding: 40px 5%;
-            text-align: center;
-        }
+.offer-details h3 {
+  margin: 20px 0 10px;
+  color: var(--text-color);
+  font-size: 16px;
+  font-weight: 600;
+}
 
-        .footer-container {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+.offer-details p {
+  color: #666;
+  font-size: 14px;
+}
 
-        .footer-section {
-            flex: 1;
-            min-width: 250px;
-        }
+.offer-details .location,
+.offer-details .date {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
 
-        .footer-section h3 {
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-        }
+.offer-details ul {
+  margin: 10px 0 10px 20px;
+  color: #666;
+  font-size: 14px;
+}
 
-        .footer-section ul {
-            list-style: none;
-            padding: 0;
-        }
+.offer-details ul li {
+  margin-bottom: 5px;
+}
 
-        .footer-section ul li {
-            margin-bottom: 10px;
-        }
+.apply-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-top: 25px;
+  transition: var(--transition);
+}
 
-        .footer-section ul li a {
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
+.apply-button:hover {
+  background-color: var(--primary-dark);
+}
 
-        .footer-section ul li a:hover {
-            color: #da0808;
-        }
+/* Contact page */
+.contact-section {
+  padding: 60px 5%;
+  background-color: var(--light-bg);
+}
 
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
+.contact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-        .social-links a {
-            color: #fff;
-            font-size: 1.5rem;
-            transition: color 0.3s;
-        }
+.contact-title {
+  text-align: center;
+  margin-bottom: 15px;
+  position: relative;
+  padding-bottom: 15px;
+  font-weight: 600;
+}
 
-        .social-links a:hover {
-            color: #da0808;
-        }
+.contact-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--primary-color);
+}
 
-        .footer-bottom {
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px solid #444;
-            font-size: 0.9rem;
-        }
+.contact-subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 40px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-form-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.contact-form {
+  padding-right: 20px;
+  border-right: 3px solid var(--primary-color);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  font-size: 15px;
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(255, 58, 65, 0.1);
+}
+
+textarea.form-control {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.submit-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  width: 100%;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.submit-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+.contact-info {
+  padding-left: 20px;
+}
+
+.contact-info-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.contact-info-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background-color: var(--primary-color);
+}
+
+.contact-info-item {
+  display: flex;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.contact-info-item i {
+  color: var(--primary-color);
+  margin-right: 15px;
+  margin-top: 5px;
+}
+
+.contact-info-text {
+  color: #666;
+}
+
+.contact-hours {
+  margin-top: 30px;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.social-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  background-color: #f1f1f1;
+  border-radius: 50%;
+  color: #666;
+  transition: var(--transition);
+}
+
+.social-icon:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.quick-help {
+  margin-top: 40px;
+}
+
+.map-container {
+  margin-top: 30px;
+  height: 200px;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+/* Footer */
+footer {
+  background-color: #212121;
+  color: #f5f5f5;
+  padding: 4rem 0 1rem;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 80%;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-section h3 {
+  color: white;
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.footer-section h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(to right, #ff3333, #ff0000);
+  border-radius: 3px;
+}
+
+.footer-section p {
+  color: #b3b3b3;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-section ul li a {
+  color: #b3b3b3;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: #ff0000;
+}
+
+.footer-social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #f5f5f5;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-social-links a:hover {
+  background-color: #ff0000;
+  color: white;
+  transform: translateY(-3px);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #888;
+  font-size: 0.9rem;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  header {
+    padding: 15px 3%;
+  }
+  
+  nav ul {
+    gap: 20px;
+  }
+  
+  .search-jobs {
+    flex-direction: column;
+    padding: 30px 5%;
+  }
+  
+  #searchInput {
+    width: 100%;
+  }
+  
+  .offres {
+    padding: 40px 5%;
+  }
+  
+  .contact-form-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .contact-form {
+    padding-right: 0;
+    border-right: none;
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: 40px;
+  }
+  
+  .contact-info {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  nav {
+    display: none; /* Pour un menu mobile qui serait ajouté avec JS */
+  }
+  
+  .offres-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .detail-container main {
+    width: 95%;
+    padding: 20px;
+  }
+  
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.close-btn {
+    background-color: #ff4d4d; /* Rouge doux */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s, transform 0.2s;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+.close-btn:hover {
+    background-color: #e60000;
+    transform: scale(1.05);
+}
+
     </style>
 </head>
 <body id="backgroundArea">
@@ -406,17 +769,18 @@
                 <h3>Liens utiles</h3>
                 <ul>
                     <li><a href="page d'accueil.html">Accueil</a></li>
-                    <li><a href="offres d'emploi.html">Offres d'emploi</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="offres-emploi.html">Offres d'emploi</a></li>
+                    <li><a href="#">Contact</a></li>
+                    
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Suivez-nous</h3>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                <div class="footer-social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
@@ -465,6 +829,8 @@
                 // Définir le contenu spécifique pour chaque offre
                 container.innerHTML = `
                     <main>
+                    <button class="close-btn">Fermer</button>
+
                         <div class="offer-details">
                             <h2>${jobTitle}</h2>
                             <p class="location"><strong>Lieu :</strong> ${jobLocation}</p>
@@ -517,6 +883,12 @@
                     container.classList.remove('active');
                 });
             });
+
+            container.querySelector('.close-btn').addEventListener('click', () => {
+    container.classList.remove('active');
+    document.getElementById('backgroundArea').style.display = 'none';
+});
+
             
             // Empêcher la propagation des clics depuis les conteneurs
             document.querySelectorAll('.detail-container').forEach(container => {

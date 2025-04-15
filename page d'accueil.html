@@ -37,59 +37,88 @@
             padding: 0 20px;
         }
         
-        /* En-tête */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(8, 8, 8, 0.473);
-        }
-        
-        .logo img{
-            height: 70px;
-            width:70px;
-            color: #333;
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            align-items: center;
-        }
-        
-        nav ul li {
-            margin-left: 25px;
-        }
-        nav ul li a.active {
-    color: #da0808;
-    font-weight: bold;
-    position: relative;
+        /* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 10%;
+  background-color: #fff;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-nav ul li a.active::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: #da0808;
+.logo img {
+  height: 45px;
+  transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.05);
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(to right, #ff3333, #ff0000);
+  transition: width 0.3s ease;
 }
 
 nav ul li a:hover {
-            color:#da0808 ;
-        }
-        
-        .signup-btn {
-            background-color: #da0808;
-            color: #fff;
-            padding: 8px 20px;
-            border-radius: 5px;
-        }
+  color: #ff0000;
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+nav ul li a.active {
+  color: #ff0000;
+  font-weight: 600;
+}
+
+nav ul li a.active::after {
+  width: 100%;
+}
+
+.signup-btn {
+  background: linear-gradient(to right, #ff3333, #ff0000);
+  color: white !important;
+  padding: 0.7rem 1.5rem !important;
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.signup-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(255, 0, 0, 0.3) !important;
+}
+
+.signup-btn::after {
+  display: none;
+}
 
 body {
   background-color: #fafafa;
@@ -843,74 +872,105 @@ section {
   }
 }
 
-        footer {
-    background-color: #333;
-    color: #fff;
-    padding: 40px 5%;
-    text-align: center;
+/* Footer */
+footer {
+  background-color: #212121;
+  color: #f5f5f5;
+  padding: 4rem 0 1rem;
 }
 
 .footer-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 80%;
+  margin: 0 auto;
+  gap: 2rem;
 }
 
 .footer-section {
-    flex: 1;
-    min-width: 250px;
+  flex: 1;
+  min-width: 250px;
 }
 
 .footer-section h3 {
-    margin-bottom: 15px;
-    font-size: 1.2rem;
+  color: white;
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.footer-section h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(to right, #ff3333, #ff0000);
+  border-radius: 3px;
+}
+
+.footer-section p {
+  color: #b3b3b3;
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .footer-section ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
 }
 
 .footer-section ul li {
-    margin-bottom: 10px;
+  margin-bottom: 0.8rem;
 }
 
 .footer-section ul li a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s;
+  color: #b3b3b3;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .footer-section ul li a:hover {
-    color: #da0808;
+  color: #ff0000;
 }
 
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
+.footer-social-links {
+  display: flex;
+  gap: 1rem;
 }
 
-.social-links a {
-    color: #fff;
-    font-size: 1.5rem;
-    transition: color 0.3s;
+.footer-social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #f5f5f5;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
-.social-links a:hover {
-    color: #da0808;
+.footer-social-links a:hover {
+  background-color: #ff0000;
+  color: white;
+  transform: translateY(-3px);
 }
 
 .footer-bottom {
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid #444;
-    font-size: 0.9rem;
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #888;
+  font-size: 0.9rem;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
-
         
         /* Responsive */
         @media (max-width: 992px) {
@@ -1154,33 +1214,34 @@ section {
     </div>
 
     <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>À propos</h3>
-                <p>Djezzy Recrutement vous aide à trouver l'emploi de vos rêves grâce à nos offres adaptées à votre profil.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Liens utiles</h3>
-                <ul>
-                    <li><a href="page d'accueil.html">Accueil</a></li>
-                    <li><a href="offres d'emploi.html">Offres d'emploi</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Suivez-nous</h3>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; 2025 Djezzy Recrutement. Tous droits réservés.
-        </div>
-    </footer>
+      <div class="footer-container">
+          <div class="footer-section">
+              <h3>À propos</h3>
+              <p>Djezzy Recrutement vous aide à trouver l'emploi de vos rêves grâce à nos offres adaptées à votre profil.</p>
+          </div>
+          <div class="footer-section">
+              <h3>Liens utiles</h3>
+              <ul>
+                  <li><a href="page d'accueil.html">Accueil</a></li>
+                  <li><a href="offres-emploi.html">Offres d'emploi</a></li>
+                  <li><a href="#">Contact</a></li>
+                  
+              </ul>
+          </div>
+          <div class="footer-section">
+              <h3>Suivez-nous</h3>
+              <div class="footer-social-links">
+                  <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                  <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                  <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                  <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              </div>
+          </div>
+      </div>
+      <div class="footer-bottom">
+          &copy; 2025 Djezzy Recrutement. Tous droits réservés.
+      </div>
+  </footer>
     
 </body>
 </html>
