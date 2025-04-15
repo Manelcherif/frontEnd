@@ -6,317 +6,524 @@
     <title>Profil - Djezzy Recrutement</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-    :root {
-      --djezzy-red: #da0808;
-      --djezzy-dark: #1a1a1a;
-      --djezzy-light: #f4f4f4;
-      --approved: #2e7d32;
-      --rejected: #c62828;
-      --pending: #1565c0;
-    }
-        * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    /* Variables pour les couleurs */
+:root {
+  --accent-color: #e60000; /* Rouge Djezzy */
+  --accent-hover: #cc0000;
+  
+  --accent-light: #ff3b3b;
+  --dark-gray: #333;
+  --medium-gray: #666;
+  --light-gray: #f9f5f5;
+  --white: #ffffff;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --card-border: rgba(0, 0, 0, 0.08);
+}
 
-    body {
-      background-color: #f9f9f9;
-      color: #333;
-      line-height: 1.6;
-    }
+/* Reset et styles de base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
 
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: var(--djezzy-dark);
-      color: white;
-      padding: 15px 5%;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+body {
+  background-color: var(--light-gray);
+  color: var(--dark-gray);
+  line-height: 1.6;
+}
 
-    .logo {
-      height: 40px;
-    }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
-    .header-menu {
-      display: flex;
-      align-items: center;
-      gap: 25px;
-    }
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--white);
+  box-shadow: 0 2px 10px var(--shadow-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 
-    .header-menu a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 15px;
-      transition: color 0.3s;
-      position: relative;
-    }
+.logo {
+  height: 45px;
+}
 
-    .header-menu a:hover {
-      color: #ccc;
-    }
+.header-menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
 
-    .header-menu a.active {
-      color: var(--djezzy-red);
-    }
+.header-menu a {
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  transition: color 0.3s;
+  position: relative;
+}
 
-    .header-menu a.active::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background-color: var(--djezzy-red);
-    }
+.header-menu a:hover, .header-menu a.active {
+  color: var(--accent-color);
+}
 
-    .user-icon {
-      background-color: white;
-      border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: transform 0.3s;
-    }
+.header-menu a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent-color);
+  transition: width 0.3s ease;
+}
 
-    .user-icon:hover {
-      transform: scale(1.1);
-    }
+.header-menu a:hover::after, .header-menu a.active::after {
+  width: 100%;
+}
 
-    .user-icon i {
-      color: var(--djezzy-dark);
-      font-size: 16px;
-    }
-        .job-buttons {
-        margin-top: 20px;
-        display: flex;
-        gap: 10px;
-        justify-content: center;
-        background-color: #f4f4f4;
-        padding: 10px;
-        border-bottom: 1px solid #ddd;
-    }
+.user-icon {
+  background-color: var(--accent-light);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s;
+}
 
-    .job-buttons button {
-        background-color: transparent;
-        color: #333;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 0;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: bold;
-        text-transform: uppercase;
-        position: relative;
-        transition: all 0.3s ease;
-    }
+.user-icon:hover {
+  transform: scale(1.1);
+  background-color: var(--accent-color);
+}
 
-    .job-buttons button.active {
-        color: #da0808;
-    }
+.user-icon i {
+  color: white;
+}
 
-    .job-buttons button.active:after {
-        content: '';
-        position: absolute;
-        bottom: -11px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background-color: #da0808;
-    }
 
-    .job-buttons button:hover {
-        color: #da0808;
-    }
+/* Job buttons */
+.job-buttons {
+  display: flex;
+  justify-content: center;
+  margin: 2rem auto;
+  gap: 1rem;
+  max-width: 600px;
+}
 
-        .search-jobs{
-            display: flex;
-            justify-content: center;
-            margin: 30px 0;
-        }
+.job-buttons button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 50px;
+  background-color: var(--white);
+  color: var(--medium-gray);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  flex: 1;
+  box-shadow: 0 2px 8px var(--shadow);
+}
 
-        .search-jobs input {
-            padding: 10px;
-            width: 300px;
-            border: 1px solid #ccc;
-            border-radius: 5px 0 0 5px;
-            font-size: 1rem;
-        }
+.job-buttons button.active,
+.job-buttons button:hover {
+  background-color: var(--accent-color);
+  color: var(--white);
+  box-shadow: 0 4px 12px rgba(230, 0, 0, 0.3);
+}
 
-        .search-jobs button {
-            background-color: #da0808;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 0 5px 5px 0;
-            font-size: 1rem;
-        }
+/* Search section */
+.search-jobs {
+  max-width: 700px;
+  margin: 2rem auto;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0 1rem;
+}
 
-        /* Section des offres */
-        .offres {
-            padding: 60px 5%;
-        }
+.search-jobs input {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border: 2px solid transparent;
+  border-radius: 50px;
+  font-size: 1rem;
+  box-shadow: 0 2px 10px var(--shadow);
+  transition: all 0.3s;
+}
 
-        .offres h1 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            text-align: center;
-            color: #333;
-        }
+.search-jobs input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
 
-        .offres-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
+.search-jobs button {
+  background-color: var(--accent-color);
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  padding: 0 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-        .offre-card {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
+.search-jobs button:hover {
+  background-color: var(--accent-hover);
+}
 
-        .offre-card:hover {
-            transform: translateY(-5px);
-        }
+/* Offres section */
+.offres {
+  padding: 2rem 5%;
+}
 
-        .offre-card img {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
+.container h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--dark-gray);
+  font-size: 2rem;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 1rem;
+}
 
-        .offre-card h2 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
+.container h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background-color: var(--accent-color);
+  border-radius: 2px;
+}
 
-        .offre-card p {
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 15px;
-        }
+.offres-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
 
-        .offre-card .details-btn, .offre-card .apply-btn {
-            display: inline-block;
-            padding: 10px 15px;
-            margin: 5px;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            transition: background-color 0.3s ease;
-        }
+/* Job card */
+.offre-card {
+  background-color: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 15px var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid var(--card-border);
+}
 
-        .offre-card .details-btn {
-            background-color: #8b8786;
-            color: #fff;
-        }
+.offre-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px var(--shadow);
+}
 
-        .offre-card .apply-btn {
-            background-color: #da0808;
-            color: #fff;
-        }
+.offre-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px solid var(--card-border);
+}
 
-        .offre-card .details-btn:hover {
-            background-color: #777;
-        }
+.offre-card h2 {
+  color: var(--dark-gray);
+  padding: 1.5rem 1.5rem 0.5rem;
+  font-size: 1.3rem;
+}
 
-        .offre-card .apply-btn:hover {
-            background-color: #c20707;
-        }
+.offre-card p {
+  color: var(--medium-gray);
+  padding: 0 1.5rem 1.5rem;
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--card-border);
+}
 
-        /* Style pour conteneur de détails */
-        .detail-container {
-            width: 80%;
-            max-width: 800px;
-            background: white;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
-            position: fixed;
-            top: 50%; 
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.3s ease-out;
-            z-index: 10;
-            cursor: default;
-        }
+.offre-card a {
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  margin: 1rem 0.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
 
-        .detail-container.active {
-            transform: translate(-50%, -50%) scale(1);
-        }
+.details-btn {
+  color: var(--medium-gray);
+  background-color: var(--light-gray);
+}
 
-        /* Contenu principal */
-        .offer-details h2 {
-            color: #333;
-            margin-bottom: 15px;
-        }
+.details-btn:hover {
+  background-color: #e6e6e6;
+}
 
-        .offer-details p {
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 15px;
-        }
+.apply-btn {
+  background-color: var(--accent-color);
+  color: var(--white);
+}
 
-        .offer-details h3 {
-            margin-top: 20px;
-            margin-bottom: 10px;
-            color: #333;
-        }
+.apply-btn:hover {
+  background-color: var(--accent-hover);
+}
 
-        .offer-details ul {
-            list-style-type: none;
-            padding-left: 15px;
-            margin-bottom: 20px;
-        }
+/* Job details pop-up */
+.detail-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s;
+}
 
-        .offer-details ul li {
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 20px;
-        }
+.detail-container.active {
+  opacity: 1;
+  visibility: visible;
+}
 
-        .offer-details ul li:before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: #da0808;
-        }
+.detail-container main {
+  background-color: var(--white);
+  border-radius: 12px;
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2rem;
+  transform: translateY(20px);
+  transition: transform 0.3s;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+}
 
-        /* Bouton Postuler */
-        .apply-button {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            margin-top: 20px;
-            background-color: #d91e18;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+.detail-container.active main {
+  transform: translateY(0);
+}
 
-        .apply-button:hover {
-            background-color: #b71b14;
-        }
+.offer-details h2 {
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.offer-details h3 {
+  margin: 1.5rem 0 0.8rem;
+  font-size: 1.2rem;
+  color: var(--dark-gray);
+}
+
+.offer-details p, 
+.offer-details li {
+  color: var(--medium-gray);
+  margin-bottom: 0.5rem;
+}
+
+.offer-details ul {
+  list-style-position: inside;
+  margin-left: 1rem;
+}
+
+.offer-details .location,
+.offer-details .date {
+  color: var(--medium-gray);
+  font-size: 0.95rem;
+}
+
+.apply-button {
+  background-color: var(--accent-color);
+  color: var(--white);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  margin-top: 2rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.apply-button:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+  }
+  
+  .header-menu {
+    gap: 1rem;
+  }
+  
+  .header-menu a {
+    font-size: 0.9rem;
+  }
+  
+  .offres-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  
+  .job-buttons button {
+    padding: 0.7rem 1rem;
+  }
+  
+  .search-jobs {
+    flex-direction: column;
+  }
+  
+  .search-jobs button {
+    width: 100%;
+    padding: 1rem;
+  }
+}
+
+.close-btn {
+    background-color: #ff4d4d; /* Rouge doux */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s, transform 0.2s;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+.close-btn:hover {
+    background-color: #e60000;
+    transform: scale(1.05);
+}
+
+
+/* Footer */
+footer {
+  background-color: #212121;
+  color: #f5f5f5;
+  padding: 4rem 0 1rem;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 80%;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-section h3 {
+  color: white;
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.footer-section h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(to right, #ff3333, #ff0000);
+  border-radius: 3px;
+}
+
+.footer-section p {
+  color: #b3b3b3;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-section ul li a {
+  color: #b3b3b3;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: #ff0000;
+}
+
+.footer-social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #f5f5f5;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-social-links a:hover {
+  background-color: #ff0000;
+  color: white;
+  transform: translateY(-3px);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #888;
+  font-size: 0.9rem;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Font Awesome icons */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
     </style>
 </head>
 <body id="backgroundArea">
     <header class="header">
         <img src="Logo_Djezzy_2015-1.png" alt="Djezzy Logo" class="logo">
         <div class="header-menu">
-          <a href="offresCandidat.html"class="active">OFFRE D'EMPLOI</a>
+          <a href="offresCandidat.html" class="active">OFFRE D'EMPLOI</a>
           <a href="mesCandidat.html" >MES CANDIDATURES</a>
           <div class="user-icon">
             <a href="candidatProfil.html"><i class="fas fa-user"></i></a>
@@ -340,8 +547,7 @@
         <h1>Toutes les offres d'emploi</h1>
         <div class="offres-grid" id="offresGrid">
             <!-- Offre 1 -->
-            <div class="offre-card" data-title="Responsable des Ressources Humaines" job-details="ujsicojzifzef ihfoijsifjrf dnioznvflkesnfjnzrefiojezf fiuozifjie,fjkjfijr rijizjrfoz,fioniojrf iurhoijrfjzurnfjenrzifjeizf zifoizjhfizenfjzfiz">
-                <img src="La gestion des ressources humaines dans un contexte en mutation.jpg" alt="Responsable des Ressources Humaines">
+            <div class="offre-card" >
                 <h2>Responsable des Ressources Humaines</h2>
                 <p>Poste basé à Alger. Gestion des talents et développement des compétences.</p>
                 <a href="#" class="details-btn">Voir détails</a>
@@ -350,7 +556,6 @@
 
             <!-- Offre 2 -->
             <div class="offre-card" data-title="Développeur Full Stack">
-                <img src="The Full Stack Web Development.jpg" alt="Développeur Full Stack">
                 <h2>Développeur Full Stack</h2>
                 <p>Poste en télétravail. Maîtrise de JavaScript, React et Node.js requise.</p>
                 <a href="#" class="details-btn">Voir détails</a>
@@ -359,7 +564,6 @@
 
             <!-- Offre 3 -->
             <div class="offre-card" data-title="Data Scientist">
-                <img src="What is Data science _.jpg" alt="Data Scientist">
                 <h2>Data Scientist</h2>
                 <p>Poste basé à Oran. Expérience en Machine Learning et Python nécessaire.</p>
                 <a href="#" class="details-btn">Voir détails</a>
@@ -368,7 +572,6 @@
 
             <!-- Offre 4 -->
             <div class="offre-card" data-title="DevOps Engineer">
-                <img src="Premium Vector _ Devops_ Agile development and optimisation background.jpg" alt="DevOps Engineer">
                 <h2>DevOps Engineer</h2>
                 <p>Poste basé à Constantine. Connaissance de Docker et Kubernetes requise.</p>
                 <a href="#" class="details-btn">Voir détails</a>
@@ -377,7 +580,6 @@
 
             <!-- Offre 5 -->
             <div class="offre-card" data-title="Comptable Senior">
-                <img src="Senior Accountant Job Description.jpg" alt="Comptable Senior">
                 <h2>Comptable Senior</h2>
                 <p>Poste basé à Alger. Expérience en gestion financière et comptabilité.</p>
                 <a href="#" class="details-btn">Voir détails</a>
@@ -386,7 +588,6 @@
 
             <!-- Offre 6 -->
             <div class="offre-card" data-title="UX/UI Designer">
-                <img src="application design to buy different types of honey.jpg" alt="UX/UI Designer">
                 <h2>UX/UI Designer</h2>
                 <p>Poste en télétravail. Maîtrise de Figma et Adobe XD requise.</p>
                 <a href="#" class="details-btn">Voir détails</a>
@@ -395,6 +596,37 @@
         </div>
     </div>
 </section>
+
+<!-- Pied de page -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>À propos</h3>
+            <p>Djezzy Recrutement vous aide à trouver l'emploi de vos rêves grâce à nos offres adaptées à votre profil.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Liens utiles</h3>
+            <ul>
+                <li><a href="page d'accueil.html">Accueil</a></li>
+                <li><a href="offres-emploi.html">Offres d'emploi</a></li>
+                <li><a href="#">Contact</a></li>
+                
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Suivez-nous</h3>
+            <div class="footer-social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2025 Djezzy Recrutement. Tous droits réservés.
+    </div>
+</footer>
     <script>
       function searchOffers() {
             const input = document.getElementById('searchInput').value.toLowerCase();
@@ -434,6 +666,7 @@
                 // Définir le contenu spécifique pour chaque offre
                 container.innerHTML = `
                     <main>
+                        <button class="close-btn">Fermer</button>
                         <div class="offer-details">
                             <h2>${jobTitle}</h2>
                             <p class="location"><strong>Lieu :</strong> ${jobLocation}</p>
@@ -486,6 +719,11 @@
                     container.classList.remove('active');
                 });
             });
+
+            container.querySelector('.close-btn').addEventListener('click', () => {
+    container.classList.remove('active');
+    document.getElementById('backgroundArea').style.display = 'none';
+});
             
             // Empêcher la propagation des clics depuis les conteneurs
             document.querySelectorAll('.detail-container').forEach(container => {
