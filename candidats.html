@@ -424,7 +424,7 @@ td {
             <div class="filters">
                 <div class="search-bar">
                     <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Rechercher un candidat...">
+                    <input type="text" placeholder="Rechercher un post...">
                 </div>
                 <div class="filter-options">
                     <select>
@@ -602,7 +602,7 @@ td {
         </div>
     </div>
     <script>
-        // Sélectionner les éléments nécessaires
+    // Sélectionner les éléments nécessaires
 const searchInput = document.querySelector('.search-bar input');
 const departmentSelect = document.querySelector('.filter-options select:nth-child(1)');
 const positionSelect = document.querySelector('.filter-options select:nth-child(2)');
@@ -629,15 +629,20 @@ function filterTable() {
     
     // Réinitialiser les lignes filtrées
     filteredRows = Array.from(candidateRows).filter(row => {
-        const name = row.querySelector('.name').textContent.toLowerCase();
-        const email = row.querySelector('.email').textContent.toLowerCase();
-        const rowPosition = row.querySelector('td:nth-child(2)').textContent;
-        const rowDepartment = row.querySelector('td:nth-child(3)').textContent;
-        const rowStatus = row.querySelector('.status').textContent;
+        // Récupérer les données de la ligne
+        const rowName = row.querySelector('td:nth-child(1)').textContent.toLowerCase();
+        const rowPosition = row.querySelector('td:nth-child(2)').textContent.trim().toLowerCase();
+        const rowDepartment = row.querySelector('td:nth-child(3)').textContent.trim();
+        const rowStatus = row.querySelector('.status').textContent.trim();
         
-        const matchesSearch = name.includes(searchText) || email.includes(searchText);
+        // Vérifier si la recherche correspond à une colonne quelconque
+        const matchesSearch = rowName.includes(searchText) || 
+                             rowPosition.includes(searchText) || 
+                             rowDepartment.toLowerCase().includes(searchText);
+        
+        // Vérifier les correspondances de filtres
         const matchesDepartment = department === 'Tous les départements' || rowDepartment === department;
-        const matchesPosition = position === 'Tous les postes' || rowPosition === position;
+        const matchesPosition = position === 'Tous les postes' || rowPosition === position.toLowerCase();
         const matchesStatus = status === 'Tous les statuts' || rowStatus === status;
         
         return matchesSearch && matchesDepartment && matchesPosition && matchesStatus;
@@ -673,7 +678,7 @@ function updateTableDisplay() {
 // Fonction pour mettre à jour les contrôles de pagination
 function updatePaginationControls() {
     const totalPages = Math.max(1, Math.ceil(filteredRows.length / rowsPerPage));
-    
+
     // Mettre à jour l'état des boutons de pagination
     pageNumbers.forEach(button => {
         const pageNum = parseInt(button.textContent);
@@ -716,10 +721,95 @@ function changePage(newPage) {
     }
 }
 
+// Fonction pour mettre à jour les options de poste en fonction du département sélectionné
+function updatePositionOptions() {
+    const selectedDepartment = departmentSelect.value;
+    const positionsSet = new Set();
+
+    candidateRows.forEach(row => {
+        const rowDepartment = row.querySelector('td:nth-child(3)').textContent.trim();
+        const rowPosition = row.querySelector('td:nth-child(2)').textContent.trim();
+
+        if (selectedDepartment === 'Tous les départements' || rowDepartment === selectedDepartment) {
+            positionsSet.add(rowPosition);
+        }
+    });
+
+    // Sauvegarder la valeur actuelle
+    const currentValue = positionSelect.value;
+    
+    // Vider les options actuelles
+    positionSelect.innerHTML = '';
+
+    // Ajouter "Tous les postes"
+    const allOption = document.createElement('option');
+    allOption.textContent = 'Tous les postes';
+    positionSelect.appendChild(allOption);
+
+    // Ajouter les nouveaux postes
+    Array.from(positionsSet).sort().forEach(position => {
+        const option = document.createElement('option');
+        option.textContent = position;
+        positionSelect.appendChild(option);
+    });
+    
+    // Si le poste précédemment sélectionné existe encore dans les options, le resélectionner
+    if (Array.from(positionsSet).includes(currentValue)) {
+        positionSelect.value = currentValue;
+    }
+}
+
+// Fonction pour mettre à jour les options de département en fonction du poste sélectionné
+function updateDepartmentOptions() {
+    const selectedPosition = positionSelect.value;
+    const departmentsSet = new Set();
+
+    candidateRows.forEach(row => {
+        const rowPosition = row.querySelector('td:nth-child(2)').textContent.trim().toLowerCase();
+        const rowDepartment = row.querySelector('td:nth-child(3)').textContent.trim();
+
+        if (selectedPosition === 'Tous les postes' || rowPosition === selectedPosition.toLowerCase()) {
+            departmentsSet.add(rowDepartment);
+        }
+    });
+
+    // Sauvegarder la valeur actuelle
+    const currentValue = departmentSelect.value;
+    
+    // Vider les options actuelles
+    departmentSelect.innerHTML = '';
+
+    // Ajouter "Tous les départements"
+    const allOption = document.createElement('option');
+    allOption.textContent = 'Tous les départements';
+    departmentSelect.appendChild(allOption);
+
+    // Ajouter les nouveaux départements
+    Array.from(departmentsSet).sort().forEach(department => {
+        const option = document.createElement('option');
+        option.textContent = department;
+        departmentSelect.appendChild(option);
+    });
+
+    // Si le département précédemment sélectionné existe encore dans les options, le resélectionner
+    if (Array.from(departmentsSet).includes(currentValue)) {
+        departmentSelect.value = currentValue;
+    }
+}
+
 // Ajouter les gestionnaires d'événements pour les filtres
 searchInput.addEventListener('input', filterTable);
-departmentSelect.addEventListener('change', filterTable);
-positionSelect.addEventListener('change', filterTable);
+
+departmentSelect.addEventListener('change', () => {
+    updatePositionOptions(); // met à jour la liste des postes selon le département
+    filterTable();           // puis filtre le tableau
+});
+
+positionSelect.addEventListener('change', () => {
+    updateDepartmentOptions(); // met à jour la liste des départements selon le poste
+    filterTable();             // puis filtre le tableau
+});
+
 statusSelect.addEventListener('change', filterTable);
 
 // Ajouter les gestionnaires d'événements pour la pagination
@@ -733,15 +823,6 @@ pageNumbers.forEach(button => {
             changePage(pageNum);
         }
     });
-});
-
-// Gestionnaire pour le bouton d'ajout
-addButton.addEventListener('click', function() {
-    alert('Fonctionnalité d\'ajout de candidat à implémenter');
-});
-// Initialiser l'affichage au chargement de la page
-document.addEventListener('DOMContentLoaded', function() {
-    filterTable();
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -829,6 +910,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Activer le bouton d'annulation
                 undoButton.disabled = false;
+                
+                // Mettre à jour l'affichage après suppression
+                filterTable();
             }
         });
     });
@@ -850,9 +934,17 @@ document.addEventListener('DOMContentLoaded', function() {
             if (deletedCandidates.length === 0) {
                 undoButton.disabled = true;
             }
+            
+            // Mettre à jour l'affichage après restauration
+            filterTable();
         }
     });
+
+    // Initialiser les listes déroulantes et appliquer le filtrage initial
+    updatePositionOptions();
+    updateDepartmentOptions();
+    filterTable();
 });
-    </script>
+</script>
 </body>
 </html>
