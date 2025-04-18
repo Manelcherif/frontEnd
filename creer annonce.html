@@ -669,25 +669,6 @@
                                 <div class="error-message">Veuillez sélectionner une date limite</div>
                             </div>
                         </div>
-                        
-                        <div class="form-row">
-                            <div class="form-col">
-                                <label for="salaryMin">Salaire minimum (DZD)</label>
-                                <input type="number" id="salaryMin" placeholder="Ex: 60000">
-                            </div>
-                            <div class="form-col">
-                                <label for="salaryMax">Salaire maximum (DZD)</label>
-                                <input type="number" id="salaryMax" placeholder="Ex: 120000">
-                            </div>
-                        </div>
-                        
-                        <div class="toggle-container">
-                            <span class="toggle-label">Afficher le salaire dans l'annonce:</span>
-                            <label class="toggle">
-                                <input type="checkbox" id="showSalary">
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
                     </div>
                     
                     <!-- Job Description Section -->
@@ -740,36 +721,7 @@
                                     <button type="button" class="btn-add" id="addSkill">Ajouter</button>
                                 </div>
                             </div>
-                        
-                            <div class="form-group">
-                                <label>Inclure dans les catégories</label>
-                                <div class="checkbox-group">
-                                    <label class="checkbox-item">
-                                        <input type="checkbox" name="categories" value="technology"> Technologie
-                                    </label>
-                                    <label class="checkbox-item">
-                                        <input type="checkbox" name="categories" value="marketing"> Marketing
-                                    </label>
-                                    <label class="checkbox-item">
-                                        <input type="checkbox" name="categories" value="finance"> Finance
-                                    </label>
-                                    <label class="checkbox-item">
-                                        <input type="checkbox" name="categories" value="customer_service"> Service Client
-                                    </label>
-                                    <label class="checkbox-item">
-                                        <input type="checkbox" name="categories" value="management"> Management
-                                    </label>
-                                    <label class="checkbox-item">
-                                        <input type="checkbox" name="categories" value="sales"> Ventes
-                                    </label>
-                                    <label class="checkbox-item">
-                                        <input type="checkbox" name="categories" value="healthcare"> Santé
-                                    </label>
-                                    <label class="checkbox-item">
-                                        <input type="checkbox" name="categories" value="education"> Éducation
-                                    </label>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                     <!-- Form Actions -->
@@ -781,5 +733,266 @@
             </div>
         </main>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Récupération des éléments du formulaire
+    const jobPostingForm = document.getElementById('jobPostingForm');
+    const skillInput = document.getElementById('skillInput');
+    const addSkillBtn = document.getElementById('addSkill');
+    const skillsContainer = document.getElementById('skillsContainer');
+    const jobDescriptionEditor = document.getElementById('jobDescription');
+    const cancelBtn = document.querySelector('.btn-cancel');
+    const publishBtn = document.querySelector('.btn-publish');
+    
+    // Dates: Configurer les dates min et max
+    const today = new Date();
+    const publishDateInput = document.getElementById('publishDate');
+    const applicationDeadlineInput = document.getElementById('applicationDeadline');
+    
+    // Format de date YYYY-MM-DD pour l'attribut min des inputs date
+    const formatDate = (date) => {
+        return date.toISOString().split('T')[0];
+    };
+    
+    publishDateInput.min = formatDate(today);
+    applicationDeadlineInput.min = formatDate(today);
+    
+    // Par défaut, mettre la date du jour comme date de publication
+    publishDateInput.value = formatDate(today);
+    
+    // S'assurer que la date limite est après la date de publication
+    publishDateInput.addEventListener('change', function() {
+        const publishDate = new Date(this.value);
+        applicationDeadlineInput.min = formatDate(publishDate);
+        
+        // Si la date limite est avant la nouvelle date de publication, la réinitialiser
+        if (new Date(applicationDeadlineInput.value) < publishDate) {
+            applicationDeadlineInput.value = formatDate(publishDate);
+        }
+    });
+    
+    // Fonctionnalité d'ajout de compétences
+    function addSkill() {
+        const skillValue = skillInput.value.trim();
+        if (!skillValue) return;
+        
+        // Vérifier si la compétence existe déjà
+        const existingSkills = Array.from(skillsContainer.querySelectorAll('.skill-tag'));
+        const skillExists = existingSkills.some(skill => skill.textContent.toLowerCase() === skillValue.toLowerCase());
+        
+        if (skillExists) {
+            alert('Cette compétence existe déjà');
+            return;
+        }
+        
+        // Créer la balise de compétence
+        const skillTag = document.createElement('div');
+        skillTag.classList.add('skill-tag');
+        
+        // Créer le texte et le bouton de suppression
+        const skillText = document.createElement('span');
+        skillText.textContent = skillValue;
+        
+        const removeBtn = document.createElement('button');
+        removeBtn.classList.add('remove-skill');
+        removeBtn.innerHTML = '&times;';
+        removeBtn.type = 'button';
+        removeBtn.addEventListener('click', function() {
+            skillsContainer.removeChild(skillTag);
+        });
+        
+        // Ajouter les éléments à la balise de compétence
+        skillTag.appendChild(skillText);
+        skillTag.appendChild(removeBtn);
+        
+        // Ajouter la balise de compétence au conteneur
+        skillsContainer.appendChild(skillTag);
+        
+        // Réinitialiser l'input
+        skillInput.value = '';
+    }
+    
+    // Ajouter une compétence en cliquant sur le bouton
+    addSkillBtn.addEventListener('click', addSkill);
+    
+    // Ajouter une compétence en appuyant sur Entrée
+    skillInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            addSkill();
+        }
+    });
+    
+    // Éditeur de texte riche pour la description détaillée
+    const toolbarButtons = document.querySelectorAll('.toolbar button');
+    
+    toolbarButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const command = getCommandFromButton(this);
+            if (command) {
+                document.execCommand(command, false, null);
+                jobDescriptionEditor.focus();
+            }
+        });
+    });
+    
+    function getCommandFromButton(button) {
+        const icon = button.querySelector('i');
+        if (icon.classList.contains('fa-bold')) return 'bold';
+        if (icon.classList.contains('fa-italic')) return 'italic';
+        if (icon.classList.contains('fa-underline')) return 'underline';
+        if (icon.classList.contains('fa-list-ul')) return 'insertUnorderedList';
+        if (icon.classList.contains('fa-list-ol')) return 'insertOrderedList';
+        if (icon.classList.contains('fa-heading')) {
+            // Pour les titres, nous utilisons formatBlock
+            const headingLevel = prompt('Choisir un niveau de titre (1-6):', '2');
+            if (headingLevel && !isNaN(headingLevel) && headingLevel >= 1 && headingLevel <= 6) {
+                document.execCommand('formatBlock', false, `h${headingLevel}`);
+            }
+            return null;
+        }
+        if (icon.classList.contains('fa-quote-right')) return 'formatBlock|blockquote';
+    }
+    
+    // Gestionnaire d'événements spécifique pour les commandes complexes
+    document.querySelectorAll('.toolbar button').forEach(button => {
+        button.addEventListener('click', function() {
+            const icon = this.querySelector('i');
+            
+            if (icon.classList.contains('fa-heading')) {
+                const headingLevel = prompt('Choisir un niveau de titre (1-6):', '2');
+                if (headingLevel && !isNaN(headingLevel) && headingLevel >= 1 && headingLevel <= 6) {
+                    document.execCommand('formatBlock', false, `h${headingLevel}`);
+                }
+            } else if (icon.classList.contains('fa-quote-right')) {
+                document.execCommand('formatBlock', false, 'blockquote');
+            }
+        });
+    });
+    
+    // Validation du formulaire
+    jobPostingForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Réinitialiser les messages d'erreur
+        document.querySelectorAll('.error-message').forEach(msg => {
+            msg.style.display = 'none';
+        });
+        
+        let isValid = true;
+        
+        // Valider les champs requis
+        const requiredInputs = document.querySelectorAll('input[required], select[required], textarea[required]');
+        
+        requiredInputs.forEach(input => {
+            if (!input.value.trim()) {
+                isValid = false;
+                const errorMsg = input.nextElementSibling;
+                if (errorMsg && errorMsg.classList.contains('error-message')) {
+                    errorMsg.style.display = 'block';
+                }
+            }
+        });
+        
+        // Valider l'éditeur de texte riche
+        if (jobDescriptionEditor.innerHTML.trim() === '') {
+            isValid = false;
+            const errorMsg = jobDescriptionEditor.parentElement.nextElementSibling;
+            if (errorMsg && errorMsg.classList.contains('error-message')) {
+                errorMsg.style.display = 'block';
+            }
+        }
+        
+        // Valider les dates
+        const publishDate = new Date(publishDateInput.value);
+        const deadlineDate = new Date(applicationDeadlineInput.value);
+        
+        if (deadlineDate < publishDate) {
+            isValid = false;
+            alert('La date limite doit être après la date de publication');
+        }
+        
+        // Valider le salaire
+        const salaryMin = parseFloat(document.getElementById('salaryMin').value);
+        const salaryMax = parseFloat(document.getElementById('salaryMax').value);
+        
+        if (salaryMin && salaryMax && salaryMin > salaryMax) {
+            isValid = false;
+            alert('Le salaire minimum ne peut pas être supérieur au salaire maximum');
+        }
+        
+        // Si tout est valide, soumettre le formulaire
+        if (isValid) {
+            // Récupérer les compétences
+            const skills = Array.from(skillsContainer.querySelectorAll('.skill-tag')).map(tag => 
+                tag.querySelector('span').textContent
+            );
+            
+            // Récupérer les catégories sélectionnées
+            const categories = Array.from(document.querySelectorAll('input[name="categories"]:checked')).map(input => 
+                input.value
+            );
+            
+            // Créer l'objet de données
+            const formData = {
+                jobTitle: document.getElementById('jobTitle').value,
+                department: document.getElementById('department').value,
+                location: document.getElementById('location').value,
+                employmentType: document.getElementById('employmentType').value,
+                experienceLevel: document.getElementById('experienceLevel').value,
+                publishDate: publishDateInput.value,
+                applicationDeadline: applicationDeadlineInput.value,
+                salaryMin: document.getElementById('salaryMin').value || null,
+                salaryMax: document.getElementById('salaryMax').value || null,
+                showSalary: document.getElementById('showSalary').checked,
+                shortDescription: document.getElementById('shortDescription').value,
+                jobDescription: jobDescriptionEditor.innerHTML,
+                skills: skills,
+                categories: categories
+            };
+            
+            // Afficher les données dans la console pour démonstration
+            console.log('Données du formulaire:', formData);
+            
+            // Ici, vous pouvez ajouter le code pour envoyer les données au serveur
+            // Exemple avec fetch:
+            /*
+            fetch('/api/job-postings', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Succès:', data);
+                alert('Annonce publiée avec succès!');
+                window.location.href = '/job-postings'; // Redirection
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue lors de la publication de l\'annonce.');
+            });
+            */
+            
+            // Pour la démonstration, nous allons simplement afficher un message
+            alert('Annonce publiée avec succès! (Simulation)');
+        }
+    });
+    
+    // Bouton Annuler
+    cancelBtn.addEventListener('click', function() {
+        if (confirm('Êtes-vous sûr de vouloir annuler? Toutes les données saisies seront perdues.')) {
+            window.location.href = '/job-postings'; // Rediriger vers la liste des annonces
+            // Ou réinitialiser le formulaire:
+            // jobPostingForm.reset();
+            // jobDescriptionEditor.innerHTML = '';
+            // skillsContainer.innerHTML = '';
+        }
+    });
+});
+    </script>
 </body>
 </html>

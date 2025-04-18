@@ -371,6 +371,294 @@ td {
 .ellipsis {
     margin: 0 5px;
 }
+/* CSS moderne pour la fenêtre modale avec accent rouge - version corrigée pour éviter le débordement */
+
+/* Styles pour le bouton calendrier */
+.action-btn.schedule {
+    background-color: #e53935;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    margin-right: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(229, 57, 53, 0.3);
+}
+
+.action-btn.schedule:hover {
+    background-color: #d32f2f;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(229, 57, 53, 0.4);
+}
+
+/* Styles pour la fenêtre modale */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    overflow-y: auto; /* Permet le défilement vertical */
+}
+
+.modal.show {
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 20px auto; /* Marge réduite en haut */
+    width: 550px;
+    max-width: 90%;
+    max-height: 90vh; /* Hauteur maximale de 90% de la hauteur de la fenêtre */
+    border-radius: 8px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+}
+
+.modal-header {
+    padding: 20px 24px;
+    background-color: #e53935;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; /* Empêche l'en-tête de rétrécir */
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.close-modal {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 28px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.close-modal:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.modal-body {
+    padding: 24px;
+    overflow-y: auto; /* Permet le défilement du contenu */
+    flex-grow: 1; /* Permet au corps de la modale de s'agrandir */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group p {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+#candidate-name {
+    font-weight: 600;
+    color: #e53935;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #444;
+    font-size: 15px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #e53935;
+    box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.2);
+}
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+    border-color: #e53935;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-actions {
+    text-align: right;
+    margin-top: 24px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-submit {
+    background-color: #e53935;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(229, 57, 53, 0.4);
+}
+
+.btn-submit:hover {
+    background-color: #c62828;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(229, 57, 53, 0.5);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+/* Style pour le statut "Entretien prévu" */
+.status.interview {
+    background-color: #e53935;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    font-weight: 500;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(229, 57, 53, 0.3);
+}
+
+/* Animation pour l'apparition du statut */
+@keyframes statusFadeIn {
+    0% { opacity: 0; transform: translateY(-10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.status.interview {
+    animation: statusFadeIn 0.4s ease forwards;
+}
+
+/* Style pour le champ de date et heure */
+input[type="date"], 
+input[type="time"] {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #fff;
+    padding-right: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23e53935' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: calc(100% - 8px) center;
+    background-size: 20px;
+}
+
+/* Style pour les select */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #fff;
+    padding-right: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23e53935' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: calc(100% - 8px) center;
+    background-size: 20px;
+}
+
+/* Personnalisation de la barre de défilement pour les navigateurs compatibles */
+.modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: #e53935;
+    border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: #c62828;
+}
+
+/* Media queries pour la responsivité */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 10px auto;
+        max-height: 95vh;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .btn-submit {
+        width: 100%;
+    }
+}
+
+/* Pour les écrans très petits */
+@media (max-height: 550px) {
+    .modal-content {
+        margin: 5px auto;
+        max-height: 98vh;
+    }
+    
+    .modal-header {
+        padding: 10px 15px;
+    }
+    
+    .modal-body {
+        padding: 15px;
+    }
+    
+    .form-group {
+        margin-bottom: 10px;
+    }
+}
     </style>
 </head>
 <body>
@@ -388,7 +676,7 @@ td {
                     <i class="fas fa-chart-line"></i>
                     <span>Tableau de bord</span>
                 </a>
-                <a href="creer annonce.html" class="menu-item">
+                <a href="liste des offres.html" class="menu-item">
                     <i class="fas fa-bullhorn"></i>
                     <span>Annonces</span>
                 </a>
@@ -397,7 +685,11 @@ td {
                     <span>Candidats</span>
                 </a>
                 
-                
+                <a href="Entretient.html" class="menu-item">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Entretiens</span>
+                </a>
+
                 <div class="menu-title">Compte</div>
                 <a href="admin profile.html" class="menu-item">
                     <i class="fas fa-user-circle"></i>
@@ -424,7 +716,7 @@ td {
             <div class="filters">
                 <div class="search-bar">
                     <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Rechercher un post...">
+                    <input type="text" placeholder="Rechercher un candidat...">
                 </div>
                 <div class="filter-options">
                     <select>
@@ -586,6 +878,55 @@ td {
                             </td>
                         </tr>
                     </tbody>
+                    <!-- Ajouter ce code HTML au-dessus ou en-dessous de votre table -->
+<div id="interview-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close-modal">&times;</span>
+            <h2>Programmer un entretien</h2>
+        </div>
+        <div class="modal-body">
+            <form id="interview-form">
+                <div class="form-group">
+                    <p>Candidat: <span id="candidate-name"></span></p>
+                </div>
+                <div class="form-group">
+                    <label for="interview-date">Date de l'entretien:</label>
+                    <input type="date" id="interview-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="interview-time">Heure de l'entretien:</label>
+                    <input type="time" id="interview-time" required>
+                </div>
+                <div class="form-group">
+                    <label for="interviewer">Recruteur:</label>
+                    <select id="interviewer" required>
+                        <option value="">Sélectionner un recruteur</option>
+                        <option value="Thomas Martin">Thomas Martin</option>
+                        <option value="Sophie Dubois">Sophie Dubois</option>
+                        <option value="Jean Dupont">Jean Dupont</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="interview-type">Type d'entretien:</label>
+                    <select id="interview-type" required>
+                        <option value="">Sélectionner un type</option>
+                        <option value="Vidéo">Entretien vidéo</option>
+                        <option value="Téléphonique">Entretien téléphonique</option>
+                        <option value="Présentiel">Entretien en présentiel</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="interview-notes">Notes:</label>
+                    <textarea id="interview-notes" rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">Confirmer l'entretien</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
                 </table>
             </div>
 
@@ -825,10 +1166,207 @@ pageNumbers.forEach(button => {
     });
 });
 
+// Sélectionner les éléments nécessaires
 document.addEventListener('DOMContentLoaded', function() {
-    // Variables pour stocker l'historique des suppressions
-    let deletedCandidates = [];
+    const searchInput = document.querySelector('.search-bar input');
+    const departmentSelect = document.querySelector('.filter-options select:nth-child(1)');
+    const positionSelect = document.querySelector('.filter-options select:nth-child(2)');
+    const statusSelect = document.querySelector('.filter-options select:nth-child(3)');
+    const candidateRows = document.querySelectorAll('tbody tr');
+    const addButton = document.querySelector('.add-button');
+    const paginationButtons = document.querySelectorAll('.page-btn');
+    const prevButton = document.querySelector('.page-btn.prev');
+    const nextButton = document.querySelector('.page-btn.next');
+    const pageNumbers = Array.from(document.querySelectorAll('.page-btn:not(.prev):not(.next)'));
+
+    // Variables pour la pagination
+    const rowsPerPage = 5;
+    let currentPage = 1;
+    let filteredRows = Array.from(candidateRows);
     
+    // Tableau pour stocker les éléments supprimés
+    const deletedCandidates = [];
+    
+    // Délai avant que la suppression ne soit définitive (en millisecondes)
+    const deletionDelay = 10000; // 10 secondes
+
+    // Fonction principale de filtrage
+    function filterTable() {
+        const searchText = searchInput.value.toLowerCase();
+        const department = departmentSelect.value;
+        const position = positionSelect.value;
+        const status = statusSelect.value;
+        
+        // Réinitialiser les lignes filtrées
+        filteredRows = Array.from(candidateRows).filter(row => {
+            // Récupérer les données de la ligne
+            const rowName = row.querySelector('td:nth-child(1)').textContent.toLowerCase();
+            const rowPosition = row.querySelector('td:nth-child(2)').textContent.trim().toLowerCase();
+            const rowDepartment = row.querySelector('td:nth-child(3)').textContent.trim();
+            const rowStatus = row.querySelector('.status').textContent.trim();
+            
+            // Vérifier si la recherche correspond à une colonne quelconque
+            const matchesSearch = rowName.includes(searchText) || 
+                                rowPosition.includes(searchText) || 
+                                rowDepartment.toLowerCase().includes(searchText);
+            
+            // Vérifier les correspondances de filtres
+            const matchesDepartment = department === 'Tous les départements' || rowDepartment === department;
+            const matchesPosition = position === 'Tous les postes' || rowPosition === position.toLowerCase();
+            const matchesStatus = status === 'Tous les statuts' || rowStatus === status;
+            
+            return matchesSearch && matchesDepartment && matchesPosition && matchesStatus;
+        });
+        
+        // Réinitialiser à la première page après filtrage
+        currentPage = 1;
+        
+        // Appliquer la pagination sur les résultats filtrés
+        updateTableDisplay();
+    }
+
+    // Fonction pour mettre à jour l'affichage de la table
+    function updateTableDisplay() {
+        // Masquer toutes les lignes d'abord
+        candidateRows.forEach(row => row.style.display = 'none');
+        
+        // Calculer les indices pour la pagination
+        const startIndex = (currentPage - 1) * rowsPerPage;
+        const endIndex = Math.min(startIndex + rowsPerPage, filteredRows.length);
+        
+        // Afficher uniquement les lignes de la page actuelle
+        for (let i = startIndex; i < endIndex; i++) {
+            if (filteredRows[i]) {
+                filteredRows[i].style.display = '';
+            }
+        }
+        
+        // Mettre à jour les contrôles de pagination
+        updatePaginationControls();
+    }
+
+    // Fonction pour mettre à jour les contrôles de pagination
+    function updatePaginationControls() {
+        const totalPages = Math.max(1, Math.ceil(filteredRows.length / rowsPerPage));
+
+        // Mettre à jour l'état des boutons de pagination
+        pageNumbers.forEach(button => {
+            const pageNum = parseInt(button.textContent);
+            button.classList.toggle('active', pageNum === currentPage);
+            
+            // N'afficher que les boutons pertinents
+            if (totalPages <= 5) {
+                // Si peu de pages, montrer tous les boutons jusqu'au total
+                button.style.display = pageNum <= totalPages ? '' : 'none';
+            } else {
+                // Pour beaucoup de pages, montrer 1, la page courante et ses voisines, et la dernière page
+                if (pageNum === 1 || pageNum === totalPages || 
+                    Math.abs(pageNum - currentPage) <= 1) {
+                    button.style.display = '';
+                } else {
+                    button.style.display = 'none';
+                }
+            }
+        });
+        
+        // Mettre à jour l'état des boutons précédent/suivant
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage >= totalPages;
+        
+        // Gérer l'affichage de l'ellipse
+        const ellipsis = document.querySelector('.ellipsis');
+        if (ellipsis) {
+            ellipsis.style.display = (totalPages > 5 && currentPage < totalPages - 2) ? '' : 'none';
+        }
+    }
+
+    // Fonction pour changer de page
+    function changePage(newPage) {
+        const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
+        
+        // Vérifier que la nouvelle page est valide
+        if (newPage >= 1 && newPage <= totalPages) {
+            currentPage = newPage;
+            updateTableDisplay();
+        }
+    }
+
+    // Fonction pour mettre à jour les options de poste en fonction du département sélectionné
+    function updatePositionOptions() {
+        const selectedDepartment = departmentSelect.value;
+        const positionsSet = new Set();
+
+        candidateRows.forEach(row => {
+            const rowDepartment = row.querySelector('td:nth-child(3)').textContent.trim();
+            const rowPosition = row.querySelector('td:nth-child(2)').textContent.trim();
+
+            if (selectedDepartment === 'Tous les départements' || rowDepartment === selectedDepartment) {
+                positionsSet.add(rowPosition);
+            }
+        });
+
+        // Sauvegarder la valeur actuelle
+        const currentValue = positionSelect.value;
+        
+        // Vider les options actuelles
+        positionSelect.innerHTML = '';
+
+        // Ajouter "Tous les postes"
+        const allOption = document.createElement('option');
+        allOption.textContent = 'Tous les postes';
+        positionSelect.appendChild(allOption);
+
+        // Ajouter les nouveaux postes
+        Array.from(positionsSet).sort().forEach(position => {
+            const option = document.createElement('option');
+            option.textContent = position;
+            positionSelect.appendChild(option);
+        });
+        
+        // Si le poste précédemment sélectionné existe encore dans les options, le resélectionner
+        if (Array.from(positionsSet).includes(currentValue)) {
+            positionSelect.value = currentValue;
+        }
+    }
+
+    // Fonction pour mettre à jour les options de département en fonction du poste sélectionné
+    function updateDepartmentOptions() {
+        const selectedPosition = positionSelect.value;
+        const departmentsSet = new Set();
+
+        candidateRows.forEach(row => {
+            const rowPosition = row.querySelector('td:nth-child(2)').textContent.trim().toLowerCase();
+            const rowDepartment = row.querySelector('td:nth-child(3)').textContent.trim();
+
+            if (selectedPosition === 'Tous les postes' || rowPosition === selectedPosition.toLowerCase()) {
+                departmentsSet.add(rowDepartment);
+            }
+        });
+
+        // Sauvegarder la valeur actuelle
+        const currentValue = departmentSelect.value;
+        
+        // Vider les options actuelles
+        departmentSelect.innerHTML = '';
+
+        // Ajouter "Tous les départements"
+        const allOption = document.createElement('option');
+        allOption.textContent = 'Tous les départements';
+        departmentSelect.appendChild(allOption);
+
+        // Ajouter les nouveaux départements
+        Array.from(departmentsSet).sort().forEach(department => {
+            const option = document.createElement('option');
+            option.textContent = department;
+            departmentSelect.appendChild(option);
+        });
+
+        // Si le département précédemment sélectionné existe encore dans les options, le resélectionner
+        if (Array.from(departmentsSet).includes(currentValue)) {
+            departmentSelect.value = currentValue;
+        }
+    }
+
     // Créer et ajouter un bouton d'annulation au-dessus du tableau
     const actionBar = document.createElement('div');
     actionBar.style.cssText = 'margin: 10px 0; text-align: right;';
@@ -839,108 +1377,553 @@ document.addEventListener('DOMContentLoaded', function() {
     table.parentNode.insertBefore(actionBar, table);
     
     const undoButton = document.getElementById('undo-btn');
-    
-    // Sélectionner tous les boutons d'action
-    const viewButtons = document.querySelectorAll('.action-btn.view');
-    const deleteButtons = document.querySelectorAll('.action-btn.delete');
-    
-    // Ajouter un nouveau bouton "refuser" à chaque ligne
-    const rows = document.querySelectorAll('tr');
+
+    // Fonction pour créer une notification
+    function createNotification(message, type = 'info', parent) {
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.innerHTML = `
+            <span>${message}</span>
+            ${type === 'warning' ? '<button class="btn-undo">Annuler</button>' : ''}
+        `;
+        
+        // Ajouter la notification après la ligne du candidat
+        const targetRow = parent.closest('tr');
+        const notificationRow = document.createElement('tr');
+        const notificationCell = document.createElement('td');
+        notificationCell.colSpan = targetRow.cells.length;
+        notificationCell.appendChild(notification);
+        notificationRow.appendChild(notificationCell);
+        notificationRow.className = 'notification-row';
+        
+        targetRow.parentNode.insertBefore(notificationRow, targetRow.nextSibling);
+        
+        // Ajouter un écouteur d'événement au bouton d'annulation si présent
+        const undoButton = notification.querySelector('.btn-undo');
+        if (undoButton) {
+            undoButton.addEventListener('click', function() {
+                undoLastDeletion();
+                notificationRow.remove();
+            });
+        }
+        
+        // Supprimer automatiquement la notification après un délai
+        setTimeout(() => {
+            notificationRow.classList.add('fade-out');
+            setTimeout(() => notificationRow.remove(), 500);
+        }, deletionDelay - 500);
+        
+        return notification;
+    }
+
+    // Ajouter un nouveau bouton "refuser" et "programmer entretien" à chaque ligne
+    const rows = document.querySelectorAll('tbody tr');
     rows.forEach(row => {
         const actionsCell = row.querySelector('.actions');
         if (actionsCell) {
-            // Créer le bouton refuser et l'insérer avant le bouton supprimer
+            // Créer le bouton refuser
             const refuseButton = document.createElement('button');
             refuseButton.className = 'action-btn refuse';
             refuseButton.innerHTML = '<i class="fas fa-times"></i>';
             refuseButton.title = 'Refuser';
             
-            // Insérer le bouton avant le bouton de suppression
+            // Créer le bouton programmer entretien
+            const scheduleButton = document.createElement('button');
+            scheduleButton.className = 'action-btn schedule';
+            scheduleButton.innerHTML = '<i class="fas fa-calendar-alt"></i>';
+            scheduleButton.title = 'Programmer un entretien';
+            
+            // Insérer les boutons
             const deleteButton = actionsCell.querySelector('.action-btn.delete');
             if (deleteButton) {
+                actionsCell.insertBefore(scheduleButton, deleteButton);
                 actionsCell.insertBefore(refuseButton, deleteButton);
             } else {
                 actionsCell.appendChild(refuseButton);
+                actionsCell.appendChild(scheduleButton);
             }
-        }
-    });
-    
-    // Récupérer les nouveaux boutons refuser
-    const refuseButtons = document.querySelectorAll('.action-btn.refuse');
-    
-    // Gérer le clic sur le bouton "voir" (œil) - Changer le statut à "Accepté"
-    viewButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const row = this.closest('tr');
-            const statusCell = row.querySelector('td:nth-child(5) span');
-            
-            statusCell.className = 'status accepted';
-            statusCell.textContent = 'Accepté';
-        });
-    });
-    
-    // Gérer le clic sur le bouton "refuser" (croix) - Changer le statut à "Refusé"
-    refuseButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const row = this.closest('tr');
-            const statusCell = row.querySelector('td:nth-child(5) span');
-            
-            statusCell.className = 'status rejected';
-            statusCell.textContent = 'Refusé';
-        });
-    });
-    
-    // Gérer le clic sur le bouton "supprimer" (corbeille) - Supprimer la ligne avec possibilité d'annulation
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            if(confirm('Êtes-vous sûr de vouloir supprimer ce candidat?')) {
-                const row = this.closest('tr');
-                const tbody = row.parentNode;
-                const position = Array.from(tbody.children).indexOf(row);
-                
-                // Stocker les informations de la ligne supprimée
-                deletedCandidates.push({
-                    element: row,
-                    parent: tbody,
-                    position: position
-                });
-                
-                // Retirer la ligne du tableau
-                row.remove();
-                
-                // Activer le bouton d'annulation
-                undoButton.disabled = false;
-                
-                // Mettre à jour l'affichage après suppression
-                filterTable();
-            }
-        });
-    });
-    
-    // Gérer le clic sur le bouton "Annuler"
-    undoButton.addEventListener('click', function() {
-        if (deletedCandidates.length > 0) {
-            // Récupérer la dernière suppression
-            const lastDeleted = deletedCandidates.pop();
-            
-            // Réinsérer la ligne à sa position d'origine si possible
-            if (lastDeleted.position >= lastDeleted.parent.children.length) {
-                lastDeleted.parent.appendChild(lastDeleted.element);
-            } else {
-                lastDeleted.parent.insertBefore(lastDeleted.element, lastDeleted.parent.children[lastDeleted.position]);
-            }
-            
-            // Désactiver le bouton si l'historique est vide
-            if (deletedCandidates.length === 0) {
-                undoButton.disabled = true;
-            }
-            
-            // Mettre à jour l'affichage après restauration
-            filterTable();
         }
     });
 
-    // Initialiser les listes déroulantes et appliquer le filtrage initial
+    // Récupérer tous les boutons d'action
+    const viewButtons = document.querySelectorAll('.action-btn.view');
+    const refuseButtons = document.querySelectorAll('.action-btn.refuse');
+    const scheduleButtons = document.querySelectorAll('.action-btn.schedule');
+    const deleteButtons = document.querySelectorAll('.action-btn.delete');
+
+    // Fonction pour accepter un candidat
+    function acceptCandidate(candidateRow, button) {
+        // Changer le statut à "Accepté"
+        const statusCell = candidateRow.querySelector('.status');
+        statusCell.textContent = 'Accepté';
+        statusCell.className = 'status accepted';
+        
+        // Désactiver le bouton d'acceptation
+        button.disabled = true;
+        button.classList.add('disabled');
+        
+        // Afficher une notification
+        createNotification('Candidat accepté. Vous pouvez maintenant programmer un entretien.', 'success', candidateRow);
+    }
+
+    // Fonction pour refuser un candidat
+    function refuseCandidate(candidateRow, button) {
+        // Changer le statut à "Refusé"
+        const statusCell = candidateRow.querySelector('.status');
+        statusCell.textContent = 'Refusé';
+        statusCell.className = 'status rejected';
+        
+        // Afficher une notification
+        createNotification('Candidat refusé.', 'info', candidateRow);
+    }
+
+    // Fonction pour programmer un entretien
+    function scheduleInterview(candidateRow) {
+        const candidateName = candidateRow.querySelector('.candidate-info .name').textContent;
+        
+        // Ouvrir la fenêtre modale pour programmer un entretien
+        document.getElementById('interview-modal').style.display = 'block';
+        document.getElementById('candidate-name').textContent = candidateName;
+        
+        setTimeout(() => {
+            document.getElementById('interview-modal').classList.add('show');
+        }, 10);
+    }
+
+    // Fonction pour supprimer un candidat
+    function deleteCandidate(candidateRow) {
+        // Si la ligne est déjà marquée pour suppression
+        if (candidateRow.classList.contains('pending-deletion')) {
+            return;
+        }
+        
+        // Stocker les données de la ligne pour une annulation possible
+        const rowData = {
+            element: candidateRow,
+            parent: candidateRow.parentNode,
+            position: Array.from(candidateRow.parentNode.children).indexOf(candidateRow),
+            timeoutId: null
+        };
+        
+        // Ajouter l'effet visuel de suppression en attente
+        candidateRow.classList.add('pending-deletion');
+        
+        // Créer une notification avec bouton d'annulation
+        createNotification(
+            'Cette candidature sera supprimée dans 10 secondes', 
+            'warning', 
+            candidateRow
+        );
+        
+        // Définir un délai avant la suppression définitive
+        rowData.timeoutId = setTimeout(() => {
+            // Supprimer la ligne de candidature
+            candidateRow.remove();
+            
+            // Supprimer l'élément du tableau des suppressions en attente
+            const index = deletedCandidates.findIndex(item => item.element === candidateRow);
+            if (index !== -1) {
+                deletedCandidates.splice(index, 1);
+            }
+            
+            // Créer une notification de confirmation flottante
+            const confirmNotification = document.createElement('div');
+            confirmNotification.className = 'floating-notification notification-success';
+            confirmNotification.innerHTML = '<span>La candidature a été supprimée</span>';
+            document.body.appendChild(confirmNotification);
+            
+            setTimeout(() => {
+                confirmNotification.classList.add('fade-out');
+                setTimeout(() => confirmNotification.remove(), 500);
+            }, 3000);
+            
+            // Mettre à jour l'affichage après suppression
+            filterTable();
+        }, deletionDelay);
+        
+        // Ajouter aux éléments supprimés pour permettre l'annulation
+        deletedCandidates.push(rowData);
+        
+        // Activer le bouton d'annulation
+        undoButton.disabled = false;
+    }
+
+    // Fonction pour annuler la dernière suppression
+    function undoLastDeletion() {
+        if (deletedCandidates.length === 0) return;
+        
+        // Récupérer le dernier élément supprimé
+        const lastDeleted = deletedCandidates.pop();
+        
+        // Annuler le délai de suppression
+        clearTimeout(lastDeleted.timeoutId);
+        
+        // Restaurer l'élément à sa position d'origine
+        lastDeleted.element.classList.remove('pending-deletion');
+        
+        // Réinsérer la ligne à sa position d'origine si possible
+        if (lastDeleted.position >= lastDeleted.parent.children.length) {
+            lastDeleted.parent.appendChild(lastDeleted.element);
+        } else {
+            lastDeleted.parent.insertBefore(lastDeleted.element, lastDeleted.parent.children[lastDeleted.position]);
+        }
+        
+        // Désactiver le bouton si l'historique est vide
+        if (deletedCandidates.length === 0) {
+            undoButton.disabled = true;
+        }
+        
+        // Créer une notification de confirmation flottante
+        const confirmNotification = document.createElement('div');
+        confirmNotification.className = 'floating-notification notification-success';
+        confirmNotification.innerHTML = '<span>La suppression a été annulée</span>';
+        document.body.appendChild(confirmNotification);
+        
+        setTimeout(() => {
+            confirmNotification.classList.add('fade-out');
+            setTimeout(() => confirmNotification.remove(), 500);
+        }, 3000);
+        
+        // Mettre à jour l'affichage après restauration
+        filterTable();
+    }
+
+    // Gestion du formulaire d'entretien
+    function handleInterviewFormSubmission(e) {
+        e.preventDefault();
+        
+        const candidateName = document.getElementById('candidate-name').textContent;
+        const interviewDate = document.getElementById('interview-date').value;
+        const interviewTime = document.getElementById('interview-time').value;
+        const interviewer = document.getElementById('interviewer').value;
+        
+        // Traiter les données
+        alert(`Entretien programmé pour ${candidateName} le ${interviewDate} à ${interviewTime} avec ${interviewer}`);
+        
+        // Marquer visuellement que l'entretien est programmé
+        document.querySelectorAll('tbody tr').forEach(row => {
+            const name = row.querySelector('.candidate-info .name');
+            if (name && name.textContent === candidateName) {
+                const statusCell = row.querySelector('.status');
+                statusCell.className = 'status interview';
+                statusCell.textContent = 'Entretien prévu';
+                
+                // Créer un élément pour afficher la date d'entretien
+                const interviewInfo = document.createElement('div');
+                interviewInfo.className = 'interview-date';
+                interviewInfo.textContent = `Entretien: ${interviewDate} à ${interviewTime}`;
+                
+                // Ajouter l'élément après le statut s'il n'existe pas déjà
+                if (!statusCell.parentNode.querySelector('.interview-date')) {
+                    statusCell.parentNode.appendChild(interviewInfo);
+                }
+            }
+        });
+        
+        // Fermer la fenêtre modale
+        document.getElementById('interview-modal').classList.remove('show');
+        setTimeout(() => {
+            document.getElementById('interview-modal').style.display = 'none';
+        }, 300);
+        
+        // Afficher une notification
+        createNotification(`Entretien programmé pour le ${interviewDate} à ${interviewTime}`, 'success', 
+            document.querySelector(`tr .candidate-info .name:contains('${candidateName}')`).closest('tr'));
+    }
+
+    // Ajouter les écouteurs d'événements pour les filtres
+    searchInput.addEventListener('input', filterTable);
+    
+    departmentSelect.addEventListener('change', () => {
+        updatePositionOptions();
+        filterTable();
+    });
+    
+    positionSelect.addEventListener('change', () => {
+        updateDepartmentOptions();
+        filterTable();
+    });
+    
+    statusSelect.addEventListener('change', filterTable);
+    
+    // Ajouter les écouteurs d'événements pour la pagination
+    prevButton.addEventListener('click', () => changePage(currentPage - 1));
+    nextButton.addEventListener('click', () => changePage(currentPage + 1));
+    
+    pageNumbers.forEach(button => {
+        button.addEventListener('click', function() {
+            const pageNum = parseInt(this.textContent);
+            if (!isNaN(pageNum)) {
+                changePage(pageNum);
+            }
+        });
+    });
+
+    // Ajouter les écouteurs d'événements aux boutons d'action
+    viewButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const candidateRow = this.closest('tr');
+            acceptCandidate(candidateRow, this);
+        });
+    });
+    
+    refuseButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const candidateRow = this.closest('tr');
+            refuseCandidate(candidateRow, this);
+        });
+    });
+    
+    scheduleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const candidateRow = this.closest('tr');
+            scheduleInterview(candidateRow);
+        });
+    });
+    
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            if(confirm('Êtes-vous sûr de vouloir supprimer ce candidat?')) {
+                const candidateRow = this.closest('tr');
+                deleteCandidate(candidateRow);
+            }
+        });
+    });
+
+    // Gestion de la modale d'entretien
+    const closeModalButton = document.querySelector('.close-modal');
+    if (closeModalButton) {
+        closeModalButton.addEventListener('click', function() {
+            document.getElementById('interview-modal').classList.remove('show');
+            setTimeout(() => {
+                document.getElementById('interview-modal').style.display = 'none';
+            }, 300);
+        });
+    }
+
+    // Fermer la fenêtre modale en cliquant en dehors
+    window.addEventListener('click', function(event) {
+        const modal = document.getElementById('interview-modal');
+        if (event.target == modal) {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+    });
+
+    // Gestionnaire pour le formulaire d'entretien
+    const interviewForm = document.getElementById('interview-form');
+    if (interviewForm) {
+        interviewForm.addEventListener('submit', handleInterviewFormSubmission);
+    }
+
+    // Helper pour la sélection jQuery-like
+    if (!Element.prototype.matches) {
+        Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+    }
+    
+    if (!Element.prototype.closest) {
+        Element.prototype.closest = function(s) {
+            let el = this;
+            do {
+                if (el.matches(s)) return el;
+                el = el.parentElement || el.parentNode;
+            } while (el !== null && el.nodeType === 1);
+            return null;
+        };
+    }
+    
+    // Ajouter le CSS pour les notifications et les animations
+    const style = document.createElement('style');
+    style.textContent = `
+        /* Styles pour les notifications */
+        .notification {
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .notification-row td {
+            padding: 0;
+        }
+        
+        .notification-info {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            color: #0d47a1;
+        }
+        
+        .notification-warning {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            color: #ff6f00;
+        }
+        
+        .notification-success {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            color: #1b5e20;
+        }
+        
+        .btn-undo {
+            background-color: transparent;
+            border: 1px solid currentColor;
+            border-radius: 3px;
+            padding: 3px 8px;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: all 0.2s;
+        }
+        
+        .btn-undo:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Styles pour les lignes en attente de suppression */
+        .pending-deletion {
+            opacity: 0.5;
+            position: relative;
+        }
+        
+        .pending-deletion::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 0, 0, 0.1);
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* Styles pour les dates d'entretien et statuts */
+        .interview-date {
+            font-size: 0.8em;
+            color: #777;
+            margin-top: 5px;
+        }
+        
+        .action-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .status.accepted {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .status.rejected {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        
+        .status.interview {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        /* Styles pour les notifications flottantes */
+        .floating-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 10px 15px;
+            border-radius: 4px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            animation: slideInRight 0.3s ease-out;
+        }
+        
+        .fade-out {
+            animation: fadeOut 0.5s forwards;
+        }
+        
+        /* Animations */
+        @keyframes slideIn {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        
+        /* Style pour le bouton de programmation d'entretien */
+        .action-btn.schedule {
+            background-color: #2196f3;
+            color: white;
+        }
+        
+        .action-btn.schedule:hover {
+            background-color: #1976d2;
+        }
+        
+        /* Styles pour la modale */
+        #interview-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        #interview-modal.show {
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 5px;
+            width: 50%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        
+        #interview-modal.show .modal-content {
+            transform: translateY(0);
+        }
+        
+        .close-modal {
+            float: right;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close-modal:hover {
+            color: #777;
+        }
+        
+        /* Polyfill pour :contains() */
+        :not(:defined):not(:defined) {
+            display: none;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Initialiser les filtres et appliquer le filtrage initial
     updatePositionOptions();
     updateDepartmentOptions();
     filterTable();

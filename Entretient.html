@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Djezzy Recrutement - Entretiens</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #e63312;
+            --secondary-color: #333;
+            --light-gray: #f4f4f4;
+            --white: #ffffff;
+            --text-dark: #333;
+            --border-color: #ddd;
+        }
+    
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            width: 250px;
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 20px 0;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+        }
+        
+        .brand {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .brand img {
+            width: 40px;
+            margin-right: 10px;
+        }
+        
+        .brand-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--light-gray);
+        }
+        
+        .sidebar-menu {
+            padding: 20px 0;
+        }
+        
+        .menu-title {
+            padding: 10px 20px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .menu-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .menu-item:hover, .menu-item.active {
+            background-color: rgba(230, 18, 18, 0.8);
+            color: var(--white);
+        }
+        
+        .menu-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main content styles */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--secondary-color);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            padding: 8px 15px;
+            border-radius: 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .user-name {
+            margin-right: 10px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: bold;
+        }
+
+        /* Filtres et recherche */
+        .filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .search-bar {
+            position: relative;
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px 10px 35px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+
+        .filter-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-options select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+        }
+
+        .btn-add {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        /* Styles pour l'onglet d'entretiens */
+        .interviews-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .tab.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .interview-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .interview-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .interview-card-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .interview-date {
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .interview-status {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .interview-card-content {
+            padding: 15px;
+        }
+
+        .candidate-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .candidate-avatar {
+            width: 40px;
+            height: 40px;
+            background-color: #f0f0f0;
+            color: #666;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .candidate-details .name {
+            font-weight: 500;
+        }
+
+        .candidate-details .position {
+            font-size: 13px;
+            color: #888;
+        }
+
+        .interview-details {
+            margin-top: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .interview-detail {
+            display: flex;
+            margin-bottom: 8px;
+        }
+
+        .detail-label {
+            width: 100px;
+            font-weight: 500;
+            color: #666;
+        }
+
+        .interview-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-interview-action {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            flex: 1;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: #f0f0f0;
+            color: #666;
+        }
+
+        /* Media queries */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+            
+            .brand-text {
+                display: none;
+            }
+            
+            .menu-item span {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <img src="Logo_Djezzy_2015-1.png" alt="Logo">
+                <div class="brand-text">Djezzy Recrutement</div>
+            </div>
+            
+            <nav class="sidebar-menu">
+                <div class="menu-title">Général</div>
+                <a href="tableau de bord.html" class="menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Tableau de bord</span>
+                </a>
+                <a href="liste des offres.html" class="menu-item">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Annonces</span>
+                </a>
+                <a href="candidats.html" class="menu-item">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Candidats</span>
+                </a>
+                <a href="entretiens.html" class="menu-item active">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Entretiens</span>
+                </a>
+                
+                <div class="menu-title">Compte</div>
+                <a href="admin profile.html" class="menu-item">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Mon profil</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Déconnexion</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1 class="page-title">Entretiens</h1>
+                <div class="user-info">
+                    <span>Brahim Mansouri</span>
+                    <div class="user-avatar">BM</div>
+                </div>
+            </div>
+
+            <!-- Filters and Search -->
+            <div class="filters">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Rechercher un candidat...">
+                </div>
+                <div class="filter-options">
+                    <select>
+                        <option>Tous les types</option>
+                        <option>Entretien vidéo</option>
+                        <option>Entretien téléphonique</option>
+                        <option>Entretien en présentiel</option>
+                    </select>
+                    <select>
+                        <option>Tous les statuts</option>
+                        <option>Programmé</option>
+                        <option>Complété</option>
+                        <option>Annulé</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <div class="tab active">Aujourd'hui</div>
+                <div class="tab">Cette semaine</div>
+                <div class="tab">À venir</div>
+                <div class="tab">Passés</div>
+            </div>
+
+            <!-- Interview Cards -->
+            <div class="interview-cards">
+                <!-- Card 1 -->
+                <div class="interview-card">
+                    <div class="interview-card-header">
+                        <div class="interview-date">17 Avril, 10:00</div>
+                        <div class="interview-status">Aujourd'hui</div>
+                    </div>
+                    <div class="interview-card-content">
+                        <div class="candidate-info">
+                            <div class="candidate-avatar">KL</div>
+                            <div class="candidate-details">
+                                <div class="name">Karim Lahlou</div>
+                                <div class="position">Développeur Full Stack</div>
+                            </div>
+                        </div>
+                        <div class="interview-details">
+                            <div class="interview-detail">
+                                <div class="detail-label">Type:</div>
+                                <div>Entretien vidéo</div>
+                            </div>
+                            <div class="interview-detail">
+                                <div class="detail-label">Recruteur:</div>
+                                <div>Thomas Martin</div>
+                            </div>
+                            <div class="interview-detail">
+                                <div class="detail-label">Durée:</div>
+                                <div>45 minutes</div>
+                            </div>
+                        </div>
+                        <div class="interview-actions">
+                            <button class="btn-interview-action btn-primary">
+                                <i class="fas fa-video"></i>
+                                <span>Démarrer</span>
+                            </button>
+                            <button class="btn-interview-action btn-secondary">
+                                <i class="fas fa-pen"></i>
+                                <span>Modifier</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="interview-card">
+                    <div class="interview-card-header">
+                        <div class="interview-date">17 Avril, 14:30</div>
+                        <div class="interview-status">Aujourd'hui</div>
+                    </div>
+                    <div class="interview-card-content">
+                        <div class="candidate-info">
+                            <div class="candidate-avatar">SB</div>
+                            <div class="candidate-details">
+                                <div class="name">Sara Benali</div>
+                                <div class="position">Chef de Projet Digital</div>
+                            </div>
+                        </div>
+                        <div class="interview-details">
+                            <div class="interview-detail">
+                                <div class="detail-label">Type:</div>
+                                <div>Entretien en présentiel</div>
+                            </div>
+                            <div class="interview-detail">
+                                <div class="detail-label">Recruteur:</div>
+                                <div>Sophie Dubois</div>
+                            </div>
+                            <div class="interview-detail">
+                                <div class="detail-label">Durée:</div>
+                                <div>60 minutes</div>
+                            </div>
+                        </div>
+                        <div class="interview-actions">
+                            <button class="btn-interview-action btn-primary">
+                                <i class="fas fa-check"></i>
+                                <span>Confirmer</span>
+                            </button>
+                            <button class="btn-interview-action btn-secondary">
+                                <i class="fas fa-pen"></i>
+                                <span>Modifier</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="interview-card">
+                    <div class="interview-card-header">
+                        <div class="interview-date">17 Avril, 16:00</div>
+                        <div class="interview-status">Aujourd'hui</div>
+                    </div>
+                    <div class="interview-card-content">
+                        <div class="candidate-info">
+                            <div class="candidate-avatar">YM</div>
+                            <div class="candidate-details">
+                                <div class="name">Yacine Mehdi</div>
+                                <div class="position">Ingénieur Réseau</div>
+                            </div>
+                        </div>
+                        <div class="interview-details">
+                            <div class="interview-detail">
+                                <div class="detail-label">Type:</div>
+                                <div>Entretien téléphonique</div>
+                            </div>
+                            <div class="interview-detail">
+                                <div class="detail-label">Recruteur:</div>
+                                <div>Jean Dupont</div>
+                            </div>
+                            <div class="interview-detail">
+                                <div class="detail-label">Durée:</div>
+                                <div>30 minutes</div>
+                            </div>
+                        </div>
+                        <div class="interview-actions">
+                            <button class="btn-interview-action btn-primary">
+                                <i class="fas fa-phone"></i>
+                                <span>Appeler</span>
+                            </button>
+                            <button class="btn-interview-action btn-secondary">
+                                <i class="fas fa-pen"></i>
+                                <span>Modifier</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="interview-card">
+                    <div class="interview-card-header">
+                        <div class="interview-date">18 Avril, 09:30</div>
+                        <div class="interview-status">Demain</div>
+                    </div>
+                    <div class="interview-card-content">
+                        <div class="candidate-info">
+                            <div class="candidate-avatar">NA</div>
+                            <div class="candidate-details">
+                                <div class="name">Naima Amrani</div>
+                                <div class="position">Chef de Projet Digital</div>
+                            </div>
+                        </div>
+                        <div class="interview-details">
+                            <div class="interview-detail">
+                                <div class="detail-label">Type:</div>
+                                <div>Entretien vidéo</div>
+                            </div>
+                            <div class="interview-detail">
+                                <div class="detail-label">Recruteur:</div>
+                                <div>Sophie Dubois</div>
+                            </div>
+                            <div class="interview-detail">
+                                <div class="detail-label">Durée:</div>
+                                <div>45 minutes</div>
+                            </div>
+                        </div>
+                        <div class="interview-actions">
+                            <button class="btn-interview-action btn-primary">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Rappel</span>
+                            </button>
+                            <button class="btn-interview-action btn-secondary">
+                                <i class="fas fa-pen"></i>
+                                <span>Modifier</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="interview-card">
+                    <div class="interview-card-header">
+                        <div class="interview-date">18 Avril, 11:30</div>
+                        <div class="interview-status">Demain</div>
+                    </div>
+                    <div class="interview-card-content">
+                        <div class="candidate-info">
+                            <div class="candidate-avatar">MH</div>
+                            <div class="candidate-details">
+                                <div class="name">Mohammed Hamdi</div>
+                                <div class="position">Responsable Commercial</div>
+                            </div>
+                        </div>
+                        <div class="interview-details">
+                            <div class="interview-detail">
+                                <div class="detail-label">Type:</div>
+                                <div>Entretien en présentiel</div>
+                            </div>
+                            <div class="interview-detail">
+                                <div class="detail-label">Recruteur:</div>
+                                <div>Jean Dupont</div>
+                            </div>
+                            <div class="interview-detail">
+                                <div class="detail-label">Durée:</div>
+                                <div>60 minutes</div>
+                            </div>
+                        </div>
+                        <div class="interview-actions">
+                            <button class="btn-interview-action btn-primary">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Rappel</span>
+                            </button>
+                            <button class="btn-interview-action btn-secondary">
+                                <i class="fas fa-pen"></i>
+                                <span>Modifier</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="interview-card">
+                    <div class="interview-card-header">
+                        <div class="interview-date">19 Avril, 10:00</div>
+                        <div class="interview-status">Vendredi</div>
+                    </div>
+                    <div class="interview-card-content">
+                        <div class="candidate-info">
+                            <div class="candidate-avatar">LS</div>
+                            <div class="candidate-details">
+                                <div class="name">Leila Salhi</div>
+                                <div class="position">Développeur Full Stack</div>
+                            </div>
+                        </div>
+                        <div class="interview-details">
+                            <div class="interview-detail">
+                                <div class="detail-label">Type:</div>
+                                <div>Entretien vidéo</div>
+                            </div>
+                            <div class="interview-detail">
+                                <div class="detail-label">Recruteur:</div>
+                                <div>Thomas Martin</div>
+                            </div>
+                            <div class="interview-detail">
+                                <div class="detail-label">Durée:</div>
+                                <div>45 minutes</div>
+                            </div>
+                        </div>
+                        <div class="interview-actions">
+                            <button class="btn-interview-action btn-primary">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Rappel</span>
+                            </button>
+                            <button class="btn-interview-action btn-secondary">
+                                <i class="fas fa-pen"></i>
+                                <span>Modifier</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Script pour la gestion des onglets
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Supprimer la classe active de tous les onglets
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Ajouter la classe active à l'onglet cliqué
+                    this.classList.add('active');
+                    
+                    // Ici on pourrait ajouter du code pour charger des données spécifiques à l'onglet
+                });
+            });
+        });
+
+        // Attendre que le DOM soit complètement chargé
+document.addEventListener('DOMContentLoaded', function() {
+    // Sélectionner les éléments du DOM
+    const typeSelect = document.querySelector('.filter-options select:first-child');
+    const statusSelect = document.querySelector('.filter-options select:last-child');
+    const searchInput = document.querySelector('.search-bar input');
+    const interviewCards = document.querySelectorAll('.interview-card');
+    const tabs = document.querySelectorAll('.tab');
+    
+    // Fonction pour filtrer les entretiens
+    function filterInterviews() {
+        const typeFilter = typeSelect.value;
+        const statusFilter = statusSelect.value;
+        const searchTerm = searchInput.value.toLowerCase();
+        const activeTab = document.querySelector('.tab.active').textContent;
+        
+        // Parcourir toutes les cartes d'entretien
+        interviewCards.forEach(card => {
+            // Récupérer les données de la carte
+            const cardContent = card.querySelector('.interview-card-content');
+            const cardHeader = card.querySelector('.interview-card-header');
+            
+            const candidateName = cardContent.querySelector('.name').textContent.toLowerCase();
+            const candidatePosition = cardContent.querySelector('.position').textContent.toLowerCase();
+            const interviewType = cardContent.querySelector('.interview-details .interview-detail:nth-child(1) div:last-child').textContent;
+            const interviewStatus = cardHeader.querySelector('.interview-status').textContent;
+            
+            // Filtrer par terme de recherche
+            const matchesSearch = searchTerm === '' || 
+                                  candidateName.includes(searchTerm) || 
+                                  candidatePosition.includes(searchTerm);
+            
+            // Filtrer par type d'entretien
+            const matchesType = typeFilter === 'Tous les types' || interviewType === typeFilter;
+            
+            // Filtrer par statut
+            const matchesStatus = statusFilter === 'Tous les statuts' || 
+                                 (statusFilter === 'Programmé' && (interviewStatus === 'Aujourd\'hui' || interviewStatus === 'Demain' || interviewStatus === 'Vendredi')) ||
+                                 (statusFilter === 'Complété' && interviewStatus === 'Complété') ||
+                                 (statusFilter === 'Annulé' && interviewStatus === 'Annulé');
+            
+            // Filtrer par onglet actif
+            let matchesTab = false;
+            switch(activeTab) {
+                case 'Aujourd\'hui':
+                    matchesTab = interviewStatus === 'Aujourd\'hui';
+                    break;
+                case 'Cette semaine':
+                    matchesTab = interviewStatus === 'Aujourd\'hui' || interviewStatus === 'Demain' || interviewStatus === 'Vendredi';
+                    break;
+                case 'À venir':
+                    matchesTab = interviewStatus === 'Aujourd\'hui' || interviewStatus === 'Demain' || interviewStatus === 'Vendredi';
+                    break;
+                case 'Passés':
+                    matchesTab = interviewStatus === 'Complété';
+                    break;
+                default:
+                    matchesTab = true;
+            }
+            
+            // Afficher ou masquer la carte en fonction des filtres
+            if (matchesSearch && matchesType && matchesStatus && matchesTab) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        
+        // Vérifier s'il y a des entretiens visibles
+        checkNoResults();
+    }
+    
+    // Fonction pour vérifier s'il n'y a aucun résultat et afficher un message
+    function checkNoResults() {
+        const visibleCards = Array.from(interviewCards).filter(card => card.style.display !== 'none');
+        const noResultsMessage = document.getElementById('no-results-message');
+        
+        if (visibleCards.length === 0) {
+            // Créer un message si aucun entretien ne correspond aux filtres
+            if (!noResultsMessage) {
+                const message = document.createElement('div');
+                message.id = 'no-results-message';
+                message.className = 'no-results';
+                message.innerHTML = `
+                    <div style="text-align: center; padding: 40px 20px; color: #666;">
+                        <i class="fas fa-search" style="font-size: 48px; margin-bottom: 20px; color: #ccc;"></i>
+                        <h3>Aucun entretien trouvé</h3>
+                        <p>Modifiez vos critères de recherche pour voir les entretiens.</p>
+                    </div>
+                `;
+                document.querySelector('.interview-cards').after(message);
+            }
+        } else if (noResultsMessage) {
+            // Supprimer le message s'il y a des entretiens visibles
+            noResultsMessage.remove();
+        }
+    }
+    
+    // Ajouter des écouteurs d'événements pour les changements de filtres et recherche
+    typeSelect.addEventListener('change', filterInterviews);
+    statusSelect.addEventListener('change', filterInterviews);
+    searchInput.addEventListener('input', filterInterviews);
+    
+    // Gestion des onglets
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            // Supprimer la classe active de tous les onglets
+            tabs.forEach(t => t.classList.remove('active'));
+            
+            // Ajouter la classe active à l'onglet cliqué
+            this.classList.add('active');
+            
+            // Appliquer les filtres avec le nouvel onglet actif
+            filterInterviews();
+        });
+    });
+    
+    // Fonction pour ajouter des données fictives de statut aux entretiens existants
+    function addMockStatusData() {
+        // Ajout des attributs data pour faciliter le filtrage (dans un cas réel, ces données viendraient du backend)
+        interviewCards.forEach(card => {
+            const statusElement = card.querySelector('.interview-status');
+            const status = statusElement.textContent;
+            
+            // Ajouter un attribut data-status pour faciliter le filtrage
+            if (status === 'Aujourd\'hui' || status === 'Demain' || status === 'Vendredi') {
+                card.setAttribute('data-status', 'Programmé');
+            } else {
+                card.setAttribute('data-status', status);
+            }
+            
+            // Extraire et ajouter le type d'entretien comme attribut data
+            const typeText = card.querySelector('.interview-details .interview-detail:nth-child(1) div:last-child').textContent;
+            card.setAttribute('data-type', typeText);
+        });
+    }
+    
+    // Initialiser les attributs de données mock
+    addMockStatusData();
+    
+    // Appliquer les filtres au chargement initial
+    filterInterviews();
+    
+    // Ajouter un événement pour le bouton d'ajout d'entretien
+    const addButton = document.querySelector('.btn-add');
+    if (addButton) {
+        addButton.addEventListener('click', function() {
+            alert('Fonctionnalité d\'ajout d\'entretien à implémenter');
+            // Ici, on pourrait ouvrir une modale pour ajouter un nouvel entretien
+        });
+    }
+});
+
+
+    </script>
+</body>
+</html>

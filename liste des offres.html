@@ -408,6 +408,10 @@
                     <span>Candidats</span>
                 </a>
                 
+                <a href="Entretient.html" class="menu-item">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Entretiens</span>
+                </a>
                 
                 <div class="menu-title">Compte</div>
                 <a href="admin profile.html" class="menu-item">
@@ -477,7 +481,7 @@
                     <div class="job-info">
                         <div class="info-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>Alger, Algérie</span>
+                            <span>Region centre</span>
                         </div>
                         
                         <div class="info-item">
@@ -544,7 +548,7 @@
                     <div class="job-info">
                         <div class="info-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>Alger, Algérie</span>
+                            <span>region centre</span>
                         </div>
                         <div class="info-item">
                             <i class="fas fa-clock"></i>
@@ -586,8 +590,8 @@
                             <button class="btn-action" title="Clôturer">
                                 <i class="fas fa-lock"></i>
                             </button>
-                            <button class="btn-action" title="Dupliquer">
-                                <i class="fas fa-copy"></i>
+                            <button class="btn-action" title="Changer l'état">
+                                <i class="fas fa-exchange-alt"></i>
                             </button>
                             <button class="btn-action" title="Supprimer">
                                 <i class="fas fa-trash"></i>
@@ -652,8 +656,8 @@
                             <button class="btn-action" title="Clôturer">
                                 <i class="fas fa-lock"></i>
                             </button>
-                            <button class="btn-action" title="Dupliquer">
-                                <i class="fas fa-copy"></i>
+                            <button class="btn-action" title="Changer l'état">
+                                <i class="fas fa-exchange-alt"></i>
                             </button>
                             <button class="btn-action" title="Supprimer">
                                 <i class="fas fa-trash"></i>
@@ -717,8 +721,8 @@
                             <button class="btn-action" title="Clôturer">
                                 <i class="fas fa-lock"></i>
                             </button>
-                            <button class="btn-action" title="Dupliquer">
-                                <i class="fas fa-copy"></i>
+                            <button class="btn-action" title="Changer l'état">
+                                <i class="fas fa-exchange-alt"></i>
                             </button>
                             <button class="btn-action" title="Supprimer">
                                 <i class="fas fa-trash"></i>
@@ -781,8 +785,8 @@
                             <button class="btn-action" title="Clôturer">
                                 <i class="fas fa-lock"></i>
                             </button>
-                            <button class="btn-action" title="Dupliquer">
-                                <i class="fas fa-copy"></i>
+                            <button class="btn-action" title="Changer l'état">
+                                <i class="fas fa-exchange-alt"></i>
                             </button>
                             <button class="btn-action" title="Supprimer">
                                 <i class="fas fa-trash"></i>
@@ -845,8 +849,8 @@
                             <button class="btn-action" title="Clôturer">
                                 <i class="fas fa-lock"></i>
                             </button>
-                            <button class="btn-action" title="Dupliquer">
-                                <i class="fas fa-copy"></i>
+                            <button class="btn-action" title="Changer l'état">
+                                <i class="fas fa-exchange-alt"></i>
                             </button>
                             <button class="btn-action" title="Supprimer">
                                 <i class="fas fa-trash"></i>
@@ -909,8 +913,8 @@
                             <button class="btn-action" title="Clôturer">
                                 <i class="fas fa-lock"></i>
                             </button>
-                            <button class="btn-action" title="Dupliquer">
-                                <i class="fas fa-copy"></i>
+                            <button class="btn-action" title="Changer l'état">
+                                <i class="fas fa-exchange-alt"></i>
                             </button>
                             <button class="btn-action" title="Supprimer">
                                 <i class="fas fa-trash"></i>
@@ -918,24 +922,8 @@
                         </div>
                     </div>
                 </div>
-                
-                
-                            </div>
-                            
-                            <!-- Pagination -->
-                            <div class="pagination">
-                                <button class="page-btn">
-                                    <i class="fas fa-chevron-left"></i>
-                                </button>
-                                <button class="page-btn active">1</button>
-                                <button class="page-btn">2</button>
-                                <button class="page-btn">3</button>
-                                <button class="page-btn">
-                                    <i class="fas fa-chevron-right"></i>
-                                </button>
-                            </div>
-                        </main>
-                    </div>
+            </div>
+        </main>
                 
                     <script>
                         // Toggle sidebar on mobile
@@ -990,40 +978,366 @@
                                 searchInput.addEventListener('input', filterJobs);
                             }
                             
-                            
-                            // Pagination functionality
-                            const pageButtons = document.querySelectorAll('.page-btn');
-                            
-                            pageButtons.forEach(button => {
-                                button.addEventListener('click', function() {
-                                    // Remove active class from all buttons
-                                    pageButtons.forEach(btn => btn.classList.remove('active'));
-                                    
-                                    // Add active class to clicked button if it's a number
-                                    if (!this.querySelector('i')) {
-                                        this.classList.add('active');
-                                    }
-                                    
-                                    // Handle pagination logic
-                                    // For demo purposes, we'll just show an alert
-                                    const page = this.textContent.trim();
-                                    if (page) {
-                                        alert(`Aller à la page ${page}`);
-                                    } else if (this.querySelector('.fa-chevron-left')) {
-                                        alert("Page précédente");
-                                    } else if (this.querySelector('.fa-chevron-right')) {
-                                        alert("Page suivante");
-                                    }
-                                });
-                            });
+
                         });
-                        
+
+                        document.addEventListener('DOMContentLoaded', function() {
+    // Sélectionner tous les boutons d'action
+    const editButtons = document.querySelectorAll('.btn-action[title="Modifier"]');
+    const lockButtons = document.querySelectorAll('.btn-action[title="Clôturer"]');
+    const statusButtons = document.querySelectorAll('.btn-action[title="Changer l\'état"]');
+    const deleteButtons = document.querySelectorAll('.btn-action[title="Supprimer"]');
+    
+    // Tableau pour stocker les éléments supprimés
+    const deletedElements = [];
+    const deletedCloses = [];
+    
+    // Délai avant que la suppression ne soit définitive (en millisecondes)
+    const deletionDelay = 10000; // 10 secondes
+    
+    // Fonction pour créer une notification
+    function createNotification(message, type = 'info', parent) {
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.innerHTML = `
+            <span>${message}</span>
+            ${type === 'warning' ? '<button class="btn-undo">Annuler</button>' : ''}
+        `;
+        
+        // Ajouter la notification après l'élément parent
+        parent.parentNode.insertBefore(notification, parent.nextSibling);
+        
+        // Ajouter un écouteur d'événement au bouton d'annulation si présent
+        const undoButton = notification.querySelector('.btn-undo');
+        if (undoButton) {
+            undoButton.addEventListener('click', function() {
+                undoLastDeletion();
+                undoLastClose();
+                notification.remove();
+            });
+        }
+        
+        // Supprimer automatiquement la notification après un délai
+        setTimeout(() => {
+            notification.classList.add('fade-out');
+            setTimeout(() => notification.remove(), 500);
+        }, deletionDelay - 500);
+        
+        return notification;
+    }
+
+    // Fonction pour changer l'état d'une offre d'emploi
+    function changeJobStatus(jobCard, button) {
+        const statusBadge = jobCard.querySelector('.status-badge');
+        const currentStatus = statusBadge.textContent.toLowerCase();
+        let newStatus;
+        
+        // Rotation des états: active -> urgent -> clôturé -> active
+        switch (currentStatus) {
+            case 'active':
+                newStatus = 'urgent';
+                statusBadge.className = 'status-badge status-urgent';
+                break;
+            case 'urgent':
+                newStatus = 'active';
+                statusBadge.className = 'status-badge status-active';
+                break;
+            default:
+                newStatus = 'active';
+                statusBadge.className = 'status-badge status-active';
+        }
+        
+        statusBadge.textContent = newStatus.charAt(0).toUpperCase() + newStatus.slice(1);
+        
+        // Afficher une notification
+        createNotification(`L'état de l'offre a été changé en "${newStatus}"`, 'info', jobCard);
+    }
+    
+    function closeJob(jobCard, button) {
+    // Si l'offre est déjà marquée pour clôture
+    if (jobCard.classList.contains('job-closed')) {
+        return;
+    }
+    
+    // Stocker les données de l'offre pour une annulation possible
+    const jobData = {
+        element: jobCard,
+        originalStatus: jobCard.querySelector('.status-badge').textContent,
+        originalClass: jobCard.querySelector('.status-badge').className,
+        timeoutId: null
+    };
+    
+    const statusBadge = jobCard.querySelector('.status-badge');
+    statusBadge.textContent = 'Clôturé';
+    statusBadge.className = 'status-badge status-closed';
+    
+    // Ajouter une classe pour l'effet visuel de l'offre clôturée
+    jobCard.classList.add('job-closed');
+
+    // Créer une notification avec bouton d'annulation (sans message de délai)
+    const notification = document.createElement('div');
+    notification.className = 'notification notification-warning';
+    notification.innerHTML = `
+        <span>Action de clôture</span>
+        <button class="btn-undo">Annuler</button>
+    `;
+    
+    // Ajouter la notification après l'élément parent
+    jobCard.parentNode.insertBefore(notification, jobCard.nextSibling);
+    
+    // Ajouter un écouteur d'événement au bouton d'annulation
+    const undoButton = notification.querySelector('.btn-undo');
+    undoButton.addEventListener('click', function() {
+        undoLastClose();
+        notification.remove();
+    });
+    
+    // Désactiver certains boutons
+    button.disabled = true;
+    jobCard.querySelector('.btn-action[title="Changer l\'état"]').disabled = true;
+    
+    // Définir un délai avant la clôture définitive
+    jobData.timeoutId = setTimeout(() => {
+        // Supprimer la notification avec le bouton d'annulation
+        notification.remove();
+        
+        // Afficher une notification de confirmation après le délai
+        createNotification('Cette offre d\'emploi a été clôturée', 'info', jobCard);
+        
+        // Supprimer l'élément du tableau des clôtures en attente
+        const index = deletedCloses.findIndex(item => item.element === jobCard);
+        if (index !== -1) {
+            deletedCloses.splice(index, 1);
+        }
+    }, deletionDelay);
+    
+    // Ajouter aux éléments clôturés pour permettre l'annulation
+    deletedCloses.push(jobData);
+}
+    
+    // Fonction pour supprimer une offre d'emploi
+    function deleteJob(jobCard, button) {
+        // Si l'offre est déjà marquée pour suppression
+        if (jobCard.classList.contains('pending-deletion')) {
+            return;
+        }
+        
+        // Stocker les données de l'offre pour une annulation possible
+        const jobData = {
+            element: jobCard,
+            parent: jobCard.parentNode,
+            nextSibling: jobCard.nextSibling,
+            timeoutId: null
+        };
+        
+        // Ajouter l'effet visuel de suppression en attente
+        jobCard.classList.add('pending-deletion');
+        
+        // Créer une notification avec bouton d'annulation
+        const notification = createNotification(
+            'Cette offre d\'emploi sera supprimée dans 10 secondes', 
+            'warning', 
+            jobCard
+        );
+        
+        // Définir un délai avant la suppression définitive
+        jobData.timeoutId = setTimeout(() => {
+            jobCard.remove();
+            notification.remove();
+            
+            // Supprimer l'élément du tableau des suppressions en attente
+            const index = deletedElements.findIndex(item => item.element === jobCard);
+            if (index !== -1) {
+                deletedElements.splice(index, 1);
+            }
+            
+            // Afficher une notification de confirmation
+            const confirmNotification = document.createElement('div');
+            confirmNotification.className = 'notification notification-success';
+            confirmNotification.innerHTML = '<span>L\'offre d\'emploi a été supprimée</span>';
+            document.body.appendChild(confirmNotification);
+            
+            setTimeout(() => {
+                confirmNotification.classList.add('fade-out');
+                setTimeout(() => confirmNotification.remove(), 500);
+            }, 3000);
+            
+        }, deletionDelay);
+        
+        // Ajouter aux éléments supprimés pour permettre l'annulation
+        deletedElements.push(jobData);
+    }
+    
+    // Fonction pour annuler la dernière suppression
+    function undoLastDeletion() {
+        if (deletedElements.length === 0) return;
+        
+        // Récupérer le dernier élément supprimé
+        const lastDeleted = deletedElements.pop();
+        
+        // Annuler le délai de suppression
+        clearTimeout(lastDeleted.timeoutId);
+        
+        // Restaurer l'élément à sa position d'origine
+        lastDeleted.element.classList.remove('pending-deletion');
+        
+        // Afficher une notification de confirmation
+        createNotification('La suppression a été annulée', 'success', lastDeleted.element);
+    }
+
+        // Fonction pour annuler la dernière cloture
+        function undoLastClose() {
+    if (deletedCloses.length === 0) return;
+    
+    // Récupérer le dernier élément clôturé
+    const lastClosed = deletedCloses.pop();
+    
+    // Annuler le délai de clôture
+    clearTimeout(lastClosed.timeoutId);
+    
+    // Restaurer l'élément à son état d'origine
+    lastClosed.element.classList.remove('job-closed');
+    
+    // Restaurer le statut et la classe d'origine
+    const statusBadge = lastClosed.element.querySelector('.status-badge');
+    statusBadge.textContent = lastClosed.originalStatus;
+    statusBadge.className = lastClosed.originalClass;
+    
+    // Réactiver les boutons
+    lastClosed.element.querySelector('.btn-action[title="Clôturer"]').disabled = false;
+    lastClosed.element.querySelector('.btn-action[title="Changer l\'état"]').disabled = false;
+    
+    // Afficher une notification de confirmation
+    createNotification('La clôture a été annulée', 'success', lastClosed.element);
+}
+    
+    // Fonction pour éditer une offre d'emploi
+    function editJob(jobCard) {
+        // Simulation: Redirection vers la page d'édition
+        // Dans un cas réel, cela pourrait être une redirection ou l'ouverture d'un modal
+        alert('Redirection vers la page d\'édition de l\'offre');
+        
+        // Exemple de redirection (à décommenter si nécessaire):
+        // const jobId = jobCard.dataset.jobId; // Assurez-vous d'avoir un attribut data-job-id sur votre carte
+        // window.location.href = `/edit-job/${jobId}`;
+    }
+    
+    // Ajouter les écouteurs d'événements aux boutons
+    editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const jobCard = this.closest('.job-card');
+            editJob(jobCard);
+        });
+    });
+    
+    lockButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const jobCard = this.closest('.job-card');
+            closeJob(jobCard, this);
+        });
+    });
+    
+    statusButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const jobCard = this.closest('.job-card');
+            changeJobStatus(jobCard, this);
+        });
+    });
+    
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const jobCard = this.closest('.job-card');
+            deleteJob(jobCard, this);
+        });
+    });
+    
+    // Ajouter du CSS dynamique pour les notifications et les animations
+    const style = document.createElement('style');
+    style.textContent = `
+        .notification {
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .notification-info {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            color: #0d47a1;
+        }
+        
+        .notification-warning {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            color: #ff6f00;
+        }
+        
+        .notification-success {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            color: #1b5e20;
+        }
+        
+        .btn-undo {
+            background-color: transparent;
+            border: 1px solid currentColor;
+            border-radius: 3px;
+            padding: 3px 8px;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: all 0.2s;
+        }
+        
+        .btn-undo:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .pending-deletion {
+            opacity: 0.5;
+            position: relative;
+        }
+        
+        .pending-deletion::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 0, 0, 0.1);
+            z-index: 1;
+        }
+        
+        .job-closed {
+            opacity: 0.7;
+            background-color: #f5f5f5;
+        }
+        
+        .fade-out {
+            animation: fadeOut 0.5s forwards;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
+});
 
 
-
-
-                        
-                        
                     </script>
-                </body>
-                </html>
+    </div>
+
+</body>
+
+</html>
